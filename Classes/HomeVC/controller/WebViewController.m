@@ -30,7 +30,9 @@ UITextFieldDelegate,
 MyWebBottomViewDelegate,
 MySearchViewControllerDelegate,
 MyToolsMenuViewDelegate,
-QRDelegate
+QRDelegate,
+MyHistoryViewControllerDelegate,
+MyBookmarkVCDelegate
 >
 {
     BOOL isplay;
@@ -39,6 +41,7 @@ QRDelegate
 }
 @property (nonatomic, strong) SearchView *searchView;
 @property (nonatomic,strong) UIButton * refreshBtn;//!<刷新按钮
+@property (nonatomic,strong) UIButton * downLoadBtn;//!<下载按钮
 
 @property (nonatomic,strong) GSWebView * webView;
 @property (nonatomic,strong) NSString * webTitle;
@@ -58,11 +61,16 @@ QRDelegate
     [super viewWillDisappear:animated];
 //    [_webView wkgsDealloc];
      [[NSNotificationCenter defaultCenter] removeObserver:self name:NEED_M3U8_Capture_NOTIFICATION object:nil];
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:NEED_PUSH_Pasteboard_NOTIFICATION object:nil];
+
 }
-//-(void)backVC_Click{
-//    [super backVC_Click];
-//
-//}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+     //通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardNotification:) name:NEED_PUSH_Pasteboard_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCaptureM3U8Notification:) name:NEED_M3U8_Capture_NOTIFICATION object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self g_init];
@@ -78,16 +86,14 @@ QRDelegate
         self.url = [BookMarkManager readDefUrl]?:@"http://www.63ys.com/";
     }
     isplay = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardNotification:) name:NEED_PUSH_Pasteboard_NOTIFICATION object:nil];
-    [DownLoadManager initConfig:@"GSDownLoad"];
-    //通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCaptureM3U8Notification:) name:NEED_M3U8_Capture_NOTIFICATION object:nil];
+  
 }
 -(void)g_CreateUI{
     [self.myView addSubview:self.webView];
     [self.myView addSubview:self.searchView];
     [self.searchView addSubview:self.refreshBtn];
     [self.myView addSubview:self.bottomView];
+    [self.myView addSubview:self.downLoadBtn];
 }
 -(void)g_LayoutFrame{
     [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -97,13 +103,18 @@ QRDelegate
         make.centerY.equalTo(self.searchView.searchTextField);
         make.right.equalTo(self.searchView.mas_right).mas_offset(0);
         make.size.mas_equalTo(CGSizeMake(__kNewSize(60), __kNewSize(60)));
-        
     }];
     [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.webView.mas_bottom);
         make.left.right.mas_equalTo(self.myView).insets(UIEdgeInsetsMake(0, 0, 0, 0));
         make.height.mas_equalTo(__kTabBarHeight__);
     }];
+    [_downLoadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.bottomView.mas_top).mas_offset(-__kNewSize(30));
+        make.right.mas_equalTo(self.myView.mas_right).mas_offset(-__kNewSize(20));
+        make.size.mas_equalTo(CGSizeMake(__kNewSize(100), __kNewSize(100)));
+    }];
+    
 }
 -(void)g_loadUrl{
     if (!kStringIsEmpty(self.url)) {
@@ -120,7 +131,7 @@ QRDelegate
         _searchView = [[SearchView alloc]initWithFrame:CGRectMake(__kNewSize(20), 0, __kScreenWidth__-__kNewSize(40), __kNavigationBarHeight__)];
         _searchView.searchTextField.delegate = self;
         _searchView.searchTextField.clearButtonMode = UITextFieldViewModeNever;
-
+        [_searchView.videoBtn addTarget:self action:@selector(playVideoClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _searchView;
 }
@@ -155,6 +166,29 @@ QRDelegate
     }
     return _bottomView;
 }
+-(UIButton *)downLoadBtn{
+    if (!_downLoadBtn) {
+        _downLoadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_downLoadBtn setImage:[UIImage imageNamed:@"xiazai_guanli"] forState:UIControlStateNormal];
+//        [_downLoadBtn setTitle:@"下载" forState:UIControlStateNormal];
+//        [_downLoadBtn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+        _downLoadBtn.backgroundColor = [UIColor colorWithHexString:@"#FFD454"];
+//        _downLoadBtn.titleEdgeInsets = UIEdgeInsetsMake(0,20, 0, 0);
+//        UIImage *image = [UIImage imageNamed:@"tool_bird_3"];
+//        UIImageView *iconView = [[UIImageView alloc]initWithImage:image];
+//        iconView.frame = CGRectMake(__kNewSize(10), __kNewSize((120-30)/2), __kNewSize(30), __kNewSize(30));
+//        [_downLoadBtn addSubview:iconView];
+        _downLoadBtn.layer.masksToBounds = YES;
+        _downLoadBtn.layer.cornerRadius = __kNewSize(100/2);
+        _downLoadBtn.layer.borderWidth = __kNewSize(1);
+        CGColorRef colorref = [UIColor colorWithHexString:@"#ffffff"].CGColor;
+        [_downLoadBtn.layer setBorderColor:colorref];
+        _downLoadBtn.titleLabel.font = [UIFont systemFontOfSize:__kNewSize(24)];
+        _downLoadBtn.hidden = YES;
+        [_downLoadBtn addTarget:self action:@selector(downLoadPlayVideoClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _downLoadBtn;
+}
 -(NSMutableArray *)historyDataList{
     if (!_historyDataList) {
         _historyDataList = [[NSMutableArray alloc]init];
@@ -173,6 +207,16 @@ QRDelegate
         }
     }
     return _favoriteDataList;
+}
+#pragma mark - BookMarkDelegate
+-(void)myBookmarkVCRloadViewWithUrl:(NSString *)url{
+    [self.webView stopLoading];
+    [self.webView loadURLString:[GSTool urlWithIsUrl:url]];
+}
+#pragma mark - historyDelegate
+-(void)myHistoryRloadViewWithUrl:(NSString *)url{
+    [self.webView stopLoading];
+    [self.webView loadURLString:[GSTool urlWithIsUrl:url]];
 }
 #pragma mark - QRCodeDelegate
 -(void)getQRDataString:(NSString *)QRDataString{
@@ -196,26 +240,22 @@ QRDelegate
     GSLog(@"收到剪切板通知：%@",notification.object);
     NSDictionary * dict = [NSDictionary dictionaryWithDictionary:notification.object];
     NSString * url = [dict objectForKey:@"url"];
-    
-    if([[url pathExtension] isEqualToString:@"m3u8"]){
-        [self pushPlayVC_Url:url];
+    if (!kStringIsEmpty(url)) {
+        _playUrl =  url;
     }
-    else
-    {
-        [self.webView loadURLString:[GSTool urlWithIsUrl:url]];
-    }
-    
+    isplay = [self playWithUrl:url];
+
+//     [self pushPlayVC_Url:url];
 }
 -(void)setCaptureM3U8Notification:(NSNotification *)notification{
     GSLog(@"接收到捕获M3U8通知%@",notification);
     NSDictionary * dict = (NSDictionary *)notification.object;
-    self.playUrl = [dict objectForKey:@"play"];
-    if (!kStringIsEmpty(self.playUrl)) {
-        isplay = YES;
-    }
+    NSString * url = [dict objectForKey:@"play"];
+    isplay = [self playWithUrl:url];
+
 }
 //捕获视频播放地址
--(void)playWithUrl:(NSString *)url{
+-(BOOL)playWithUrl:(NSString *)url{
     if ([url containsString:@"m3u8"]) {
         //后戳.m3u8
         if([[url pathExtension] isEqualToString:@"m3u8"]){
@@ -232,10 +272,17 @@ QRDelegate
                 GSLog(@"视频播放地址：%@",array[1]);
                 self.playUrl = array[1];
                 if (!kStringIsEmpty(self.playUrl)) {
-                    isplay = YES;
+                    self.downLoadBtn.hidden = NO;
+                    [_searchView playVideoButtonIs:YES];
+                   return  YES;
                 }
             }else{
                 GSLog(@"后缀是.m3u8,但捕获规则未加\n%@",url);
+                self.playUrl = url;
+                self.downLoadBtn.hidden = NO;
+
+                [_searchView playVideoButtonIs:YES];
+                return  YES;
             }
         }
         else
@@ -244,13 +291,19 @@ QRDelegate
         }
         
     }
+    self.playUrl = @"";
+    self.downLoadBtn.hidden = YES;
+
+    [_searchView playVideoButtonIs:NO];
+    return NO;
 }
+
 #pragma mark -GSWebViewDelegate
 - (BOOL)gswebView:(GSWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(GSWebViewNavigationType)navigationType
 {
     GSLog(@"页面请求加载 %@ ",[request.URL absoluteString] );
+    isplay = [self playWithUrl:[request.URL absoluteString]];
 
-    [self playWithUrl:[request.URL absoluteString]];
     
     return YES;
 }
@@ -259,7 +312,9 @@ QRDelegate
     if (!kStringIsEmpty(url)) {
         self.searchView.searchTextField.text = url;
         [self refreshBackImage:NO];
-
+        if(isplay == YES){
+            isplay = [self playWithUrl:url];
+        }
     }
     
 }
@@ -267,7 +322,6 @@ QRDelegate
     //    __kWeakSelf__;
     GSLog(@"页面加载完成  %@  %@ ",url ,title);
     [self refreshBackImage:YES];
-    
     if (!kStringIsEmpty(title)) {
         self.searchView.searchTextField.text = title;
         self.webUrl = url;
@@ -275,10 +329,9 @@ QRDelegate
         [HistoryModel addCacheName:WEB_History_Cache title:title url:url arr:self.historyDataList];
        [self displayNoneAd:url];
         if (isplay == YES) {
-            [self pushPlayVC_Url:self.playUrl];
+            [PlayNanager addHistoryData:@{@"url":self.playUrl,@"title":title}];
         }
-            [[ToolsMenuView menu] isFavorite:[BookMarkManager isExistAppForUrl:self.webUrl]];
-       
+        [[ToolsMenuView menu] isFavorite:[BookMarkManager isExistAppForUrl:self.webUrl]];
     }
     
 }
@@ -310,6 +363,18 @@ QRDelegate
 
     }
 }
+-(void)stopVideoHtmlJavaScript{
+    NSString * downPalay = [NSString stringWithFormat:@"document.getElementsByTagName('video')[0].pause()"];
+    [_webView excuteJavaScript:downPalay completionHandler:^(id  _Nonnull params, NSError * _Nonnull error) {
+        if (error) {
+            GSLog(@"注入JS方法shouldUseLatestWebView出错：%@",[error localizedDescription]);
+        }else{
+            GSLog(@"注入JS方法shouldUseLatestWebView成功");
+        }
+    }];
+    
+}
+
 #pragma mark - click
 -(void)refreshtoolBarClick
 {
@@ -320,7 +385,16 @@ QRDelegate
     }
     _refreshBtn.selected = !_refreshBtn.selected;
 }
+-(void)playVideoClick{
+    [self pushPlayVC_Url:self.playUrl];
+}
+-(void)downLoadPlayVideoClick{
 
+    [DownLoadManager start:self.playUrl Name:self.webTitle progressBlock:^(CGFloat progress) {
+
+    }];
+
+}
 #pragma mark - 刷新按钮当前状态
 -(void)refreshBackImage:(BOOL)isStop
 {
@@ -353,7 +427,7 @@ QRDelegate
             break;
         case HomeStyleType:
         {
-            [self.webView loadURLString:self.url];
+            [self.webView loadURLString:[BookMarkManager readDefUrl]?:@"http://www.63ys.com/"];
             
         }
             break;
@@ -455,6 +529,7 @@ QRDelegate
 }
 -(void)push_HistoryVC{
     HistoryViewController * historyVC = [[HistoryViewController alloc]init];
+    historyVC.delegate = self;
     [self presentViewController:historyVC animated:NO completion:nil];
 //    [self.navigationController pushViewController:historyVC animated:YES];
 }
@@ -466,7 +541,7 @@ QRDelegate
 }
 -(void)push_BookmarkVC{
     BookmarkClickVC * bookVC = [[BookmarkClickVC alloc] init];
-//    [self presentViewController:bookVC animated:YES completion:nil];
+    bookVC.delegate = self;
     [self.navigationController pushViewController:bookVC animated:YES];
 
 }

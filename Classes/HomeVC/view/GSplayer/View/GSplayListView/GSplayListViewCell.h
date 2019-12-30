@@ -13,5 +13,7 @@
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 -(void)setCurrentLabelAlpha_PlayListIndex:(NSInteger)alpha;
+-(void)setCurrentLabelTitle:(NSString *)text;
+
 
 @end

@@ -173,6 +173,8 @@
         }else{
             [cell setCurrentLabelAlpha_PlayListIndex:0];
         }
+        HistoryItmeModel * itmeModel = self.playListData[indexPath.row];
+        [cell setCurrentLabelTitle:itmeModel.h_name];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor colorWithHexString:@"#333333"];

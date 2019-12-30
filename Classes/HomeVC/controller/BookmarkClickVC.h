@@ -7,10 +7,15 @@
 //
 
 #import "SubViewController.h"
+@protocol MyBookmarkVCDelegate <NSObject>
 
+- (void)myBookmarkVCRloadViewWithUrl:(NSString *_Nullable)url;
+
+@end
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BookmarkClickVC : SubViewController
+@property(nonatomic, assign) id<MyBookmarkVCDelegate>delegate;
 
 @end
 

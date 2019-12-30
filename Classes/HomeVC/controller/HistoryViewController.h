@@ -7,10 +7,15 @@
 //
 
 #import "SubViewController.h"
+@protocol MyHistoryViewControllerDelegate <NSObject>
 
+- (void)myHistoryRloadViewWithUrl:(NSString *_Nullable)url;
+
+@end
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HistoryViewController : SubViewController
+@property(nonatomic, assign) id<MyHistoryViewControllerDelegate>delegate;
 
 @end
 

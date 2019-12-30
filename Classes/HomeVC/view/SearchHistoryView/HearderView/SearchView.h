@@ -11,10 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchView : BaseView
+@property (nonatomic,strong) UIButton * videoBtn;//!<视频弹窗按钮
 
 @property (nonatomic,strong) UIImageView * leftImageView;
 @property (nonatomic,strong) UITextField * searchTextField;
 
+#pragma mark - 是否显示视频窗口按钮
+-(void)playVideoButtonIs:(BOOL)isHidVideo;
 @end
 
 NS_ASSUME_NONNULL_END

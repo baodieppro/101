@@ -101,9 +101,12 @@ MyHistoryManagerFooterViewDelegate
     [[self getCurrentVC] presentViewController:playVC animated:NO completion:nil];
 }
 -(void)mySelected_Under_IndexItmeWithClick:(HistoryItmeModel *)model{
-    WebViewController * webVC = [[WebViewController alloc] init];
-    webVC.url = model.h_url;
-    [[self getCurrentVC] presentViewController:webVC animated:NO completion:nil];
+//    WebViewController * webVC = [[WebViewController alloc] init];
+//    webVC.url = model.h_url;
+//    [[self getCurrentVC] presentViewController:webVC animated:NO completion:nil];
+    if ([self.delegate respondsToSelector:@selector(mySelectAtIndexPathItmeUrl:)]) {
+        [self.delegate mySelectAtIndexPathItmeUrl:model.h_url];
+    }
 }
 -(void)mySelectAllClick:(BOOL)isAll{
     if(pageIndex == 0){

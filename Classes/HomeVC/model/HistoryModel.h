@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString * h_Id;
 @property (nonatomic,strong) NSString * h_name;
+@property (nonatomic,strong) NSString * h_image;
 @property (nonatomic,strong) NSString * h_url;
 @property (nonatomic,strong) NSString * item_time;
 @property (nonatomic,strong) NSString * serction_time;

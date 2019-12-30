@@ -43,14 +43,7 @@
     /*单个媒体下载的文件并发数控制*/
     dlConfig.maxConcurrenceCount = 5;
     dlConfig.localhost = _localhost_;
-    [BNM3U8Manager.shareInstance downloadVideoWithConfig:dlConfig progressBlock:^(CGFloat progress) {
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                progressBlock(progress);
-            });
-        });
-       
-    }resultBlock:^(NSError * _Nullable error, NSString * _Nullable localPlayUrl) {
+    [BNM3U8Manager.shareInstance downloadVideoWithConfig:dlConfig progressBlock:progressBlock resultBlock:^(NSError * _Nullable error, NSString * _Nullable localPlayUrl) {
         if(localPlayUrl)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -60,6 +53,24 @@
             });
         }
     }];
+//    [BNM3U8Manager.shareInstance downloadVideoWithConfig:dlConfig progressBlock:^(CGFloat progress) {
+////        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+////        dispatch_async(queue, ^{
+////            dispatch_async(queue, ^{
+////            });
+////        });
+//        progressBlock(progress);
+//
+//    }resultBlock:^(NSError * _Nullable error, NSString * _Nullable localPlayUrl) {
+//        if(localPlayUrl)
+//        {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                //更新数据
+//                [self addDownLoadCacheUrl:m3u8DownUrl name:m3u8DownTitle pathUrl:localPlayUrl progress:@"100%"isDown:@"1"];
+//                
+//            });
+//        }
+//    }];
 }
 //添加下载记录
 +(void)addDownLoadCacheUrl:(NSString *)url

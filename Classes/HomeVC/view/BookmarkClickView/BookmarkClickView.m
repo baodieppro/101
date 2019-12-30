@@ -102,10 +102,13 @@
     GSLog(@"tableViewcell_touch");
     if (self.favoriteArr.count != 0) {
         BookMarkCacheModel * model = self.favoriteArr[indexPath.row];
-        WebViewController * webVC = [[WebViewController alloc] init];
-        webVC.url = model.url;
-        webVC.titleNavi = model.title;
-        [[self getCurrentVC] presentViewController:webVC animated:NO completion:nil];
+//        WebViewController * webVC = [[WebViewController alloc] init];
+//        webVC.url = model.url;
+//        webVC.titleNavi = model.title;
+//        [[self getCurrentVC] presentViewController:webVC animated:NO completion:nil];
+        if ([self.delegate respondsToSelector:@selector(mySelectedIndexItmeWithUrl:)]) {
+            [self.delegate mySelectedIndexItmeWithUrl:model.url];
+        }
     }
     
 }

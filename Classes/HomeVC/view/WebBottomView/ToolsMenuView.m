@@ -49,7 +49,6 @@ static ToolsMenuView* updateappearances = nil;
 }
 -(void)g_Init{
     self.frame = CGRectMake(0, 0, __kScreenWidth__, __kScreenHeight__);
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
 
 }
 -(void)g_CreateUI{
@@ -97,6 +96,7 @@ static ToolsMenuView* updateappearances = nil;
 }
 #pragma mark - 公共方法
 -(void)show{
+     [[UIApplication sharedApplication].keyWindow addSubview:self];
     __kWeakSelf__;
     self.hidden = NO;
     [weakSelf gs_display];
@@ -119,6 +119,7 @@ static ToolsMenuView* updateappearances = nil;
     } completion:^(BOOL finished) {
         weakSelf.hidden = YES;
         weakSelf.menuView.layer.position = startPosition;
+        [self removeFromSuperview];
     }];
     
 }
@@ -179,7 +180,7 @@ static ToolsMenuView* updateappearances = nil;
 }
 -(NSMutableArray *)itemImagerArr{
     if (!_itemImagerArr) {
-        _itemImagerArr = [NSMutableArray arrayWithArray:@[@"me_8",@"lishi",@"tool_bird_3",@"collect_noun",@"tool_bird_13",@"window_small",@"home_bird"]];
+        _itemImagerArr = [NSMutableArray arrayWithArray:@[@"me_8",@"lishi",@"tool_bird_3",@"collect_noun",@"tool_bird_13",@"tool_bird_6",@"home_bird"]];
     }
     return _itemImagerArr;
 }

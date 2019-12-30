@@ -59,5 +59,6 @@
 
 //FMDB
 #import "BookMarkManager.h"
+#import "PlayNanager.h"
 
 #endif /* PrefixHeader_pch */

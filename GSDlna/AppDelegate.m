@@ -20,6 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [LBManager newLBManager];
+    [DownLoadManager initConfig:@"GSDownLoad"];
     [NSURLProtocol registerClass:[HybridNSURLProtocol class]];
     BaseNavigationController *nav = [[BaseNavigationController alloc]initWithRootViewController:[[WebViewController alloc] init]];
     [self.window setRootViewController:nav];

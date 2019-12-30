@@ -9,7 +9,7 @@
 #import "HistoryViewController.h"
 #import "HistoryView.h"
 
-@interface HistoryViewController ()
+@interface HistoryViewController ()<MyHistoryViewDelegate>
 @property (nonatomic,strong) HistoryView * historyView;
 
 @end
@@ -34,11 +34,19 @@
         make.top.left.bottom.right.mas_equalTo(self.myView).insets(UIEdgeInsetsMake(ToolbarHeight+10, 0, 0, 0));
     }];
 }
+#pragma mark - 代理实现
+-(void)mySelectAtIndexPathItmeUrl:(NSString *)url{
+  
+    if ([self.delegate respondsToSelector:@selector(myHistoryRloadViewWithUrl:)]) {
+        [self.delegate myHistoryRloadViewWithUrl:url];
+    }
+      [self dismissVC];
+}
 #pragma mark - 懒加载
 -(HistoryView *)historyView{
     if (!_historyView) {
         _historyView = [[HistoryView alloc]init];
-        
+        _historyView.delegate = self;
     }
     return _historyView;
 }

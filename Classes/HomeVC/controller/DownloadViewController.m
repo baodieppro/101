@@ -15,7 +15,10 @@
 @end
 
 @implementation DownloadViewController
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [_downView gs_ViewDidAppear];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self g_init];

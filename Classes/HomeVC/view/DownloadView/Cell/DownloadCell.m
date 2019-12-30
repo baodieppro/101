@@ -22,19 +22,11 @@
     if ([downLoadModel.isDown integerValue] == 1) {
         _urlLabel.text = @"100%";
         [_loadedView setProgress:1 animated:NO];
-        _startButton.alpha = 0.0f;
+        _startButton.hidden = YES;
     }else{
         [_startButton setTitle:@"暂停" forState:UIControlStateNormal];
         _startButton.selected = NO;
-        __kWeakSelf__;
-        [DownLoadManager start:self.downLoadModel.downLoadUrl Name:self.downLoadModel.title progressBlock:^(CGFloat progress) {
-            NSLog(@"下载进度:%@",[NSString stringWithFormat:@"%.00f%%",progress * 100]);
-            weakSelf.urlLabel.text = [NSString stringWithFormat:@"%.00f%%",progress * 100];
-            [weakSelf.loadedView setProgress:progress animated:YES];
-            if (progress >= 1) {
-               weakSelf.startButton.alpha = 0.0f;
-            }
-        }];
+
     }
 
 }

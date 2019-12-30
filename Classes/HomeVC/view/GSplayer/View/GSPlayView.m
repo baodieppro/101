@@ -493,11 +493,19 @@ static id _instance;
 
 
 #pragma mark - 定位播放数据
+-(void)playListIndex:(NSInteger)index{
+    self.playIndex = [self protectionListIndexMaxCount:index];
+    HistoryItmeModel * model = self.playDataArr[self.playIndex];
+    [self playWithPlayName:model.h_name];
+    [self playWithPlayInfo:model.h_url];
+    self.playlistView.playListIndex = self.playIndex;
+    [self setListWithindex:index Count:self.playDataArr.count];
+    
+}
 
 #pragma mark - 播放列表数量
 -(void)setListWithindex:(NSInteger)index Count:(NSInteger)coun{
     self.listLable.text = [NSString stringWithFormat:@"%ld/%ld",(long)index+1,(long)coun];
-    self.playlistView.playListIndex = self.playIndex;
 }
 -(void)playWithPlayName:(NSString *)name{
     self.titleLable.text = name;
@@ -522,10 +530,19 @@ static id _instance;
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    [defaults setObject:playInfo.url forKey:@"currentPlayingUrl"];
 //
-    if ([DownloadDataManager isExistAppForPathUrl:playInfo] == YES) {
-        [BNHttpLocalServer.shareInstance tryStart];
-        self.playerItem =  [AVPlayerItem playerItemWithURL:[NSURL URLWithString:playInfo]];
-        self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
+    
+    //判断是否有下载缓存
+    if ([DownloadDataManager isExistAppForUrl:playInfo] == YES) {
+        Download_FMDBDataModel * model = [[DownloadCacheManager downManager] itmefromeKeyURL:playInfo];
+        if ([model.isDown integerValue] == 1) {
+            [BNHttpLocalServer.shareInstance tryStart];
+            self.playerItem =  [AVPlayerItem playerItemWithURL:[NSURL URLWithString:model.pathUrl]];
+            self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
+        }else{
+            self.asset = [AVURLAsset assetWithURL:[NSURL URLWithString:model.downLoadUrl]];
+            self.playerItem = [AVPlayerItem playerItemWithAsset:self.asset];
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+        }
 
     }else{
         self.asset = [AVURLAsset assetWithURL:[NSURL URLWithString:playInfo]];
@@ -556,6 +573,8 @@ static id _instance;
     // 添加时间周期OB、OB和通知
     [self addTimerObserver];
     [self addPlayItemObserverAndNotification];
+    [self setListWithindex:self.playIndex Count:self.playDataArr.count];
+
 
 }
 #pragma mark - 判断播放格式
@@ -1227,6 +1246,7 @@ static id _instance;
 //        [self.delegate gs_playListClick];
 //    }
     [self addSubview:self.playlistView];
+    self.playlistView.playListIndex = self.playIndex;
     [_playlistView setPlayListData:self.playDataArr];
 }
 #pragma mark - delegate(代理实现)
@@ -1528,6 +1548,9 @@ static id _instance;
 -(NSMutableArray *)playDataArr{
     if (!_playDataArr) {
        _playDataArr = [[NSMutableArray alloc]init];
+        if ([EntireManageMent isExisedManager:PLAY_History_Cache]) {
+            [HistoryModel writeResponseDict:[EntireManageMent dictionaryWithJsonString:[EntireManageMent readCacheDataWithName:PLAY_History_Cache]] dataArrName:_playDataArr cacheName:PLAY_History_Cache];
+        }
     }
     return _playDataArr;
 }

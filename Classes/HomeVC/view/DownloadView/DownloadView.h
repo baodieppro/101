@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DownloadView : BaseView
-
+-(void)gs_ViewDidAppear;
 @end
 
 NS_ASSUME_NONNULL_END

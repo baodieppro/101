@@ -16,7 +16,9 @@
 
 @end
 @implementation DownloadView
-
+-(void)gs_ViewDidAppear{
+    [self loadViewCell];
+}
 -(instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -82,7 +84,16 @@
     
     return tableViewCell;
 }
-
+//用于判断tableview是否加载完成
+//
+//-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//
+//{
+//
+//    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+//        [self loadViewCell];
+//    }
+//}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.downLoadList.count != 0) {
@@ -100,11 +111,7 @@
     GSLog(@"tableViewcell_touch");
     if (self.downLoadList.count != 0) {
         Download_FMDBDataModel * model = self.downLoadList[indexPath.row];
-        if ([model.isDown integerValue] == 0) {
-            [self push_PlayViewControllerWithUrl:model.downLoadUrl name:model.title];
-        }else{
-            [self push_PlayViewControllerWithUrl:model.pathUrl name:model.title];
-        }
+        [self push_PlayViewControllerWithUrl:model.downLoadUrl name:model.title];
     }
 }
 #pragma mark - pushPlay
@@ -147,6 +154,33 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //将设置好的按钮方到数组中返回
     return @[deleteAction];
+}
+#pragma mark - 更新下载数据
+-(void)loadViewCell{
+    if (self.downLoadList.count != 0) {
+        for (NSInteger i = 0; i< self.downLoadList.count; i++) {
+            Download_FMDBDataModel * model = self.downLoadList[i];
+            if ([model.isDown integerValue] == 1) {
+                break;
+            }
+            NSIndexPath *cellIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            DownloadCell * newCell  = (DownloadCell *)[self.tableView cellForRowAtIndexPath:cellIndexPath];
+            [DownLoadManager start:model.downLoadUrl Name:model.title progressBlock:^(CGFloat progress) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSLog(@"下载进度:%@",[NSString stringWithFormat:@"%.00f%%",progress * 100]);
+                    newCell.urlLabel.text = [NSString stringWithFormat:@"%.00f%%",progress * 100];
+                    newCell.loadedView.progress = progress;
+                    //            [weakSelf.loadedView setProgress:progress animated:YES];
+                    
+                });
+                
+//                if (progress >= 1) {
+//                    newCell.startButton.hidden = YES;
+//                }
+            }];
+        }
+       
+    }
 }
 
 #pragma mark - 懒加载

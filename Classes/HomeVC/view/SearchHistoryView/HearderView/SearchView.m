@@ -26,6 +26,7 @@
 }
 -(void)g_CreateUI{
     [self addSubview:self.searchTextField];
+    [self addSubview:self.videoBtn];
 }
 -(void)g_LayoutFrame{
     [_searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,6 +65,55 @@
         _leftImageView.image = [UIImage imageNamed:@"Search_pic"];
     }
     return _leftImageView;
+}
+- (UIButton *)videoBtn{
+    if (!_videoBtn) {
+        _videoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_videoBtn setTitle:@"小窗" forState:UIControlStateNormal];
+        [_videoBtn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+        _videoBtn.backgroundColor = [UIColor colorWithHexString:@"#FFD454"];
+        _videoBtn.titleEdgeInsets = UIEdgeInsetsMake(0,20, 0, 0);
+        UIImage *image = [UIImage imageNamed:@"window_small"];
+        UIImageView *iconView = [[UIImageView alloc]initWithImage:image];
+        iconView.frame = CGRectMake(__kNewSize(10), __kNewSize((50-30)/2), __kNewSize(30), __kNewSize(30));
+        [_videoBtn addSubview:iconView];
+        _videoBtn.layer.masksToBounds = YES;
+        _videoBtn.layer.cornerRadius = 2.0f;
+        _videoBtn.layer.borderWidth = __kNewSize(1);
+        CGColorRef colorref = [UIColor colorWithHexString:@"#ffffff"].CGColor;
+        [_videoBtn.layer setBorderColor:colorref];
+        _videoBtn.titleLabel.font = [UIFont systemFontOfSize:__kNewSize(24)];
+     
+        _videoBtn.hidden = YES;
+    }
+    return _videoBtn;
+}
+#pragma mark - 是否显示视频窗口按钮
+-(void)playVideoButtonIs:(BOOL)isHidVideo{
+    //yes：显示浮窗按钮
+    if (isHidVideo == YES) {
+        _videoBtn.hidden = NO;
+        [_videoBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self).mas_offset(__kNewSize(20));
+            make.left.equalTo(self).mas_offset(__kNewSize(20));
+            make.size.mas_equalTo(CGSizeMake(__kNewSize(100), __kNewSize(50)));
+        }];
+        [_searchTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, __kNewSize(130), 0, 0));
+            make.centerY.mas_equalTo(self).mas_offset(__kNewSize(20));
+            make.height.mas_equalTo(__kNewSize(62));
+        }];
+       
+        
+    }else{
+        _videoBtn.hidden = YES;
+        [_searchTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, 0, 0, 0));
+            make.centerY.mas_equalTo(self).mas_offset(__kNewSize(20));
+            make.height.mas_equalTo(__kNewSize(62));
+        }];
+        
+    }
 }
 
 @end

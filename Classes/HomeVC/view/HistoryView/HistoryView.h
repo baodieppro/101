@@ -10,6 +10,7 @@
 @protocol MyHistoryViewDelegate <NSObject>
 
 - (void)mySelectAtIndexPath:(NSInteger)index itme:(NSString *_Nullable)itme;
+- (void)mySelectAtIndexPathItmeUrl:(NSString *_Nullable)url;
 
 @end
 NS_ASSUME_NONNULL_BEGIN

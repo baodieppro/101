@@ -43,9 +43,20 @@
 {
     return [[DownloadCacheManager downManager] isExistAppForPathUrl:pathUrl];
 }
++ (BOOL)isExistAppForUrl:(NSString *)url
+{
+    return [[DownloadCacheManager downManager] isExistAppForUrl:url];
+}
 #pragma mark - 读取所有缓存数据
 +(NSArray *)readDownLoadDataList{
     return [[DownloadCacheManager downManager] allArray];
+}
++(NSString *)readDownLoadCachePathUrl:(NSString *)url{
+    Download_FMDBDataModel * model = [[DownloadCacheManager downManager] itmefromeKeyURL:url];
+    if (model.downLoadUrl) {
+        return model.pathUrl?:model.downLoadUrl;
+    }
+    return url;
 }
 #pragma mark - 清除数据
 
@@ -238,8 +249,19 @@ static DownloadCacheManager *manager=nil;
 }
 - (BOOL)isExistAppForUrl:(NSString *)url
 {
-    NSString *sql = @"select * from DOWNLOADVIDEO where url = ?";
+    NSString *sql = @"select * from DOWNLOADVIDEO where downLoadUrl = ?";
     FMResultSet *rs = [database executeQuery:sql,url];
+    // NSLog(@"%@-----------MusModel--------",rs);
+    if ([rs next]) {//查看是否存在 下条记录 如果存在 肯定 数据库中有记录
+        return YES;
+    }else{
+        return NO;
+    }
+}
+- (BOOL)isExistAppForPathUrl:(NSString *)PathUrl
+{
+    NSString *sql = @"select * from DOWNLOADVIDEO where pathUrl = ?";
+    FMResultSet *rs = [database executeQuery:sql,PathUrl];
     // NSLog(@"%@-----------MusModel--------",rs);
     if ([rs next]) {//查看是否存在 下条记录 如果存在 肯定 数据库中有记录
         return YES;
@@ -373,6 +395,33 @@ static DownloadCacheManager *manager=nil;
     }
     
     return [array copy];
+}
+/**
+ *  通过url获取指定数据
+ *
+ *  @return 当前指定数据
+ */
+- (Download_FMDBDataModel *)itmefromeKeyURL:(NSString *)url
+{
+    //[_lock lock];
+    //* 查找全部 select * from 表名
+    NSString *selSQL=@"select * from DOWNLOADVIDEO where downLoadUrl = ?";
+    FMResultSet *set=[database executeQuery:selSQL,url];
+    //遍历集合
+    Download_FMDBDataModel *appModel;
+    while ([set next]) {
+        //把查询之后结果 放在model
+        appModel = [[Download_FMDBDataModel alloc] init];
+        appModel.fileName = [set stringForColumn:@"fileName"];
+        appModel.title = [set stringForColumn:@"title"];
+        appModel.downLoadUrl = [set stringForColumn:@"downLoadUrl"];
+        appModel.pathUrl = [set stringForColumn:@"pathUrl"];
+        appModel.progress = [set stringForColumn:@"progress"];
+        appModel.isDown = [set stringForColumn:@"isDown"];
+        appModel.time = [set stringForColumn:@"time"];
+    }
+    
+    return appModel;
 }
 - (NSInteger)timeModelArrayfromeKey:(NSString *)time classificationId:(NSString *)classificationId
 {

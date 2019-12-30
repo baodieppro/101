@@ -18,7 +18,7 @@
 @implementation GSplayListViewCell
 
 static NSString *cellID = @"GSplayListViewCell";
-+ (instancetype)cellWithTableView:(UITableView *)tableView
++ (instancetype)cellWithTableView:(UITableView *)tableView 
 {
     GSplayListViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell == nil) {
@@ -78,7 +78,9 @@ static NSString *cellID = @"GSplayListViewCell";
 -(void)setCurrentLabelAlpha_PlayListIndex:(NSInteger)alpha{
     _currentLabel.alpha = alpha;
 }
-
+-(void)setCurrentLabelTitle:(NSString *)text{
+    _titleLabel.text = text;
+}
 #pragma mark - UI
 -(UIImageView *)centerImageView{
     if (!_centerImageView) {

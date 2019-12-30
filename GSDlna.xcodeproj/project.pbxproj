@@ -30,6 +30,7 @@
 		8154217D23AA23B9001E884C /* BookmarkClickVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8154217C23AA23B9001E884C /* BookmarkClickVC.m */; };
 		8154218123AA2469001E884C /* WebBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8154218023AA2469001E884C /* WebBottomView.m */; };
 		8154218523AA54C2001E884C /* BookmarkClickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8154218423AA54C2001E884C /* BookmarkClickView.m */; };
+		81901A8023B9C8AB00CA0307 /* PlayNanager.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901A7F23B9C8AB00CA0307 /* PlayNanager.m */; };
 		81AFB3ED239F67C4000E6078 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB3EC239F67C4000E6078 /* AppDelegate.m */; };
 		81AFB3F0239F67C4000E6078 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB3EF239F67C4000E6078 /* ViewController.m */; };
 		81AFB3F3239F67C4000E6078 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AFB3F1239F67C4000E6078 /* Main.storyboard */; };
@@ -209,6 +210,8 @@
 		8154218023AA2469001E884C /* WebBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebBottomView.m; sourceTree = "<group>"; };
 		8154218323AA54C2001E884C /* BookmarkClickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookmarkClickView.h; sourceTree = "<group>"; };
 		8154218423AA54C2001E884C /* BookmarkClickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkClickView.m; sourceTree = "<group>"; };
+		81901A7E23B9C8AB00CA0307 /* PlayNanager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayNanager.h; sourceTree = "<group>"; };
+		81901A7F23B9C8AB00CA0307 /* PlayNanager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayNanager.m; sourceTree = "<group>"; };
 		81AFB3E8239F67C4000E6078 /* GSDlna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSDlna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AFB3EB239F67C4000E6078 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		81AFB3EC239F67C4000E6078 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -607,6 +610,15 @@
 			path = BookmarkClickView;
 			sourceTree = "<group>";
 		};
+		81901A7D23B9C86200CA0307 /* PlayNanager */ = {
+			isa = PBXGroup;
+			children = (
+				81901A7E23B9C8AB00CA0307 /* PlayNanager.h */,
+				81901A7F23B9C8AB00CA0307 /* PlayNanager.m */,
+			);
+			path = PlayNanager;
+			sourceTree = "<group>";
+		};
 		81AFB3DF239F67C4000E6078 = {
 			isa = PBXGroup;
 			children = (
@@ -980,6 +992,7 @@
 		81AFB4C3239F6E3E000E6078 /* FMDBCache */ = {
 			isa = PBXGroup;
 			children = (
+				81901A7D23B9C86200CA0307 /* PlayNanager */,
 				811B5AAD23B620F200B3862B /* BookMarkManager */,
 				811B5A9923B2122400B3862B /* DownloadDataManager */,
 				81AFB4C4239F6E3E000E6078 /* ConfigManager */,
@@ -1201,10 +1214,10 @@
 		81AFB5AC239F9309000E6078 /* HearderView */ = {
 			isa = PBXGroup;
 			children = (
-				81AFB5AD239F9309000E6078 /* SearchHeaderView.m */,
-				81AFB5AE239F9309000E6078 /* SearchView.m */,
 				81AFB5AF239F9309000E6078 /* SearchHeaderView.h */,
+				81AFB5AD239F9309000E6078 /* SearchHeaderView.m */,
 				81AFB5B0239F9309000E6078 /* SearchView.h */,
+				81AFB5AE239F9309000E6078 /* SearchView.m */,
 			);
 			path = HearderView;
 			sourceTree = "<group>";
@@ -1518,6 +1531,7 @@
 				81AFB51F239F6E3E000E6078 /* ShowRemindTool.m in Sources */,
 				81AFB5B1239F9309000E6078 /* SearchHeaderView.m in Sources */,
 				81AFB5A3239F8FC0000E6078 /* GSBrightnessAndVolumeView.m in Sources */,
+				81901A8023B9C8AB00CA0307 /* PlayNanager.m in Sources */,
 				81AFB52D239F6E3E000E6078 /* GS_ConfigManager.m in Sources */,
 				811B5AAC23B5A8B000B3862B /* GSQRCodeView.m in Sources */,
 				81AFB525239F6E3E000E6078 /* GSActionSheet.m in Sources */,

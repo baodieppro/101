@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel * splitLine;//!<分割线
 
 @property (nonatomic,strong) HistoryItmeModel * itmeModel;//!<数据映射
+
 @property (nonatomic, assign) BOOL editSelected;//!<编辑
 
 @end
