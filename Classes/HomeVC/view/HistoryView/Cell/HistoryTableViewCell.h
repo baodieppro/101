@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) HistoryItmeModel * itmeModel;//!<数据映射
 
 @property (nonatomic, assign) BOOL editSelected;//!<编辑
+@property (nonatomic, assign) BOOL isLefOrRight;//!<左边还是右边
+
 
 @end
 

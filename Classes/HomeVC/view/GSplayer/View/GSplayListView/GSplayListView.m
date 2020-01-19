@@ -60,7 +60,7 @@
     }];
     [_backGroundView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.mas_equalTo(self).insets(UIEdgeInsetsMake(0, 0, 0, 0));
-        make.right.mas_equalTo(self);
+        make.right.mas_equalTo(self.mas_right);
         make.width.mas_equalTo(172);
     }];
     [_listCounLabel mas_remakeConstraints:^(MASConstraintMaker *make) {

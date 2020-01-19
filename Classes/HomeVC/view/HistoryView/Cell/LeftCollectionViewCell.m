@@ -129,6 +129,7 @@
             [cell setItmeModel:itmeModel];
         }
         [cell setEditSelected:self.editSelected];
+        [cell setIsLefOrRight:YES];
         tableViewCell = cell;
     }
     tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;

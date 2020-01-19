@@ -174,13 +174,13 @@ static ToolsMenuView* updateappearances = nil;
 }
 -(NSMutableArray *)itemTitleArr{
     if (!_itemTitleArr) {
-        _itemTitleArr = [NSMutableArray arrayWithArray:@[@"书签",@"历史",@"下载管理",@"收藏网址",@"刷新",@"视频播放",@"二维码识别"]];
+        _itemTitleArr = [NSMutableArray arrayWithArray:@[@"书签",@"历史",@"下载管理",@"收藏网址",@"刷新",@"视频播放",@"二维码识别",@"复制视频地址"]];
     }
     return _itemTitleArr;
 }
 -(NSMutableArray *)itemImagerArr{
     if (!_itemImagerArr) {
-        _itemImagerArr = [NSMutableArray arrayWithArray:@[@"me_8",@"lishi",@"tool_bird_3",@"collect_noun",@"tool_bird_13",@"tool_bird_6",@"home_bird"]];
+        _itemImagerArr = [NSMutableArray arrayWithArray:@[@"me_8",@"lishi",@"tool_bird_3",@"collect_noun",@"tool_bird_13",@"tool_bird_6",@"home_bird",@"tool_copy"]];
     }
     return _itemImagerArr;
 }

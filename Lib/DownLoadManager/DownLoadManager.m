@@ -44,13 +44,17 @@
     dlConfig.maxConcurrenceCount = 5;
     dlConfig.localhost = _localhost_;
     [BNM3U8Manager.shareInstance downloadVideoWithConfig:dlConfig progressBlock:progressBlock resultBlock:^(NSError * _Nullable error, NSString * _Nullable localPlayUrl) {
-        if(localPlayUrl)
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //更新数据
-                [self addDownLoadCacheUrl:m3u8DownUrl name:m3u8DownTitle pathUrl:localPlayUrl progress:@"100%"isDown:@"1"];
-                
-            });
+        if (error != nil) {
+            GSLog(@"m3u8_DownLoad-Error:%@",error);
+        }else{
+            if(localPlayUrl)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //更新数据
+                    [self addDownLoadCacheUrl:m3u8DownUrl name:m3u8DownTitle pathUrl:localPlayUrl progress:@"100%"isDown:@"1"];
+                    
+                });
+            }
         }
     }];
 //    [BNM3U8Manager.shareInstance downloadVideoWithConfig:dlConfig progressBlock:^(CGFloat progress) {
@@ -89,6 +93,7 @@
                                           @"isDown":isDown,
                                           }];
 }
+
 + (void)cannel:(NSString *)url
 {
     [BNM3U8Manager.shareInstance  cannel:url];

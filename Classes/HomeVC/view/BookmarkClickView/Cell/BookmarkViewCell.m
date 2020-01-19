@@ -9,9 +9,21 @@
 #import "BookmarkViewCell.h"
 
 @implementation BookmarkViewCell
+- (void)setFrame:(CGRect)frame{
+    //    frame.origin.x += __kNewSize(5*2);
+    frame.origin.y += __kNewSize(5*2);
+    frame.size.height -= __kNewSize(5*2);
+    //    frame.size.width -= __kNewSize(30*2);
+    [super setFrame:frame];
+}
 -(void)setItmeModel:(BookMarkCacheModel *)itmeModel{
     _titleLabel.text = itmeModel.title;
     _urlLabel.text = itmeModel.url;
+    if ([itmeModel.isDef integerValue] == 1) {
+        _rightImageView.hidden = NO;
+    }else{
+        _rightImageView.hidden = YES;
+    }
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -26,6 +38,7 @@
 -(void)cell_AddUI{
     [self addSubview:self.titleLabel];
     [self addSubview:self.urlLabel];
+    [self addSubview:self.rightImageView];
 }
 -(void)cell_LayoutFrame{
     
@@ -39,6 +52,10 @@
         make.left.mas_equalTo(self.titleLabel);
         make.right.mas_equalTo(self.titleLabel);
         make.height.mas_equalTo(__kNewSize(20*2));
+    }];
+    [_rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self);
+        make.right.mas_equalTo(self);
     }];
 }
 #pragma 懒加载
@@ -67,5 +84,11 @@
     }
     return _urlLabel;
 }
-
+-(UIImageView *)rightImageView{
+    if (!_rightImageView) {
+        _rightImageView = [[UIImageView alloc]init];
+        _rightImageView.image = [UIImage imageNamed:@"booksMark_Def"];
+    }
+    return _rightImageView;
+}
 @end

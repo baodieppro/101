@@ -17,20 +17,47 @@
 @end
 
 @implementation PlayViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self addNotification];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+}
+-(void)addNotification{
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self
+               selector:@selector(removePlayerOnPlayerLayer)
+                   name:UIApplicationDidEnterBackgroundNotification
+                 object:nil];
+    [center addObserver:self
+               selector:@selector(resetPlayerToPlayerLayer)
+                   name:UIApplicationWillEnterForegroundNotification
+                 object:nil];
+}
+- (void)removePlayerOnPlayerLayer {
+//    self.playerView  = nil;
+}
+- (void)resetPlayerToPlayerLayer {
+//    [self.playerView playWithPlayName:self.topName];
+//    [self.playerView playWithPlayInfo:self.playUrl];
+}
 -(void)viewDidLoad {
     [super viewDidLoad];
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
-    GSLog(@"path:%@",path);
-    
-    self.myView.backgroundColor = [UIColor colorWithHexString:@"#333333"];
 
+    self.myView.backgroundColor = [UIColor colorWithHexString:@"#333333"];
     [self.playerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.myView);
     }];
-    [self historyData];
-    [self.playerView playWithPlayName:self.topName];
-    [self.playerView playWithPlayInfo:self.playUrl];
+    if (!kStringIsEmpty(self.playUrl)) {
+        [self historyData];
+        [self.playerView playWithPlayName:self.topName];
+        [self.playerView playWithPlayInfo:self.playUrl];
+    }else{
+        [self.playerView playListIndex:0];
+    }
+   
     
 }
 -(void)historyData{

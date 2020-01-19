@@ -1,0 +1,209 @@
+//
+//  SecurityStrategy.m
+//  VoteWhere
+//
+//  Created by WJ02047 mini on 14-12-9.
+//  Copyright (c) 2014年 Touna Wang. All rights reserved.
+//
+
+#import "SecurityStrategy.h"
+#import "UIImage+BlurGlass.h"
+
+#define screenWidth ([UIScreen mainScreen].bounds.size.width)
+#define screenHeight ([UIScreen mainScreen].bounds.size.height)
+#define screenScale ([UIScreen mainScreen].scale)
+
+#define effectTag 19999
+
+#define gsImageTag 1111111
+
+
+
+@implementation SecurityStrategy
+
++(void)addBlurEffect
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    imageView.tag = effectTag;
+    imageView.image = [self blurImage];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:imageView];
+}
++(void)removeBlurEffect
+{
+    NSArray *subViews = [[UIApplication sharedApplication] keyWindow].subviews;
+    for (id object in subViews) {
+        if ([[object class] isSubclassOfClass:[UIImageView class]]) {
+            UIImageView *imageView = (UIImageView *)object;
+            if(imageView.tag == effectTag)
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    imageView.alpha = 0;
+                    [imageView removeFromSuperview];
+
+                }];
+               
+            }
+        }
+    }
+}
+
++(UIImageView *)addGsImage:(NSInteger)tagNum
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    imageView.tag = gsImageTag + tagNum;
+    imageView.image = [self gsImager];
+//    [[[UIApplication sharedApplication] keyWindow] addSubview:imageView];
+    return imageView;
+}
++(UIImageView *)addGsImage:(NSInteger)tagNum view:(UIView *)window
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    imageView.tag = gsImageTag + tagNum;
+    imageView.image = [self gsImagerview:window];
+    //    [[[UIApplication sharedApplication] keyWindow] addSubview:imageView];
+    return imageView;
+}
+
++(void)removeGsImage:(NSInteger)tagNum
+{
+    NSArray *subViews = [[UIApplication sharedApplication] keyWindow].subviews;
+    for (id object in subViews) {
+        if ([[object class] isSubclassOfClass:[UIImageView class]]) {
+            UIImageView *imageView = (UIImageView *)object;
+            if(imageView.tag == gsImageTag + tagNum)
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    imageView.alpha = 0;
+                    [imageView removeFromSuperview];
+                }];
+                
+            }
+        }
+    }
+}
+
+
+//毛玻璃效果
++(UIImage *)blurImage
+{
+    UIImage *image = [[self screenShot] imgWithBlur];
+    //保存图片到照片库(test)
+//    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    
+    return image;
+}
+//正常截屏
++(UIImage *)gsImager{
+    UIImage * image = [[self screenShot] imgWithLightAlpha:0 radius:0 colorSaturationFactor:1];
+    return image;
+}
+
++(UIImage *)gsImagerview:(UIView *)window{
+    UIImage * image = [[self screenShotView:window] imgWithLightAlpha:0 radius:0 colorSaturationFactor:1];
+    return image;
+}
+//屏幕截屏
++(UIImage *)screenShot
+{
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(screenWidth*screenScale, screenHeight*screenScale), YES, 0);
+    //设置截屏大小
+//    [[[[UIApplication sharedApplication] keyWindow] layer] renderInContext:UIGraphicsGetCurrentContext()];
+   
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow] ;
+////    [win snapshotViewAfterScreenUpdates:NO];
+////    [win drawViewHierarchyInRect:win.bounds afterScreenUpdates:NO];
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    [win.layer renderInContext: UIGraphicsGetCurrentContext()];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    if(window != nil){
+        
+        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO];
+        }
+        else{
+            [window.layer renderInContext:UIGraphicsGetCurrentContext()];
+        }
+    }else{
+        for (UIWindow * window in [[UIApplication sharedApplication] windows]) {
+            if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
+                CGContextSaveGState(context);
+                CGContextTranslateCTM(context, [window center].x, [window center].y);
+                CGContextConcatCTM(context, [window transform]);
+                CGContextTranslateCTM(context, -[window bounds].size.width*[[window layer] anchorPoint].x, -[window bounds].size.height*[[window layer] anchorPoint].y);
+                [[window layer] renderInContext:context];
+                
+                CGContextRestoreGState(context);
+            }
+        }
+        
+    }
+
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+    CGImageRef imageRef = viewImage.CGImage;
+    CGRect rect = CGRectMake(1, 1, screenWidth*screenScale,screenHeight*screenScale);
+   
+    CGImageRef imageRefRect =CGImageCreateWithImageInRect(imageRef, rect);
+    UIImage *sendImage = [[UIImage alloc] initWithCGImage:imageRefRect];
+//    CGImageRelease(imageRef);
+    CGImageRelease(imageRefRect);
+    
+   
+    
+    return sendImage;
+}
+
+//屏幕截屏
++(UIImage *)screenShotView:(UIView *)window
+{
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(screenWidth*screenScale, screenHeight*screenScale), YES, 0);
+    //设置截屏大小
+    //    [[[[UIApplication sharedApplication] keyWindow] layer] renderInContext:UIGraphicsGetCurrentContext()];
+  
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    if(window != nil){
+
+        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO];
+        }
+        else{
+            [window.layer renderInContext:UIGraphicsGetCurrentContext()];
+        }
+    }else{
+        for (UIWindow * window in [[UIApplication sharedApplication] windows]) {
+            if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
+                CGContextSaveGState(context);
+                CGContextTranslateCTM(context, [window center].x, [window center].y);
+                CGContextConcatCTM(context, [window transform]);
+                CGContextTranslateCTM(context, -[window bounds].size.width*[[window layer] anchorPoint].x, -[window bounds].size.height*[[window layer] anchorPoint].y);
+                [[window layer] renderInContext:context];
+                
+                CGContextRestoreGState(context);
+            }
+        }
+
+    }
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    CGImageRef imageRef = viewImage.CGImage;
+    CGRect rect = CGRectMake(0, 0, screenWidth*screenScale,screenHeight*screenScale);
+    
+    CGImageRef imageRefRect =CGImageCreateWithImageInRect(imageRef, rect);
+    UIImage *sendImage = [[UIImage alloc] initWithCGImage:imageRefRect];
+    //    CGImageRelease(imageRef);
+    CGImageRelease(imageRefRect);
+    
+    
+    
+    return sendImage;
+}
+
+
+
+
+@end
+

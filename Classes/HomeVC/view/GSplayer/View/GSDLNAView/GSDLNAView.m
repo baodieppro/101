@@ -209,9 +209,7 @@
 - (void)dlnaStartPlay{
     NSLog(@"投屏成功 开始播放");
     [self tapRemove];
-    [self.dlnaManager endService];
-    
-//    [self.dlnaManager setLBLelinkPlayerItemPlayUrl:self.playUrl];
+    [self gs_showTextHud:@"投屏成功，开始播放"];
     NSString *model = self.deviceArr[index];
     if ([self.delegate respondsToSelector:@selector(gs_dlnaStartPlay:listIndex:)])
     {

@@ -529,7 +529,6 @@ static id _instance;
     // 存储当前播放URL到本地 以便后面选集时比较哪个是当前播放的曲目
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    [defaults setObject:playInfo.url forKey:@"currentPlayingUrl"];
-//
     
     //判断是否有下载缓存
     if ([DownloadDataManager isExistAppForUrl:playInfo] == YES) {
@@ -788,13 +787,15 @@ static id _instance;
             self.placeHolderView.image = nil;
             [self playOrPauseAction];
 //            [self.coverPictureNode startAnimating];
-            [self.waitingView stopAnimating];
+//            [self.waitingView stopAnimating];
         } else if (status == AVPlayerStatusFailed) { // 播放错误 资源不存在 网络问题等等
-            [self.waitingView startAnimating];
+//            [self.waitingView startAnimating];
             GSLog(@"播放错误 资源不存在");
+            [self gs_showTextHud:@"播放错误 资源不存在"];
         } else if (status == AVPlayerStatusUnknown) { // 未知错误
-            [self.waitingView stopAnimating];
+//            [self.waitingView stopAnimating];
             GSLog(@"播放错误 未知错误");
+             [self gs_showTextHud:@"播放错误 未知错误"];
         }
     } else if ([keyPath isEqualToString:@"loadedTimeRanges"]) { // 检测缓存状态
 //        NSArray *loadedTimeRanges = [playItem loadedTimeRanges];
@@ -808,15 +809,15 @@ static id _instance;
         [self.loadedView setProgress:bufferingTime / self.totalTime animated:YES];
 
         if (bufferingTime >= CMTimeGetSeconds(playItem.currentTime) + 5.f) {
-            [self.waitingView stopAnimating];
+//            [self.waitingView stopAnimating];
         }
     } else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {  // 缓存为空
         if (playItem.playbackBufferEmpty) {
-            [self.waitingView startAnimating];
+//            [self.waitingView startAnimating];
         }
     } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) { // 缓存足够能播放
         if (playItem.playbackLikelyToKeepUp) {
-            [self.waitingView stopAnimating];
+//            [self.waitingView stopAnimating];
         }
     } else if ([keyPath isEqualToString:@"thumbImages"]) {
        
@@ -825,13 +826,13 @@ static id _instance;
         if (rate == .0f) {
             self.placeHolderView.hidden = YES;
             if (self.playType == playMusicType) {
-                [self.coverPictureNode stopAnimating];
+//                [self.coverPictureNode stopAnimating];
             }
             [self.playButton setImage:[UIImage imageNamed:@"icon_tv_play"] forState:UIControlStateNormal];
         } else if (rate > .0f) {
             self.placeHolderView.hidden = NO;
             if (self.playType == playMusicType) {
-                [self.coverPictureNode startAnimating];
+//                [self.coverPictureNode startAnimating];
             }
             [self.playButton setImage:[UIImage imageNamed:@"icon_tv_stop"] forState:UIControlStateNormal];
         }
@@ -877,17 +878,22 @@ static id _instance;
     self.progressSlider.value = currentTime;
     [self dragProgressAction:self.progressSlider];
 }
-
+#pragma mark - 进度条拖拽中
+- (void)progressSliderValueChanged:(UISlider *)sender
+{
+    [self dragProgressAction:sender];
+}
 #pragma mark - 进度条拖拽结束
 - (void)progressDragEnd:(UISlider *)sender
 {
     // 把播放器控制面板显示属性设置为NO 避免拖动时触发手势隐藏面板
     self.controlPanelShow = NO;
-    
+    GSLog(@"UISlider:%f",sender.value);
 //    [UIView animateWithDuration:.5f animations:^{
 ////        self.previewView.alpha = .0f;
 //    }];
-    [self.player seekToTime:CMTimeMake(self.progressSlider.value, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+
+    [self.player seekToTime:CMTimeMake(sender.value, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     [self addTimerObserver];
 //    [self.player play];
     // 延迟10.0秒后隐藏播放控制面板
@@ -1246,6 +1252,9 @@ static id _instance;
 //        [self.delegate gs_playListClick];
 //    }
     [self addSubview:self.playlistView];
+    [_playlistView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
+    }];
     self.playlistView.playListIndex = self.playIndex;
     [_playlistView setPlayListData:self.playDataArr];
 }
@@ -1411,12 +1420,13 @@ static id _instance;
 -(GSSlider *)progressSlider{
     if (!_progressSlider) {
         GSSlider * slider = [[GSSlider alloc]init];
+        slider.continuous = YES;// 设置可连续变化
 //        // slider开始滑动事件
 //        [slider addTarget:self action:@selector(progressSliderTouchBegan:) forControlEvents:UIControlEventTouchDown];
 //        // slider滑动中事件
-//        [slider addTarget:self action:@selector(progressSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [slider addTarget:self action:@selector(progressSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
         // slider结束滑动事件
-        [slider addTarget:self action:@selector(progressDragEnd:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchCancel];
+        [slider addTarget:self action:@selector(progressDragEnd:) forControlEvents:UIControlEventTouchCancel];
 //        //小于当前滑动的颜色
         slider.minimumTrackTintColor=[UIColor colorWithHexString:@"#FFD454"];
 //        //大于当前滑动的颜色

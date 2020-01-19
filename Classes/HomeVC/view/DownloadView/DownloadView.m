@@ -74,7 +74,7 @@
         if (self.downLoadList.count != 0) {
             [cell setDownLoadModel:self.downLoadList[indexPath.row]];
         }
-
+        cell.tag = 1001+indexPath.row;
         tableViewCell = cell;
         
     }
@@ -161,22 +161,19 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath{
         for (NSInteger i = 0; i< self.downLoadList.count; i++) {
             Download_FMDBDataModel * model = self.downLoadList[i];
             if ([model.isDown integerValue] == 1) {
-                break;
+                continue;
             }
-            NSIndexPath *cellIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            DownloadCell * newCell  = (DownloadCell *)[self.tableView cellForRowAtIndexPath:cellIndexPath];
+//            NSIndexPath *cellIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+//            [self.tableView registerClass:[DownloadCell class] forCellReuseIdentifier:@"DownloadCell"];
+//            DownloadCell * newCell  = (DownloadCell *)[self tableView:self.tableView cellForRowAtIndexPath:cellIndexPath];
+//            __kWeakSelf__;
             [DownLoadManager start:model.downLoadUrl Name:model.title progressBlock:^(CGFloat progress) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"下载进度:%@",[NSString stringWithFormat:@"%.00f%%",progress * 100]);
-                    newCell.urlLabel.text = [NSString stringWithFormat:@"%.00f%%",progress * 100];
-                    newCell.loadedView.progress = progress;
-                    //            [weakSelf.loadedView setProgress:progress animated:YES];
-                    
-                });
-                
-//                if (progress >= 1) {
-//                    newCell.startButton.hidden = YES;
-//                }
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    newCell.urlLabel.text = [NSString stringWithFormat:@"%.00f%%",progress * 100];
+////                    newCell.loadedView.progress = progress;
+//                    [newCell.loadedView setProgress:progress animated:YES];
+//                    [weakSelf.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:cellIndexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+//                });
             }];
         }
        
@@ -188,7 +185,7 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath{
 {
     if(_tableView == nil)
     {
-        _tableView = [[UITableView alloc]init];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -209,7 +206,6 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath{
 -(NSMutableArray *)downLoadList{
     if (!_downLoadList) {
         _downLoadList = [[NSMutableArray alloc] initWithArray:[DownloadDataManager readDownLoadDataList]];
-       
     }
     return _downLoadList;
 }

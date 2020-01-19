@@ -82,8 +82,9 @@
                 base_url = [[orUrl subStringTo:@"com"] removeSpaceAndNewline];
                 new_url = [NSString stringWithFormat:@"%@com%@",base_url,url];
             }else{
-                if([orUrl containsString:@"index.m3u8"]){
-                    base_url = [[orUrl subStringTo:@"index.m3u8"] removeSpaceAndNewline];
+                if ([orUrl containsString:@".m3u8"]) {
+                    NSArray *array = [orUrl componentsSeparatedByString:@"/"];
+                    base_url = [[orUrl subStringTo:array.lastObject] removeSpaceAndNewline];
                     new_url = [NSString stringWithFormat:@"%@%@",base_url,url];
                 }else{
                     base_url = [[orUrl subStringTo:@"com"] removeSpaceAndNewline];

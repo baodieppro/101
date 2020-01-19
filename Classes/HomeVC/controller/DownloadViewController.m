@@ -17,7 +17,7 @@
 @implementation DownloadViewController
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [_downView gs_ViewDidAppear];
+   
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,6 +29,13 @@
     self.baseNavigationBar.backgroundColor = [UIColor colorWithHexString:@"#333333"];
     self.navigationTitle = @"下载管理";
     self.baseNavigationBar.titleLabel.textColor = [UIColor whiteColor];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"全部开始" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btn.frame = CGRectMake(__kScreenWidth__-70, 0, 80, 22);
+    btn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [btn addTarget:self action:@selector(allDownloadClick) forControlEvents:UIControlEventTouchUpInside];
+    self.baseNavigationBar.rightBarButtons = @[btn];
 }
 - (void)g_addUI{
     [self.myView addSubview:self.downView];
@@ -45,5 +52,9 @@
         _downView = [[DownloadView alloc]init];
     }
     return _downView;
+}
+#pragma mark - Click
+-(void)allDownloadClick{
+    [_downView gs_ViewDidAppear];
 }
 @end

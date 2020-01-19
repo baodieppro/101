@@ -16,5 +16,8 @@ target 'GSDlna' do
   pod 'MJExtension'
   pod 'MRDLNA'
   pod 'GCDWebServer','~> 3.5.3'
-
+  pod 'UMCSecurityPlugins'
+  pod 'UMCShare/Social/ReducedWeChat'
+  pod 'UMCAnalytics'
+  
 end

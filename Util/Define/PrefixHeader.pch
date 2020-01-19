@@ -34,7 +34,10 @@
 #import "GSTimeTools.h"
 #import "ShowRemindTool.h"
 #import "GSLAlertView.h"
-
+#import "ToolscreenShot.h"
+#import "GShareView.h"
+#import "GSQRCodeTool.h"
+#import "ShareTool.h"
 
 // Categorys
 #import "UIColor+GSColor.h"
@@ -60,5 +63,8 @@
 //FMDB
 #import "BookMarkManager.h"
 #import "PlayNanager.h"
+
+//友盟
+#import "GSum.h"
 
 #endif /* PrefixHeader_pch */

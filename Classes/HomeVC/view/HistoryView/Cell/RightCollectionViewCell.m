@@ -122,6 +122,7 @@
             [cell setItmeModel:itmeModel];
         }
         [cell setEditSelected:self.editSelected];
+        [cell setIsLefOrRight:NO];
 
         tableViewCell = cell;
 

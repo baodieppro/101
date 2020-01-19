@@ -24,9 +24,10 @@
         [_loadedView setProgress:1 animated:NO];
         _startButton.hidden = YES;
     }else{
-        [_startButton setTitle:@"暂停" forState:UIControlStateNormal];
+//        [_startButton setTitle:@"开始" forState:UIControlStateNormal];
         _startButton.selected = NO;
-
+        _urlLabel.text = @"0%";
+        [_loadedView setProgress:0 animated:NO];
     }
 
 }
@@ -36,7 +37,6 @@
     if (self) {
         [self cell_AddUI];
         [self cell_LayoutFrame];
-        
     }
     return self;
 }
@@ -44,9 +44,8 @@
     [self addSubview:self.leftImageView];
     [self addSubview:self.titleLabel];
     [self addSubview:self.urlLabel];
-    [self addSubview:self.startButton];
     [self addSubview:self.loadedView];
-
+    [self addSubview:self.startButton];
 }
 -(void)cell_LayoutFrame{
     [_leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -71,7 +70,6 @@
         make.right.mas_equalTo(self).mas_offset(-__kNewSize(15*2));
         make.size.mas_equalTo(CGSizeMake(__kNewSize(50*2), __kNewSize(40*2)));
     }];
-    
     [_loadedView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self).mas_offset(-6);
         make.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, 20, 0, 20));
@@ -87,8 +85,14 @@
         [DownLoadManager cannel:self.downLoadModel.downLoadUrl];
         [DownLoadManager start:self.downLoadModel.downLoadUrl Name:self.downLoadModel.title progressBlock:^(CGFloat progress) {
             NSLog(@"下载进度: %@",[NSString stringWithFormat:@"%.00f%%",progress * 100]);
-            weakSelf.urlLabel.text = [NSString stringWithFormat:@"%.00f%%",progress * 100];
-            [weakSelf.loadedView setProgress:progress animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.urlLabel.text = [NSString stringWithFormat:@"%.00f%%",progress * 100];
+                [weakSelf.loadedView setProgress:progress animated:YES];
+                if (progress >= 1) {
+                    btn.hidden = YES;
+                }
+            });
+           
         }];
     }else{
         [btn setTitle:@"开始" forState:UIControlStateNormal];
@@ -128,15 +132,14 @@
     return _urlLabel;
 }
 -(UIButton *)startButton{
-    if (_startButton == nil) {
+    if (!_startButton) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.titleLabel.font = [UIFont systemFontOfSize:__kNewSize(32)];
         [button setTitle:@"开始" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        //        button.layer.cornerRadius =5;
         button.backgroundColor = [UIColor redColor];
-        button.selected = YES;
         [button addTarget:self action:@selector(startClick:) forControlEvents:UIControlEventTouchUpInside];
+        button.selected = YES;
         _startButton = button;
     }
     return _startButton;

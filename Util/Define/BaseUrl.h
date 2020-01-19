@@ -111,7 +111,7 @@
 
 #define __API_traderAssets_get__                     @"traderAssets"//(get：获取总收益)
 
-#define __API_extractRevenue_post__                  @"extractRevenue"//(post：提现)
+#define __API_returnOrder_get__                      @"returnOrder/%@"//(get：退换货详情)
 
 
 //========================= API merchant =======================

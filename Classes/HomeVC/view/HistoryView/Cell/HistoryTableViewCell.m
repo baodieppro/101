@@ -27,6 +27,15 @@
 -(void)setEditSelected:(BOOL)editSelected{
     _selectImageView.hidden = !editSelected;
 }
+-(void)setIsLefOrRight:(BOOL)isLefOrRight{
+    if (isLefOrRight == YES) {
+        _goodsImageView.image = [UIImage imageNamed:@"History_def"];
+
+    }else{
+        _goodsImageView.image = [UIImage imageNamed:@"History_Video"];
+
+    }
+}
 - (void)setFrame:(CGRect)frame{
 //    frame.origin.x += __kNewSize(5*2);
     frame.origin.y += __kNewSize(5*2);
@@ -108,7 +117,7 @@
         _goodsImageView = [[UIImageView alloc]init];
         _goodsImageView.layer.masksToBounds = YES;
         _goodsImageView.layer.cornerRadius = 2;
-        _goodsImageView.backgroundColor = [UIColor redColor];
+//        _goodsImageView.backgroundColor = [UIColor redColor];
     }
     return _goodsImageView;
 }

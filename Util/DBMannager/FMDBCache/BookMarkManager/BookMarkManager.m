@@ -368,7 +368,7 @@ static BookMarkFMDB *manager=nil;
 {
     //[_lock lock];
     //* 查找全部 select * from 表名
-    NSString *selSQL=@"select * from BOOKMARKFMDB where isDef = ？";
+    NSString *selSQL=@"select * from BOOKMARKFMDB where isDef = ?";
     FMResultSet *set=[database executeQuery:selSQL,isDef];
     NSString * defUrl;
     //遍历集合
@@ -382,9 +382,13 @@ static BookMarkFMDB *manager=nil;
         defUrl = appModel.url;
      
     }
+    if(!defUrl){
+         NSLog(@"insert error:%@",database.lastErrorMessage);
+    }
     
     return [defUrl copy];
 }
+
 //- (NSInteger)timeModelArrayfromeKey:(NSString *)time classificationId:(NSString *)classificationId
 //{
 //    //[_lock lock];

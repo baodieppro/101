@@ -241,10 +241,38 @@ MyBookmarkVCDelegate
     NSDictionary * dict = [NSDictionary dictionaryWithDictionary:notification.object];
     NSString * url = [dict objectForKey:@"url"];
     if (!kStringIsEmpty(url)) {
-        _playUrl =  url;
-    }
     isplay = [self playWithUrl:url];
-
+        if(isplay == YES){
+            __kWeakSelf__;
+            [[GSLAlertView alertManager] createInitWithTitle:@"是否播放视频" message:self.playUrl sureBtn:@"确定" cancleBtn:@"取消"];
+            [GSLAlertView alertManager].resultIndex = ^(NSInteger index) {
+                switch (index) {
+                    case 2:
+                    {
+                        [weakSelf playVideoClick];
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            };
+            [[GSLAlertView alertManager] showGSAlertView];
+        }else{
+            [[GSLAlertView alertManager] createInitWithTitle:@"是否访问地址" message:url sureBtn:@"确定" cancleBtn:@"取消"];
+            [GSLAlertView alertManager].resultIndex = ^(NSInteger index) {
+                switch (index) {
+                    case 2:
+                    {
+                        [self.webView loadURLString:url];
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            };
+            [[GSLAlertView alertManager] showGSAlertView];
+        }
+    }
 //     [self pushPlayVC_Url:url];
 }
 -(void)setCaptureM3U8Notification:(NSNotification *)notification{
@@ -279,9 +307,12 @@ MyBookmarkVCDelegate
             }else{
                 GSLog(@"后缀是.m3u8,但捕获规则未加\n%@",url);
                 self.playUrl = url;
-                self.downLoadBtn.hidden = NO;
-
-                [_searchView playVideoButtonIs:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //主线程执行
+                    self.downLoadBtn.hidden = NO;
+                    [self.searchView playVideoButtonIs:YES];
+                });
+              
                 return  YES;
             }
         }
@@ -293,7 +324,6 @@ MyBookmarkVCDelegate
     }
     self.playUrl = @"";
     self.downLoadBtn.hidden = YES;
-
     [_searchView playVideoButtonIs:NO];
     return NO;
 }
@@ -303,14 +333,16 @@ MyBookmarkVCDelegate
 {
     GSLog(@"页面请求加载 %@ ",[request.URL absoluteString] );
     isplay = [self playWithUrl:[request.URL absoluteString]];
-
     
     return YES;
 }
 -(void)gswebViewDidStartLoad:(GSWebView *)webView url:(nonnull NSString *)url Title:(nonnull NSString *)title{
     GSLog(@"页面开始加载 %@  %@ ",url ,title);
     if (!kStringIsEmpty(url)) {
+        self.webUrl = url;
+        self.webTitle = title;
         self.searchView.searchTextField.text = url;
+        [ToolscreenShot screenShot].qrCodeStr = self.webUrl ;
         [self refreshBackImage:NO];
         if(isplay == YES){
             isplay = [self playWithUrl:url];
@@ -326,6 +358,7 @@ MyBookmarkVCDelegate
         self.searchView.searchTextField.text = title;
         self.webUrl = url;
         self.webTitle = title;
+        [ToolscreenShot screenShot].qrCodeStr = self.webUrl ;
         [HistoryModel addCacheName:WEB_History_Cache title:title url:url arr:self.historyDataList];
        [self displayNoneAd:url];
         if (isplay == YES) {
@@ -362,6 +395,14 @@ MyBookmarkVCDelegate
         }];
 
     }
+    if([url rangeOfString:@"yilongtv.com"].location != NSNotFound)
+    {
+        NSString * isNone2 = @"document.getElementById('a_wrap').style.display = 'none'";
+        [_webView excuteJavaScript:isNone2 completionHandler:^(id  _Nonnull params, NSError * _Nonnull error) {
+            GSLog(@"params :%@\nerror :%@",params,error);
+        }];
+    }
+    
 }
 -(void)stopVideoHtmlJavaScript{
     NSString * downPalay = [NSString stringWithFormat:@"document.getElementsByTagName('video')[0].pause()"];
@@ -389,10 +430,20 @@ MyBookmarkVCDelegate
     [self pushPlayVC_Url:self.playUrl];
 }
 -(void)downLoadPlayVideoClick{
-
-    [DownLoadManager start:self.playUrl Name:self.webTitle progressBlock:^(CGFloat progress) {
-
-    }];
+    if ([DownloadDataManager isExistAppForTitle:self.webTitle] == YES) {
+        //已经下载过了
+        [[GSLAlertView alertManager] createInitWithTitle:@"已经下载过了" message:self.webTitle sureBtn:@"知道了" cancleBtn:nil];
+        [[GSLAlertView alertManager] showGSAlertView];
+        
+    }else{
+        //还没有下载过
+        [self.myView gs_showTextHud:[NSString stringWithFormat:@"准备下载 - %@",self.webTitle]];
+        [DownLoadManager start:self.playUrl Name:self.webTitle progressBlock:^(CGFloat progress) {
+            
+        }];
+        [self.myView gs_showTextHud:[NSString stringWithFormat:@"下载中 \n %@",self.webTitle]];
+    }
+   
 
 }
 #pragma mark - 刷新按钮当前状态
@@ -487,9 +538,25 @@ MyBookmarkVCDelegate
             [self push_QRCodeVC];
         }
             break;
+        case 7:
+        {
+            GSLog(@"复制播放地址");
+            NSString * msg ;
+            if (!kStringIsEmpty(self.playUrl)) {
+                msg = self.playUrl;
+                UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                pasteboard.string = msg;
+            }else{
+                msg = self.url;
+            }
+            [[GSLAlertView alertManager] createInitWithTitle:@"复制成功" message:msg sureBtn:@"知道了" cancleBtn:nil];
+            [[GSLAlertView alertManager] showGSAlertView];
+        }
+            break;
         case 888:
         {
            GSLog(@"分享");
+            [self shareShow];
         }
             break;
         case 999:
@@ -501,15 +568,75 @@ MyBookmarkVCDelegate
             break;
     }
 }
+#pragma mark - 分享
+- (void)shareShow{
+    UIImage * img = [UIImage snapshotScreenInView:self.view rect:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    UIImage * image = [UIImage addImage:[GSQRCodeTool SG_generateWithLogoQRCodeData:self.webUrl logoImageName:@"" logoScaleToSuperView:2.0] toImage:img];
+    NSArray * arr = @[image];
+    [ShareTool shareWithItem:arr MySelf:self completionHandler:^(UIActivityType  _Nullable activityType, BOOL completed) {
+        GSLog(@"activityType %@",activityType);
+        if (completed == YES) {
+            GSLog(@"分享成功");
+        }else{
+            GSLog(@"取消分享");
+        }
+    }];
+//    [GShareView newShare].screenShotsImage.image = img;
+//    [GShareView newShare].shareType = ShareScreenshotsType;
+//    [[GShareView newShare] show];
+//    [GShareView newShare].shareBlock = ^(ShareClickType shareClickType) {
+//        NSString * title;
+//        NSInteger platformType;
+//        switch (shareClickType) {
+//            case QQ_ShareType:
+//                NSLog(@"QQ好友");
+//                title = @"分享到QQ";
+//                platformType = UMSocialPlatformType_QQ;
+//                break;
+//            case error_ShareType:
+//                NSLog(@"失败");
+//                title = @"分享失败";
+//                break;
+//            case Qzone_ShareType:
+//                NSLog(@"QQ空间");
+//                title = @"分享到QQ空间";
+//                platformType = UMSocialPlatformType_Qzone;
+//
+//                break;
+//            case WechatTimeLine_ShareType:
+//                NSLog(@"微信朋友圈");
+//                title = @"分享到微信朋友圈";
+//                platformType = UMSocialPlatformType_WechatTimeLine;
+//
+//                break;
+//            case WechatSession_ShareType:
+//                NSLog(@"微信好友");
+//                title = @"分享到微信好友";
+//                platformType = UMSocialPlatformType_WechatSession;
+//
+//                break;
+//            case Sina_ShareType:
+//                NSLog(@"新浪微博");
+//                title = @"分享到新浪微博";
+//                platformType = UMSocialPlatformType_Sina;
+//
+//                break;
+//            default:
+//                break;
+//        }
+//
+//        [GSUMShare shareImageToPlatformType:platformType ShareImage:img];
+//    };
+}
 #pragma mark - push
 -(void)pushPlayVC_Url:(NSString *)url{
+    PlayViewController * playVC = [[PlayViewController alloc]init];
+    __kAppDelegate__.allowRotation = YES;//关闭横屏仅允许竖屏
     if (!kStringIsEmpty(url)) {
         if([[url pathExtension] isEqualToString:@"m3u8"]||
            [[url pathExtension] isEqualToString:@"mp4"]
            ){
             isplay = NO;
-            PlayViewController * playVC = [[PlayViewController alloc]init];
-            __kAppDelegate__.allowRotation = YES;//关闭横屏仅允许竖屏
             playVC.playUrl = url;
             playVC.topName = self.webTitle;
             playVC.playStyle = playStyleTypeNormal;
@@ -518,7 +645,8 @@ MyBookmarkVCDelegate
             [self.view gs_showTextHud:[NSString stringWithFormat:@"播放地址不正确～\n%@",self.searchView.searchTextField.text]];
         }
     }else{
-        [self.view gs_showTextHud:@"播放地址不能为空～"];
+        playVC.playStyle = playStyleTypeHistory;
+        [self presentViewController:playVC animated:NO completion:nil];
     }
     
 }

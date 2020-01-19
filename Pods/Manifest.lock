@@ -32,6 +32,15 @@ PODS:
     - MRDLNA/MRC (= 0.1.1)
   - MRDLNA/MRC (0.1.1):
     - CocoaAsyncSocket
+  - UMCAnalytics (6.0.5):
+    - UMCCommon
+  - UMCCommon (2.1.1)
+  - UMCSecurityPlugins (1.0.6)
+  - UMCShare/Core (6.9.6):
+    - UMCCommon
+  - UMCShare/Social/ReducedWeChat (6.9.6):
+    - UMCCommon
+    - UMCShare/Core
 
 DEPENDENCIES:
   - AFNetworking
@@ -44,6 +53,9 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - MRDLNA
+  - UMCAnalytics
+  - UMCSecurityPlugins
+  - UMCShare/Social/ReducedWeChat
 
 SPEC REPOS:
   trunk:
@@ -58,6 +70,10 @@ SPEC REPOS:
     - MJExtension
     - MJRefresh
     - MRDLNA
+    - UMCAnalytics
+    - UMCCommon
+    - UMCSecurityPlugins
+    - UMCShare
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -71,7 +87,11 @@ SPEC CHECKSUMS:
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
   MRDLNA: 3fe35c6ac57c946413d07896faeb9101c4d8853d
+  UMCAnalytics: 045be2cd1ec05aa95ad62405a850757f932e2d59
+  UMCCommon: 971f324a5a99c9d662ae040a815e7e3d7ef8b2a8
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
+  UMCShare: e0cef55c0fd6051254c8cda1d0630eb578b27bad
 
-PODFILE CHECKSUM: 70827b4e563dbe0ea1cdfa374a13f7578f7907e6
+PODFILE CHECKSUM: c93f6e367f8b51a63776100a3d011b38df5e8a6a
 
 COCOAPODS: 1.8.4

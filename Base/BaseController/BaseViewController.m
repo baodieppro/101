@@ -172,7 +172,7 @@
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:titleName forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btn.frame = CGRectMake(__kScreenWidth__-70, 0, 60, 22);
     [btn addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     //    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc]initWithCustomView:btn];

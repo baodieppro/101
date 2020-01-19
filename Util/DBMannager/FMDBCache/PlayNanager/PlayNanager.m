@@ -19,10 +19,8 @@
     appModel.pathUrl = downModel.pathUrl?:@"0";
     appModel.isDown = downModel.isDown?:@"0";
     if ([self isExistAppForUrl:appModel.url] == NO) {
-        
         [[PlayCacheFmdb videoFMDB] insertModel:appModel];
         GSLog(@"====================添加新的视频记录");
-        
     }else{
         [[PlayCacheFmdb videoFMDB] updataExistNewModel:appModel complete:^{
             GSLog(@"====================修改视频记录成功");

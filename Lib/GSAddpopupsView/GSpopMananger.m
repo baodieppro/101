@@ -30,11 +30,11 @@ static GSpopMananger *shareInstance;
 
 
 -(void)addPopView:(UIView *)view  popView:(void (^)(GSAddpopupsView * popView))popView{
-                GSAddpopupsView *  gsAddpopupsView = [[GSAddpopupsView alloc] initWithCustomView:view popStyle:GSAnimationPopStyleScale dismissStyle:GSAnimationDismissStyleScale newStyle:GSAnimationPopStyleTapYes];
-                gsAddpopupsView.popBGAlpha = 0.5f;
-                gsAddpopupsView.isClickBGDismiss = NO;
-                [gsAddpopupsView pop];
-                popView(gsAddpopupsView);      
+        GSAddpopupsView *  gsAddpopupsView = [[GSAddpopupsView alloc] initWithCustomView:view popStyle:GSAnimationPopStyleScale dismissStyle:GSAnimationDismissStyleScale newStyle:GSAnimationPopStyleTapYes];
+        gsAddpopupsView.popBGAlpha = 0.5f;
+        gsAddpopupsView.isClickBGDismiss = NO;
+        [gsAddpopupsView pop];
+        popView(gsAddpopupsView);
     
  
 }

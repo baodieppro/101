@@ -154,6 +154,9 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath{
             [BookMarkManager addHistoryData:@{@"title":model.title,@"url":model.url,@"isDef":def}];
 
         }
+        [self.favoriteArr removeAllObjects];
+        self.favoriteArr = nil;
+        [self.tableView reloadData];
     }];
     //删除按钮颜色
     deleteAction1.backgroundColor = [UIColor colorWithHexString:@"ffd454"];

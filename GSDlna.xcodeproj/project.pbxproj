@@ -31,6 +31,13 @@
 		8154218123AA2469001E884C /* WebBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8154218023AA2469001E884C /* WebBottomView.m */; };
 		8154218523AA54C2001E884C /* BookmarkClickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8154218423AA54C2001E884C /* BookmarkClickView.m */; };
 		81901A8023B9C8AB00CA0307 /* PlayNanager.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901A7F23B9C8AB00CA0307 /* PlayNanager.m */; };
+		81901AA823BB45B000CA0307 /* GOpenUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AA723BB45B000CA0307 /* GOpenUrl.m */; };
+		81901AAE23BB45C600CA0307 /* GShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AAB23BB45C600CA0307 /* GShareView.m */; };
+		81901AB123BB45D800CA0307 /* ToolscreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AAF23BB45D800CA0307 /* ToolscreenShot.m */; };
+		81901AB423BB45F600CA0307 /* SecurityStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AB323BB45F600CA0307 /* SecurityStrategy.m */; };
+		81901AB723BB45FE00CA0307 /* UIImage+BlurGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AB623BB45FE00CA0307 /* UIImage+BlurGlass.m */; };
+		81901AFA23BB4D5600CA0307 /* GSUMConfigInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AF523BB4D5600CA0307 /* GSUMConfigInstance.m */; };
+		81901AFB23BB4D5600CA0307 /* GSUMShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AF723BB4D5600CA0307 /* GSUMShare.m */; };
 		81AFB3ED239F67C4000E6078 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB3EC239F67C4000E6078 /* AppDelegate.m */; };
 		81AFB3F0239F67C4000E6078 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB3EF239F67C4000E6078 /* ViewController.m */; };
 		81AFB3F3239F67C4000E6078 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AFB3F1239F67C4000E6078 /* Main.storyboard */; };
@@ -139,6 +146,7 @@
 		81AFB67F23A3A9D0000E6078 /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB67E23A3A9D0000E6078 /* DownloadViewController.m */; };
 		81AFB68323A76895000E6078 /* HybridNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB68123A76894000E6078 /* HybridNSURLProtocol.m */; };
 		81AFB68723A7697D000E6078 /* NSURLProtocol+WKWebVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB68523A7697D000E6078 /* NSURLProtocol+WKWebVIew.m */; };
+		81B04D1723CED8F000521D55 /* ShareTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B04D1623CED8F000521D55 /* ShareTool.m */; };
 		A73D40B1EFDD4529F809769D /* Pods_GSDlna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65560B17962D9138E624365 /* Pods_GSDlna.framework */; };
 /* End PBXBuildFile section */
 
@@ -212,6 +220,21 @@
 		8154218423AA54C2001E884C /* BookmarkClickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkClickView.m; sourceTree = "<group>"; };
 		81901A7E23B9C8AB00CA0307 /* PlayNanager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayNanager.h; sourceTree = "<group>"; };
 		81901A7F23B9C8AB00CA0307 /* PlayNanager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayNanager.m; sourceTree = "<group>"; };
+		81901AA623BB45B000CA0307 /* GOpenUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GOpenUrl.h; sourceTree = "<group>"; };
+		81901AA723BB45B000CA0307 /* GOpenUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GOpenUrl.m; sourceTree = "<group>"; };
+		81901AAA23BB45C600CA0307 /* GShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GShareView.h; sourceTree = "<group>"; };
+		81901AAB23BB45C600CA0307 /* GShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GShareView.m; sourceTree = "<group>"; };
+		81901AAF23BB45D800CA0307 /* ToolscreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolscreenShot.m; sourceTree = "<group>"; };
+		81901AB023BB45D800CA0307 /* ToolscreenShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolscreenShot.h; sourceTree = "<group>"; };
+		81901AB223BB45F600CA0307 /* SecurityStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityStrategy.h; sourceTree = "<group>"; };
+		81901AB323BB45F600CA0307 /* SecurityStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityStrategy.m; sourceTree = "<group>"; };
+		81901AB523BB45FE00CA0307 /* UIImage+BlurGlass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BlurGlass.h"; sourceTree = "<group>"; };
+		81901AB623BB45FE00CA0307 /* UIImage+BlurGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BlurGlass.m"; sourceTree = "<group>"; };
+		81901AF523BB4D5600CA0307 /* GSUMConfigInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSUMConfigInstance.m; sourceTree = "<group>"; };
+		81901AF623BB4D5600CA0307 /* GSum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSum.h; sourceTree = "<group>"; };
+		81901AF723BB4D5600CA0307 /* GSUMShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSUMShare.m; sourceTree = "<group>"; };
+		81901AF823BB4D5600CA0307 /* GSUMConfigInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSUMConfigInstance.h; sourceTree = "<group>"; };
+		81901AF923BB4D5600CA0307 /* GSUMShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSUMShare.h; sourceTree = "<group>"; };
 		81AFB3E8239F67C4000E6078 /* GSDlna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSDlna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AFB3EB239F67C4000E6078 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		81AFB3EC239F67C4000E6078 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -438,6 +461,8 @@
 		81AFB68223A76894000E6078 /* HybridNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HybridNSURLProtocol.h; sourceTree = "<group>"; };
 		81AFB68523A7697D000E6078 /* NSURLProtocol+WKWebVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WKWebVIew.m"; sourceTree = "<group>"; };
 		81AFB68623A7697D000E6078 /* NSURLProtocol+WKWebVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLProtocol+WKWebVIew.h"; sourceTree = "<group>"; };
+		81B04D1523CED8F000521D55 /* ShareTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareTool.h; sourceTree = "<group>"; };
+		81B04D1623CED8F000521D55 /* ShareTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareTool.m; sourceTree = "<group>"; };
 		C65560B17962D9138E624365 /* Pods_GSDlna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GSDlna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF913827C02EBF66CA9616C6 /* Pods-GSDlna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSDlna.release.xcconfig"; path = "Target Support Files/Pods-GSDlna/Pods-GSDlna.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -619,6 +644,35 @@
 			path = PlayNanager;
 			sourceTree = "<group>";
 		};
+		81901AA523BB457500CA0307 /* ShareManager */ = {
+			isa = PBXGroup;
+			children = (
+				81901AB023BB45D800CA0307 /* ToolscreenShot.h */,
+				81901AAF23BB45D800CA0307 /* ToolscreenShot.m */,
+				81901AA623BB45B000CA0307 /* GOpenUrl.h */,
+				81901AA723BB45B000CA0307 /* GOpenUrl.m */,
+				81901AAA23BB45C600CA0307 /* GShareView.h */,
+				81901AAB23BB45C600CA0307 /* GShareView.m */,
+				81901AB223BB45F600CA0307 /* SecurityStrategy.h */,
+				81901AB323BB45F600CA0307 /* SecurityStrategy.m */,
+				81901AB523BB45FE00CA0307 /* UIImage+BlurGlass.h */,
+				81901AB623BB45FE00CA0307 /* UIImage+BlurGlass.m */,
+			);
+			path = ShareManager;
+			sourceTree = "<group>";
+		};
+		81901AF423BB4D5600CA0307 /* GSUMmanager */ = {
+			isa = PBXGroup;
+			children = (
+				81901AF523BB4D5600CA0307 /* GSUMConfigInstance.m */,
+				81901AF623BB4D5600CA0307 /* GSum.h */,
+				81901AF723BB4D5600CA0307 /* GSUMShare.m */,
+				81901AF823BB4D5600CA0307 /* GSUMConfigInstance.h */,
+				81901AF923BB4D5600CA0307 /* GSUMShare.h */,
+			);
+			path = GSUMmanager;
+			sourceTree = "<group>";
+		};
 		81AFB3DF239F67C4000E6078 = {
 			isa = PBXGroup;
 			children = (
@@ -766,6 +820,8 @@
 		81AFB47F239F6E3D000E6078 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				81901AF423BB4D5600CA0307 /* GSUMmanager */,
+				81901AA523BB457500CA0307 /* ShareManager */,
 				8154211223A7804D001E884C /* DownLoadManager */,
 				81AFB68423A768A2000E6078 /* HybridNSURLProtocol */,
 				81AFB5D8239FA975000E6078 /* DLNAManager */,
@@ -793,9 +849,9 @@
 		81AFB483239F6E3E000E6078 /* GSAddpopupsView */ = {
 			isa = PBXGroup;
 			children = (
-				81AFB484239F6E3E000E6078 /* GSAddpopupsView.h */,
 				81AFB485239F6E3E000E6078 /* popView */,
 				81AFB48A239F6E3E000E6078 /* GSpopMananger.m */,
+				81AFB484239F6E3E000E6078 /* GSAddpopupsView.h */,
 				81AFB48B239F6E3E000E6078 /* GSAddpopupsView.m */,
 				81AFB48C239F6E3E000E6078 /* GSpopMananger.h */,
 			);
@@ -899,6 +955,7 @@
 		81AFB4A4239F6E3E000E6078 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				81B04D1423CED8E700521D55 /* ShareTool */,
 				81AFB4A5239F6E3E000E6078 /* GSRegular */,
 				81AFB4A8239F6E3E000E6078 /* SSKeyChain */,
 				81AFB4AB239F6E3E000E6078 /* LSProgressHUD */,
@@ -973,10 +1030,10 @@
 				81AFB4BB239F6E3E000E6078 /* ImageName.h */,
 				81AFB4BD239F6E3E000E6078 /* Config.h */,
 				81AFB4BE239F6E3E000E6078 /* BaseNotification_Name.h */,
-				81AFB545239F6EE2000E6078 /* PrefixHeader.pch */,
 				81AFB4C0239F6E3E000E6078 /* AppConfig.h */,
 				81AFB4C1239F6E3E000E6078 /* BaseUrl.h */,
 				811B5A9E23B2166600B3862B /* FMDB_Name.h */,
+				81AFB545239F6EE2000E6078 /* PrefixHeader.pch */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -1046,6 +1103,7 @@
 				81AFB4D9239F6E3E000E6078 /* UIView+HUD.h */,
 				81AFB4DA239F6E3E000E6078 /* UIView+Frame.m */,
 				81AFB4DB239F6E3E000E6078 /* UIView+Extension.h */,
+				81AFB4EA239F6E3E000E6078 /* UIImage+ImageCornerRadius.h */,
 				81AFB4DC239F6E3E000E6078 /* UIImage+ImageCornerRadius.m */,
 				81AFB4DD239F6E3E000E6078 /* UIViewController+Autorotate.h */,
 				81AFB4DE239F6E3E000E6078 /* UIColor+GSColor.h */,
@@ -1060,7 +1118,6 @@
 				81AFB4E7239F6E3E000E6078 /* NSString+Hashing.h */,
 				81AFB4E8239F6E3E000E6078 /* NSString+SHA1Addiction.h */,
 				81AFB4E9239F6E3E000E6078 /* UIViewController+Autorotate.m */,
-				81AFB4EA239F6E3E000E6078 /* UIImage+ImageCornerRadius.h */,
 				81AFB4EB239F6E3E000E6078 /* UIView+Frame.h */,
 				81AFB4EC239F6E3E000E6078 /* UIView+Extension.m */,
 				81AFB4ED239F6E3E000E6078 /* UIDevice+GSDevice.h */,
@@ -1338,6 +1395,15 @@
 			path = HybridNSURLProtocol;
 			sourceTree = "<group>";
 		};
+		81B04D1423CED8E700521D55 /* ShareTool */ = {
+			isa = PBXGroup;
+			children = (
+				81B04D1523CED8F000521D55 /* ShareTool.h */,
+				81B04D1623CED8F000521D55 /* ShareTool.m */,
+			);
+			path = ShareTool;
+			sourceTree = "<group>";
+		};
 		D181CE151C9B062A1583D19B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1415,6 +1481,11 @@
 				TargetAttributes = {
 					81AFB3E7239F67C4000E6078 = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					81AFB3FF239F67C6000E6078 = {
 						CreatedOnToolsVersion = 10.3;
@@ -1522,6 +1593,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AFB5B5239F9AB3000E6078 /* PlayViewController.m in Sources */,
+				81B04D1723CED8F000521D55 /* ShareTool.m in Sources */,
 				81AFB68323A76895000E6078 /* HybridNSURLProtocol.m in Sources */,
 				81AFB533239F6E3E000E6078 /* NSString+SHA1Addiction.m in Sources */,
 				81AFB518239F6E3E000E6078 /* BaseViewModel.m in Sources */,
@@ -1551,8 +1623,10 @@
 				81AFB61C23A23421000E6078 /* HistoryManagerFooterView.m in Sources */,
 				81AFB5BB239F9BF9000E6078 /* DlnaViewController.m in Sources */,
 				81AFB53A239F6E3E000E6078 /* UIView+HUD.m in Sources */,
+				81901AFA23BB4D5600CA0307 /* GSUMConfigInstance.m in Sources */,
 				81AFB61823A213B8000E6078 /* SearchHistoryCell.m in Sources */,
 				81AFB5C1239FA57A000E6078 /* BaseVerticalViewController.m in Sources */,
+				81901AFB23BB4D5600CA0307 /* GSUMShare.m in Sources */,
 				81AFB530239F6E3E000E6078 /* GS_CacheModel.m in Sources */,
 				81AFB68723A7697D000E6078 /* NSURLProtocol+WKWebVIew.m in Sources */,
 				811B5A7523B2092700B3862B /* BNM3U8PlistInfo.m in Sources */,
@@ -1560,6 +1634,7 @@
 				81AFB509239F6E3E000E6078 /* BaseTableViewCell.m in Sources */,
 				81AFB62323A362EF000E6078 /* YUFoldingTableView.m in Sources */,
 				81AFB5AA239F8FC0000E6078 /* GSplayListView.m in Sources */,
+				81901AA823BB45B000CA0307 /* GOpenUrl.m in Sources */,
 				81AFB527239F6E3E000E6078 /* GSKeychain.m in Sources */,
 				81AFB50E239F6E3E000E6078 /* BaseNewButton.m in Sources */,
 				81AFB531239F6E3E000E6078 /* EntireManageMent.m in Sources */,
@@ -1612,9 +1687,11 @@
 				81AFB5A2239F8FC0000E6078 /* GSNewButton.m in Sources */,
 				81AFB514239F6E3E000E6078 /* BaseViewController.m in Sources */,
 				811B5A9C23B2126F00B3862B /* DownloadDataManager.m in Sources */,
+				81901AB123BB45D800CA0307 /* ToolscreenShot.m in Sources */,
 				811B5A7223B2092700B3862B /* BNM3U8Manager.m in Sources */,
 				81AFB50F239F6E3E000E6078 /* BaseNewTextField.m in Sources */,
 				811B5AA223B2323000B3862B /* DownloadCell.m in Sources */,
+				81901AB723BB45FE00CA0307 /* UIImage+BlurGlass.m in Sources */,
 				81AFB62423A362EF000E6078 /* YUFoldingSectionHeader.m in Sources */,
 				81AFB536239F6E3E000E6078 /* UIView+Frame.m in Sources */,
 				81AFB50C239F6E3E000E6078 /* BaseView.m in Sources */,
@@ -1636,8 +1713,10 @@
 				811B5AA823B5A82800B3862B /* QRCodeViewController.m in Sources */,
 				81AFB511239F6E3E000E6078 /* BaseCenterTipsView.m in Sources */,
 				81AFB515239F6E3E000E6078 /* BaseNavigationController.m in Sources */,
+				81901AB423BB45F600CA0307 /* SecurityStrategy.m in Sources */,
 				81AFB50D239F6E3E000E6078 /* GSTableView.m in Sources */,
 				81AFB5A8239F8FC0000E6078 /* GSPlayView.m in Sources */,
+				81901AAE23BB45C600CA0307 /* GShareView.m in Sources */,
 				81AFB5F223A08A45000E6078 /* GSWebProgressLayer.m in Sources */,
 				81AFB60623A0FF91000E6078 /* HistoryManagerHeaderView.m in Sources */,
 				81AFB53D239F6E3E000E6078 /* UIView+Extension.m in Sources */,
