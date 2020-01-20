@@ -15,7 +15,12 @@
     _goodsPriceLabel.text = itmeModel.h_url;
     [self selectedBtnClick:itmeModel.isSeleted];
 }
-
+-(void)setPlayItmeModel:(PlayCacheModel *)playItmeModel{
+    _playItmeModel = playItmeModel;
+    _goodsNameLabel.text = playItmeModel.title;
+    _goodsPriceLabel.text = playItmeModel.url;
+    [self selectedBtnClick:playItmeModel.isSeleted];
+}
 -(void)selectedBtnClick:(BOOL)selected
 {
     if (selected == NO) {

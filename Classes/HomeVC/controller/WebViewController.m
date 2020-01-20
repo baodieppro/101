@@ -5,6 +5,8 @@
 //  Created by ios on 2019/12/11.
 //  Copyright © 2019 GSDlna_Developer. All rights reserved.
 //
+#define __Def_Url__ @"https://m.kankanwu.com/"
+
 #import "NSString+SKYExtension.h"
 #import "SearchViewController.h"
 #import "WebViewController.h"
@@ -79,11 +81,13 @@ MyBookmarkVCDelegate
     [self g_loadUrl];
 }
 - (void)g_init{
+      NSString *rootPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES) objectAtIndex:0] stringByAppendingPathComponent:@"GSDownLoad"];
+    GSLog(@"%@",rootPath);
     [NSURLProtocol wk_registerScheme:@"http"];
     [NSURLProtocol wk_registerScheme:@"https"];
     self.myView.backgroundColor = [UIColor colorWithHexString:@"#333333"];
     if (kStringIsEmpty(self.url)) {
-        self.url = [BookMarkManager readDefUrl]?:@"http://www.63ys.com/";
+        self.url = [BookMarkManager readDefUrl]?:__Def_Url__;
     }
     isplay = NO;
   
@@ -361,9 +365,9 @@ MyBookmarkVCDelegate
         [ToolscreenShot screenShot].qrCodeStr = self.webUrl ;
         [HistoryModel addCacheName:WEB_History_Cache title:title url:url arr:self.historyDataList];
        [self displayNoneAd:url];
-        if (isplay == YES) {
-            [PlayNanager addHistoryData:@{@"url":self.playUrl,@"title":title}];
-        }
+//        if (isplay == YES) {
+//            [PlayNanager addHistoryData:@{@"url":self.playUrl,@"title":self.webTitle}];
+//        }
         [[ToolsMenuView menu] isFavorite:[BookMarkManager isExistAppForUrl:self.webUrl]];
     }
     
@@ -430,14 +434,16 @@ MyBookmarkVCDelegate
     [self pushPlayVC_Url:self.playUrl];
 }
 -(void)downLoadPlayVideoClick{
+    [self.myView gs_showTextHud:[NSString stringWithFormat:@"准备下载 - %@",self.webTitle]];
+
     if ([DownloadDataManager isExistAppForTitle:self.webTitle] == YES) {
         //已经下载过了
-        [[GSLAlertView alertManager] createInitWithTitle:@"已经下载过了" message:self.webTitle sureBtn:@"知道了" cancleBtn:nil];
-        [[GSLAlertView alertManager] showGSAlertView];
-        
+//        [[GSLAlertView alertManager] createInitWithTitle:@"已经下载过了" message:self.webTitle sureBtn:@"知道了" cancleBtn:nil];
+//        [[GSLAlertView alertManager] showGSAlertView];
+        [self.myView gs_showTextHud:[NSString stringWithFormat:@"已经下载过了 - %@",self.webTitle]];
+
     }else{
         //还没有下载过
-        [self.myView gs_showTextHud:[NSString stringWithFormat:@"准备下载 - %@",self.webTitle]];
         [DownLoadManager start:self.playUrl Name:self.webTitle progressBlock:^(CGFloat progress) {
             
         }];
@@ -478,7 +484,7 @@ MyBookmarkVCDelegate
             break;
         case HomeStyleType:
         {
-            [self.webView loadURLString:[BookMarkManager readDefUrl]?:@"http://www.63ys.com/"];
+            [self.webView loadURLString:[BookMarkManager readDefUrl]?:__Def_Url__];
             
         }
             break;

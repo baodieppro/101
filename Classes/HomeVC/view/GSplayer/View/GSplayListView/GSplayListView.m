@@ -173,8 +173,8 @@
         }else{
             [cell setCurrentLabelAlpha_PlayListIndex:0];
         }
-        HistoryItmeModel * itmeModel = self.playListData[indexPath.row];
-        [cell setCurrentLabelTitle:itmeModel.h_name];
+        PlayCacheModel * itmeModel = self.playListData[indexPath.row];
+        [cell setCurrentLabelTitle:itmeModel.title];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor colorWithHexString:@"#333333"];
@@ -223,7 +223,7 @@
         _listCounLabel.textAlignment = NSTextAlignmentCenter;
         _listCounLabel.textColor = [UIColor colorWithHexString:@"#ffffff"];
         //        _dlnaLable.userInteractionEnabled = YES;
-        _listCounLabel.text = @"1/3";
+        _listCounLabel.text = @"1/0";
     }
     return _listCounLabel;
 }

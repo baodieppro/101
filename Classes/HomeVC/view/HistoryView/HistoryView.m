@@ -92,11 +92,11 @@ MyHistoryManagerFooterViewDelegate
     }
     
 }
--(void)mySelected_On_IndexItmeWithClick:(HistoryItmeModel *)model{
+-(void)mySelected_On_IndexItmeWithClick:(PlayCacheModel *)model{
     PlayViewController * playVC = [[PlayViewController alloc]init];
     __kAppDelegate__.allowRotation = YES;//关闭横屏仅允许竖屏
-    playVC.playUrl = model.h_url;
-    playVC.topName = model.h_name;
+    playVC.playUrl = model.url;
+    playVC.topName = model.title;
     playVC.playStyle = playStyleTypeHistory;
     [[self getCurrentVC] presentViewController:playVC animated:NO completion:nil];
 }

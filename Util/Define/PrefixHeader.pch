@@ -62,7 +62,7 @@
 
 //FMDB
 #import "BookMarkManager.h"
-#import "PlayNanager.h"
+#import "PlayManager.h"
 
 //友盟
 #import "GSum.h"

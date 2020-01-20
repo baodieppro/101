@@ -157,8 +157,8 @@ static LBManager *instance = nil;
 
 - (void)lelinkConnection:(LBLelinkConnection *)connection didConnectToService:(LBLelinkService *)service {
     NSLog(@"已连接到服务：%@",service.lelinkServiceName);
-    if ([self.delegate respondsToSelector:@selector(dlnaStartPlay)]) {
-        [self.delegate dlnaStartPlay];
+    if ([self.delegate respondsToSelector:@selector(dlnaStartPlay_new)]) {
+        [self.delegate dlnaStartPlay_new];
     }
 }
 
@@ -334,8 +334,8 @@ static LBManager *instance = nil;
     }
 }
 -(void)dlnaStartPlay{
-    if ([self.delegate respondsToSelector:@selector(dlnaStartPlay)]) {
-        [self.delegate dlnaStartPlay];
+    if ([self.delegate respondsToSelector:@selector(dlnaStartPlay_new)]) {
+        [self.delegate dlnaStartPlay_new];
     }
 }
 @end

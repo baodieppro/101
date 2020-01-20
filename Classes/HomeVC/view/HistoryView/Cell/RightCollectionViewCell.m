@@ -61,14 +61,16 @@
     //获取已选中的下标
     if(self.listData.count == self.delList.count){
         [self.listData removeAllObjects];
-        [EntireManageMent removeCacheWithName:PLAY_History_Cache];
-
+//        [EntireManageMent removeCacheWithName:PLAY_History_Cache];
+        [PlayManager deleteAllData];
     }else{
         [self.delList enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
             obj = [NSString stringWithFormat:@"%@", obj];
+            PlayCacheModel * model = self.listData[idx];
+            [PlayManager deleteModelForUrl:model.url];
             [self.listData removeObjectAtIndex:[obj intValue]];
         }];
-        [HistoryModel addCacheName:PLAY_History_Cache title:nil url:nil arr:self.listData];
+//        [HistoryModel addCacheName:PLAY_History_Cache title:nil url:nil arr:self.listData];
     }
     [self reloadDelCount];
     [self reloadView];
@@ -118,8 +120,8 @@
             cell = [[HistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTableIndentifier];
         }
         if (self.listData.count != 0) {
-            HistoryItmeModel * itmeModel = self.listData[indexPath.row];
-            [cell setItmeModel:itmeModel];
+            PlayCacheModel * itmeModel = self.listData[indexPath.row];
+            [cell setPlayItmeModel:itmeModel];
         }
         [cell setEditSelected:self.editSelected];
         [cell setIsLefOrRight:NO];
@@ -147,7 +149,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     GSLog(@"tableViewcell_touch");
     if (self.listData.count != 0) {
-        HistoryItmeModel * itmeModel = self.listData[indexPath.row];
+        PlayCacheModel * itmeModel = self.listData[indexPath.row];
         if (self.editSelected == NO) {
                 if ([self.delegate respondsToSelector:@selector(mySelected_On_IndexItmeWithClick:)]) {
                     [self.delegate mySelected_On_IndexItmeWithClick:itmeModel];
@@ -189,10 +191,10 @@
 }
 -(NSMutableArray *)listData{
     if (!_listData) {
-        _listData = [[NSMutableArray alloc]init];
-        if ([EntireManageMent isExisedManager:PLAY_History_Cache]) {
-            [HistoryModel writeResponseDict:[EntireManageMent dictionaryWithJsonString:[EntireManageMent readCacheDataWithName:PLAY_History_Cache]] dataArrName:_listData cacheName:PLAY_History_Cache];
-        }
+        _listData = [[NSMutableArray alloc]initWithArray:[PlayManager readDataList]];
+//        if ([EntireManageMent isExisedManager:PLAY_History_Cache]) {
+//            [HistoryModel writeResponseDict:[EntireManageMent dictionaryWithJsonString:[EntireManageMent readCacheDataWithName:PLAY_History_Cache]] dataArrName:_listData cacheName:PLAY_History_Cache];
+//        }
     }
     return _listData;
 }

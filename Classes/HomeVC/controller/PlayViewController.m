@@ -25,6 +25,10 @@
     [super viewWillDisappear:animated];
     
 }
+//-(void)viewDidDisappear:(BOOL)animated{
+//    [super viewDidDisappear:animated];
+//    [self.playerView pausePlay];
+//}
 -(void)addNotification{
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self
@@ -61,23 +65,25 @@
     
 }
 -(void)historyData{
-    static BOOL isHistory;
+//    static BOOL isHistory;
     if (self.playStyle == playStyleTypeNormal) {
-        if (self.playHistoryDataList.count != 0) {
-            for (HistoryItmeModel * model in self.playHistoryDataList) {
-                if ([self.playUrl isEqualToString:model.h_url]) {
-                    isHistory = NO;
-                }else{
-                    isHistory = YES;
-                }
-            }
-        }else{
-            isHistory = YES;
-        }
-       
-        if (isHistory == YES) {
-             [HistoryModel addCacheName:PLAY_History_Cache title:self.topName url:self.playUrl arr:self.playHistoryDataList];
-        }
+//        if (self.playHistoryDataList.count != 0) {
+//            for (HistoryItmeModel * model in self.playHistoryDataList) {
+//                if ([self.playUrl isEqualToString:model.h_url]) {
+//                    isHistory = NO;
+//                }else{
+//                    isHistory = YES;
+//                }
+//            }
+//        }else{
+//            isHistory = YES;
+//        }
+//
+//        if (isHistory == YES) {
+////             [HistoryModel addCacheName:PLAY_History_Cache title:self.topName url:self.playUrl arr:self.playHistoryDataList];
+//        }
+        [PlayManager addPlayData:@{@"title":self.topName,@"url":self.playUrl}];
+
     }
 }
 #pragma mark -代理响应事件

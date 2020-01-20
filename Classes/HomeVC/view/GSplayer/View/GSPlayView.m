@@ -309,7 +309,7 @@ static id _instance;
     [self addSubview:self.playListButton];
     [self addSubview:self.cycleButton];
     [self addSubview:self.downloadButton];
-    [self addSubview:self.waitingView];
+//    [self addSubview:self.waitingView];
     
     [self gs_layoutFrame];
 
@@ -468,10 +468,10 @@ static id _instance;
     self.playerLayer.frame = self.bounds;
     self.brightnessAndVolumeView.frame = self.bounds;
     
-    [self.waitingView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self);
-        make.width.height.mas_equalTo(__kNewSize(150*2));
-    }];
+//    [self.waitingView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.center.equalTo(self);
+//        make.width.height.mas_equalTo(__kNewSize(150*2));
+//    }];
 
     [self bringSubviewToFront:self.brightnessAndVolumeView];
     [self bringSubviewToFront:self.topView];
@@ -484,7 +484,7 @@ static id _instance;
     [self bringSubviewToFront:self.playlrcButton];
     [self bringSubviewToFront:self.playlikeButton];
     [self bringSubviewToFront:self.playButton];
-    [self bringSubviewToFront:self.waitingView];
+//    [self bringSubviewToFront:self.waitingView];
     [self bringSubviewToFront:self.playlistView];
     [self bringSubviewToFront:self.gsDLNAView];
 
@@ -495,9 +495,9 @@ static id _instance;
 #pragma mark - 定位播放数据
 -(void)playListIndex:(NSInteger)index{
     self.playIndex = [self protectionListIndexMaxCount:index];
-    HistoryItmeModel * model = self.playDataArr[self.playIndex];
-    [self playWithPlayName:model.h_name];
-    [self playWithPlayInfo:model.h_url];
+    PlayCacheModel * model = self.playDataArr[self.playIndex];
+    [self playWithPlayName:model.title];
+    [self playWithPlayInfo:model.url];
     self.playlistView.playListIndex = self.playIndex;
     [self setListWithindex:index Count:self.playDataArr.count];
     
@@ -531,23 +531,7 @@ static id _instance;
 //    [defaults setObject:playInfo.url forKey:@"currentPlayingUrl"];
     
     //判断是否有下载缓存
-    if ([DownloadDataManager isExistAppForUrl:playInfo] == YES) {
-        Download_FMDBDataModel * model = [[DownloadCacheManager downManager] itmefromeKeyURL:playInfo];
-        if ([model.isDown integerValue] == 1) {
-            [BNHttpLocalServer.shareInstance tryStart];
-            self.playerItem =  [AVPlayerItem playerItemWithURL:[NSURL URLWithString:model.pathUrl]];
-            self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
-        }else{
-            self.asset = [AVURLAsset assetWithURL:[NSURL URLWithString:model.downLoadUrl]];
-            self.playerItem = [AVPlayerItem playerItemWithAsset:self.asset];
-            [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
-        }
-
-    }else{
-        self.asset = [AVURLAsset assetWithURL:[NSURL URLWithString:playInfo]];
-        self.playerItem = [AVPlayerItem playerItemWithAsset:self.asset];
-        [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
-    }
+    [self isCache:playInfo];
     
     // 因为replaceCurrentItemWithPlayerItem在使用时会卡住主线程 重新创建player解决
 //    if (self.player) return;
@@ -556,7 +540,7 @@ static id _instance;
 //    self.titleLabel.text = playInfo.title;
     self.placeHolderView.hidden = NO;
 //
-    [self.waitingView stopAnimating];
+//    [self.waitingView stopAnimating];
     
     // 建立串行调度组 确保截图任务的先后完成
     dispatch_group_t group = dispatch_group_create();
@@ -591,9 +575,52 @@ static id _instance;
 }
 #pragma mark - 判断是否从缓存读
 -(void)isCache:(NSString *)playUrl{
-    
-}
+    CGFloat currentTime = 0;
+    if ([DownloadDataManager isExistAppForUrl:playUrl] == YES) {
+        self.dataType = playCacheType;
+        Download_FMDBDataModel * model = [[DownloadCacheManager downManager] itmefromeKeyURL:playUrl];
+        if ([model.isDown integerValue] == 1) {
+            [BNHttpLocalServer.shareInstance tryStart];
+            self.playerItem =  [AVPlayerItem playerItemWithURL:[NSURL URLWithString:model.pathUrl]];
+            self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
+//            [self.player seekToTime:CMTimeMake([model.currentTime floatValue], 1.0)];
 
+        }else{
+            self.asset = [AVURLAsset assetWithURL:[NSURL URLWithString:model.downLoadUrl]];
+            self.playerItem = [AVPlayerItem playerItemWithAsset:self.asset];
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+        }
+       
+        currentTime = [model.currentTime floatValue];
+    }else{
+        self.dataType = playRequestType;
+        self.asset = [AVURLAsset assetWithURL:[NSURL URLWithString:playUrl]];
+        self.playerItem = [AVPlayerItem playerItemWithAsset:self.asset];
+        [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+        PlayCacheModel * model = [PlayManager itmefromeKeyURL:playUrl];
+        currentTime = [model.currentTime floatValue];
+
+    }
+     //定点播放
+    [self play_gestureDragProgress:currentTime];
+}
+#pragma mark -  定点播放
+- (void)play_gestureDragProgress:(CGFloat)currentTime{
+    if (currentTime > 0) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.player seekToTime:CMTimeMake(currentTime, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:^(BOOL finished) {
+                    if (finished) {
+                        [self.player pause];
+                        [self hideControlPanel];
+                    }
+                }];
+            });
+            
+        });
+        [self gestureDragProgress:currentTime];
+    }
+}
 #pragma mark -  创建播放器
 - (void)setupPlayer
 {
@@ -617,10 +644,25 @@ static id _instance;
     }
     return _playerLayer;
 }
+#pragma mark -  记录当前播放位置
+- (void)updataCurrentTime{
+    switch (self.dataType) {
+        case playRequestType:
+            [PlayManager updata_PlayTimeWithUrl:gsPlayUrl currentTime:[NSString stringWithFormat:@"%f",self.progressSlider.value]];
+            break;
+        case playCacheType:
+              [DownloadDataManager updata_PlayTimeWithUrl:gsPlayUrl currentTime:[NSString stringWithFormat:@"%f",self.progressSlider.value]];
+            break;
+        default:
+            break;
+    }
+}
 #pragma mark -  重置播放器
 - (void)resetPlayer
 {
     if (self.playerItem) {
+        //记录当前视频播放位置
+        [self updataCurrentTime];
         [self.player pause];
         [self removePlayItemObserverAndNotification];
         [self removeTimeObserver];
@@ -736,7 +778,9 @@ static id _instance;
 
 #pragma mark - KVO监测到播放完调用
 - (void)playFinished:(NSNotification *)note {
-    
+    //播放完成重制播放时间点
+    [self updataCurrentTime];
+
     if (self.isCycleReplay == YES) {
         [self replay];
     }else{
@@ -881,6 +925,18 @@ static id _instance;
 #pragma mark - 进度条拖拽中
 - (void)progressSliderValueChanged:(UISlider *)sender
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.player seekToTime:CMTimeMake(sender.value, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:^(BOOL finished) {
+                if (finished) {
+                    [self.player pause];
+                    [self hideControlPanel];
+                }
+            }];
+        });
+        
+    });
+    self.progressSlider.value = sender.value;
     [self dragProgressAction:sender];
 }
 #pragma mark - 进度条拖拽结束
@@ -889,11 +945,9 @@ static id _instance;
     // 把播放器控制面板显示属性设置为NO 避免拖动时触发手势隐藏面板
     self.controlPanelShow = NO;
     GSLog(@"UISlider:%f",sender.value);
-//    [UIView animateWithDuration:.5f animations:^{
-////        self.previewView.alpha = .0f;
-//    }];
 
-    [self.player seekToTime:CMTimeMake(sender.value, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    [self.player seekToTime:CMTimeMake(sender.value, 1.0)];
+//    [self.player seekToTime:CMTimeMake(sender.value, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     [self addTimerObserver];
 //    [self.player play];
     // 延迟10.0秒后隐藏播放控制面板
@@ -949,7 +1003,8 @@ static id _instance;
         [_playButton setImage:[UIImage imageNamed:@"icon_tv_stop"] forState:UIControlStateNormal];
 //        [self hideControlPanel];
     }
-    
+   
+   
 }
 
 #pragma mark - 判断播放器是否播放
@@ -973,6 +1028,8 @@ static id _instance;
 //                break;
 //        }
 //    }else{
+        //更新当前播放进度
+        [self updataCurrentTime];
         if (self.player.rate == 1.0) {
             return YES;
         }else if (self.player.rate == 0.0)
@@ -1557,10 +1614,10 @@ static id _instance;
 }
 -(NSMutableArray *)playDataArr{
     if (!_playDataArr) {
-       _playDataArr = [[NSMutableArray alloc]init];
-        if ([EntireManageMent isExisedManager:PLAY_History_Cache]) {
-            [HistoryModel writeResponseDict:[EntireManageMent dictionaryWithJsonString:[EntireManageMent readCacheDataWithName:PLAY_History_Cache]] dataArrName:_playDataArr cacheName:PLAY_History_Cache];
-        }
+       _playDataArr = [[NSMutableArray alloc]initWithArray:[PlayManager readDataList]];
+//        if ([EntireManageMent isExisedManager:PLAY_History_Cache]) {
+//            [HistoryModel writeResponseDict:[EntireManageMent dictionaryWithJsonString:[EntireManageMent readCacheDataWithName:PLAY_History_Cache]] dataArrName:_playDataArr cacheName:PLAY_History_Cache];
+//        }
     }
     return _playDataArr;
 }

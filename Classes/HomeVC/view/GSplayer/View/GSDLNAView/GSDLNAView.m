@@ -191,8 +191,8 @@
 
 - (void)gs_searchDLNAResult:(NSArray *)devicesArray{
     if (devicesArray.count != 0) {
-        if (_deviceArr.count != 0) {
-            [_deviceArr removeAllObjects];
+        if (self.deviceArr.count != 0) {
+            [self.deviceArr removeAllObjects];
         }
         //测试
          isData = YES;
@@ -206,15 +206,15 @@
     [self.dlnaTableView reloadData];
 }
 
-- (void)dlnaStartPlay{
-    NSLog(@"投屏成功 开始播放");
-    [self tapRemove];
-    [self gs_showTextHud:@"投屏成功，开始播放"];
-    NSString *model = self.deviceArr[index];
-    if ([self.delegate respondsToSelector:@selector(gs_dlnaStartPlay:listIndex:)])
-    {
-        [self.delegate gs_dlnaStartPlay:model listIndex:self.listIndex];
-    }
+- (void)dlnaStartPlay_new{
+//    NSLog(@"投屏成功 开始播放");
+//    [self tapRemove];
+//    [self gs_showTextHud:@"投屏成功，开始播放"];
+//    NSString *model = self.deviceArr[index];
+//    if ([self.delegate respondsToSelector:@selector(gs_dlnaStartPlay:listIndex:)])
+//    {
+//        [self.delegate gs_dlnaStartPlay:model listIndex:self.listIndex];
+//    }
 }
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -236,8 +236,8 @@
     {
         cell = [[DlnaTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTableIndentifier];
     }
-    if (_deviceArr.count != 0) {
-        cell.nameLable.text = _deviceArr[indexPath.row];
+    if (self.deviceArr.count != 0) {
+        cell.nameLable.text = self.deviceArr[indexPath.row];
     }
   
     return cell;

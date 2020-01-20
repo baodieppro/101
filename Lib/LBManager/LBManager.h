@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  投屏成功开始播放
  */
-- (void)dlnaStartPlay;
+- (void)dlnaStartPlay_new;
 /**
  退出投屏成功
  */

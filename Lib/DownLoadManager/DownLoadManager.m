@@ -115,6 +115,8 @@
     [self clearRootPath:pathVideo];
    //删除记录
     [DownloadDataManager deleteItmeData:model.downLoadUrl];
+    [DownLoadManager cannel:model.downLoadUrl];
+
 }
 
 @end

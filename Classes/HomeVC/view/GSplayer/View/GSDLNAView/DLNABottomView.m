@@ -42,13 +42,13 @@
         make.top.mas_equalTo(self.titleLable.mas_bottom).mas_offset(6);
         make.left.mas_equalTo(self.titleLable);
         make.right.mas_equalTo(self.mas_right).mas_offset(-__kNewSize(30*2));
-        make.height.mas_equalTo(__kNewSize(26*2));
+        make.height.mas_equalTo(__kNewSize(30*2));
     }];
     [_twoLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.oneLable.mas_bottom).mas_offset(0);
         make.left.mas_equalTo(self.titleLable);
         make.right.mas_equalTo(self.mas_right).mas_offset(-__kNewSize(30*2));
-        make.height.mas_equalTo(__kNewSize(26*2));
+        make.height.mas_equalTo(__kNewSize(30*2));
     }];
 }
 #pragma mark - UI
@@ -69,7 +69,7 @@
         _oneLable = [[UILabel alloc] init];
         _oneLable.textColor = [UIColor whiteColor];
         _oneLable.font = [UIFont systemFontOfSize:__kNewSize(13*2)];
-        _oneLable.textAlignment = NSTextAlignmentLeft;
+//        _oneLable.textAlignment = NSTextAlignmentLeft;
         _oneLable.numberOfLines = 2;
         _oneLable.text = @"1.将手机/Ipad和智能电视/盒子保持同网络连接";
     }
@@ -81,7 +81,7 @@
         _twoLable = [[UILabel alloc] init];
         _twoLable.textColor = [UIColor whiteColor];
         _twoLable.font = [UIFont systemFontOfSize:__kNewSize(13*2)];
-        _twoLable.textAlignment = NSTextAlignmentLeft;
+//        _twoLable.textAlignment = NSTextAlignmentLeft;
         _twoLable.numberOfLines = 2;
         _twoLable.text = @"2.点击TV按钮，搜索到设备后选择电视完成投屏";
     }

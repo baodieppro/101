@@ -10,7 +10,12 @@
 #import "FMDatabaseAdditions.h"
 @implementation DownloadDataManager
 #pragma mark - 储存历史缓存数据
-
++(void)updata_PlayTimeWithUrl:(NSString *)url currentTime:(NSString *)currentTime
+{
+    Download_FMDBDataModel * appModel = [[DownloadCacheManager downManager] itmefromeKeyURL:url];
+    appModel.currentTime = currentTime?:@"0";
+    [self addModel:appModel];
+}
 +(void)addHistoryData:(NSDictionary *)dict{
     
     Download_FMDBDataModel *appModel = [[Download_FMDBDataModel alloc] init];
@@ -21,12 +26,16 @@
     appModel.progress = [dict objectForKey:@"progress"];
     appModel.isDown = [dict objectForKey:@"isDown"];
     appModel.time = [dict objectForKey:@"time"]?:[GSTimeTools getCurrentTimes];
+    appModel.currentTime = [dict objectForKey:@"currentTime"]?:@"0";
     
+    [self addModel:appModel];
+}
++(void)addModel:(Download_FMDBDataModel *)appModel{
     if ([self isExistAppForTitle:appModel.title] == NO) {
         
         [[DownloadCacheManager downManager] insertModel:appModel];
         GSLog(@"====================添加新的下载记录");
-
+        
     }else{
         [[DownloadCacheManager downManager] updataExistNewModel:appModel complete:^{
             GSLog(@"====================修改下载记录成功");
@@ -121,7 +130,7 @@ static DownloadCacheManager *manager=nil;
 #pragma mark - 创建表
 - (void)creatTable {
     //字段: 名字 图片 音乐地址
-    NSString *sql = @"create table if not exists DOWNLOADVIDEO(fileName TEXT NOT NULL,title TEXT NOT NULL,downLoadUrl TEXT NOT NULL,pathUrl TEXT NOT NULL,progress TEXT NOT NULL,isDown TEXT NOT NULL,time TEXT NOT NULL)";
+    NSString *sql = @"create table if not exists DOWNLOADVIDEO(fileName TEXT NOT NULL,title TEXT NOT NULL,downLoadUrl TEXT NOT NULL,pathUrl TEXT NOT NULL,progress TEXT NOT NULL,isDown TEXT NOT NULL,time TEXT NOT NULL,currentTime TEXT NOT NULL)";
     
     //创建表 如果不存在则创建新的表
     BOOL isSuccees = [database executeUpdate:sql];
@@ -156,9 +165,9 @@ static DownloadCacheManager *manager=nil;
         //        NSLog(@"this app has recorded");
         return;
     }
-    NSString *sql = @"insert into DOWNLOADVIDEO(fileName,title,downLoadUrl,pathUrl,progress,isDown,time) values (?,?,?,?,?,?,?)";
+    NSString *sql = @"insert into DOWNLOADVIDEO(fileName,title,downLoadUrl,pathUrl,progress,isDown,time,currentTime) values (?,?,?,?,?,?,?,?)";
     
-    BOOL isSuccess = [database executeUpdate:sql,appModel.fileName,appModel.title,appModel.downLoadUrl,appModel.pathUrl,appModel.progress,appModel.isDown,appModel.time];
+    BOOL isSuccess = [database executeUpdate:sql,appModel.fileName,appModel.title,appModel.downLoadUrl,appModel.pathUrl,appModel.progress,appModel.isDown,appModel.time,appModel.currentTime];
     
     if (!isSuccess) {
         NSLog(@"insert error:%@",database.lastErrorMessage);
@@ -190,12 +199,13 @@ static DownloadCacheManager *manager=nil;
 
 
 //修改
-- (void)updataExistNewModel:(id)model complete:(void (^)())complete failed:(void (^)(void))failed
+- (void)updataExistNewModel:(id)model complete:(void (^)(void))complete failed:(void (^)(void))failed
 {
     Download_FMDBDataModel *appModel = (Download_FMDBDataModel *)model;
     
 //    [database open];
-    NSString * str = [NSString stringWithFormat:@"UPDATE DOWNLOADVIDEO SET fileName ='%@',title ='%@',time ='%@',pathUrl ='%@',progress ='%@',isDown ='%@' WHERE downLoadUrl ='%@' ",appModel.fileName,appModel.title,appModel.time,appModel.pathUrl,appModel.progress,appModel.isDown,appModel.downLoadUrl];
+    NSString * str = [NSString stringWithFormat:@"UPDATE DOWNLOADVIDEO SET fileName ='%@',title ='%@',time ='%@',pathUrl ='%@',progress ='%@',isDown ='%@',currentTime ='%@' WHERE downLoadUrl ='%@' ",appModel.fileName,appModel.title,appModel.time,appModel.pathUrl,appModel.progress,appModel.isDown,appModel.currentTime,appModel.downLoadUrl];
+//     NSString * str = [NSString stringWithFormat:@"UPDATE DOWNLOADVIDEO SET fileName ='%@',title ='%@',time ='%@',pathUrl ='%@',progress ='%@',isDown ='%@' WHERE downLoadUrl ='%@' ",appModel.fileName,appModel.title,appModel.time,appModel.pathUrl,appModel.progress,appModel.isDown,appModel.downLoadUrl];
     //    NSString *sql = @"updata COLLECTION set  where title = ?";
     BOOL isSuccess = [database executeUpdate:str];
     // NSLog(@"%@-----------MusModel--------",rs);
@@ -229,7 +239,7 @@ static DownloadCacheManager *manager=nil;
         appModel.progress = [set stringForColumn:@"progress"];
         appModel.isDown = [set stringForColumn:@"isDown"];
         appModel.time = [set stringForColumn:@"time"];
-        
+        appModel.currentTime = [set stringForColumn:@"currentTime"];
         //放入数组
         [arr addObject:appModel];
     }
@@ -319,7 +329,7 @@ static DownloadCacheManager *manager=nil;
         appModel.progress = [set stringForColumn:@"progress"];
         appModel.isDown = [set stringForColumn:@"isDown"];
         appModel.time = [set stringForColumn:@"time"];
-        
+        appModel.currentTime = [set stringForColumn:@"currentTime"];
         //放入数组
         [array addObject:appModel];
         
@@ -389,7 +399,7 @@ static DownloadCacheManager *manager=nil;
         appModel.progress = [set stringForColumn:@"progress"];
         appModel.isDown = [set stringForColumn:@"isDown"];
         appModel.time = [set stringForColumn:@"time"];
-        
+        appModel.currentTime = [set stringForColumn:@"currentTime"];
         //放入数组
         [array addObject:appModel];
     }
@@ -419,6 +429,7 @@ static DownloadCacheManager *manager=nil;
         appModel.progress = [set stringForColumn:@"progress"];
         appModel.isDown = [set stringForColumn:@"isDown"];
         appModel.time = [set stringForColumn:@"time"];
+        appModel.currentTime = [set stringForColumn:@"currentTime"];
     }
     
     return appModel;

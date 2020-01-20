@@ -27,10 +27,11 @@
 		811B5AAC23B5A8B000B3862B /* GSQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 811B5AAB23B5A8B000B3862B /* GSQRCodeView.m */; };
 		811B5AB023B6212C00B3862B /* BookMarkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 811B5AAF23B6212C00B3862B /* BookMarkManager.m */; };
 		811B5AB523B6316400B3862B /* BookmarkViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 811B5AB423B6316400B3862B /* BookmarkViewCell.m */; };
+		814D946623D5535600446F9D /* HistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 814D946523D5535600446F9D /* HistoryManager.m */; };
 		8154217D23AA23B9001E884C /* BookmarkClickVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8154217C23AA23B9001E884C /* BookmarkClickVC.m */; };
 		8154218123AA2469001E884C /* WebBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8154218023AA2469001E884C /* WebBottomView.m */; };
 		8154218523AA54C2001E884C /* BookmarkClickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8154218423AA54C2001E884C /* BookmarkClickView.m */; };
-		81901A8023B9C8AB00CA0307 /* PlayNanager.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901A7F23B9C8AB00CA0307 /* PlayNanager.m */; };
+		81901A8023B9C8AB00CA0307 /* PlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901A7F23B9C8AB00CA0307 /* PlayManager.m */; };
 		81901AA823BB45B000CA0307 /* GOpenUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AA723BB45B000CA0307 /* GOpenUrl.m */; };
 		81901AAE23BB45C600CA0307 /* GShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AAB23BB45C600CA0307 /* GShareView.m */; };
 		81901AB123BB45D800CA0307 /* ToolscreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AAF23BB45D800CA0307 /* ToolscreenShot.m */; };
@@ -212,14 +213,16 @@
 		811B5AAF23B6212C00B3862B /* BookMarkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookMarkManager.m; sourceTree = "<group>"; };
 		811B5AB323B6316400B3862B /* BookmarkViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookmarkViewCell.h; sourceTree = "<group>"; };
 		811B5AB423B6316400B3862B /* BookmarkViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewCell.m; sourceTree = "<group>"; };
+		814D946423D5535600446F9D /* HistoryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryManager.h; sourceTree = "<group>"; };
+		814D946523D5535600446F9D /* HistoryManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryManager.m; sourceTree = "<group>"; };
 		8154217B23AA23B9001E884C /* BookmarkClickVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookmarkClickVC.h; sourceTree = "<group>"; };
 		8154217C23AA23B9001E884C /* BookmarkClickVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkClickVC.m; sourceTree = "<group>"; };
 		8154217F23AA2469001E884C /* WebBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebBottomView.h; sourceTree = "<group>"; };
 		8154218023AA2469001E884C /* WebBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebBottomView.m; sourceTree = "<group>"; };
 		8154218323AA54C2001E884C /* BookmarkClickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookmarkClickView.h; sourceTree = "<group>"; };
 		8154218423AA54C2001E884C /* BookmarkClickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkClickView.m; sourceTree = "<group>"; };
-		81901A7E23B9C8AB00CA0307 /* PlayNanager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayNanager.h; sourceTree = "<group>"; };
-		81901A7F23B9C8AB00CA0307 /* PlayNanager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayNanager.m; sourceTree = "<group>"; };
+		81901A7E23B9C8AB00CA0307 /* PlayManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayManager.h; sourceTree = "<group>"; };
+		81901A7F23B9C8AB00CA0307 /* PlayManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayManager.m; sourceTree = "<group>"; };
 		81901AA623BB45B000CA0307 /* GOpenUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GOpenUrl.h; sourceTree = "<group>"; };
 		81901AA723BB45B000CA0307 /* GOpenUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GOpenUrl.m; sourceTree = "<group>"; };
 		81901AAA23BB45C600CA0307 /* GShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GShareView.h; sourceTree = "<group>"; };
@@ -604,6 +607,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		814D946323D5531F00446F9D /* HistoryManager */ = {
+			isa = PBXGroup;
+			children = (
+				814D946423D5535600446F9D /* HistoryManager.h */,
+				814D946523D5535600446F9D /* HistoryManager.m */,
+			);
+			path = HistoryManager;
+			sourceTree = "<group>";
+		};
 		8154211223A7804D001E884C /* DownLoadManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,8 +650,8 @@
 		81901A7D23B9C86200CA0307 /* PlayNanager */ = {
 			isa = PBXGroup;
 			children = (
-				81901A7E23B9C8AB00CA0307 /* PlayNanager.h */,
-				81901A7F23B9C8AB00CA0307 /* PlayNanager.m */,
+				81901A7E23B9C8AB00CA0307 /* PlayManager.h */,
+				81901A7F23B9C8AB00CA0307 /* PlayManager.m */,
 			);
 			path = PlayNanager;
 			sourceTree = "<group>";
@@ -1049,6 +1061,7 @@
 		81AFB4C3239F6E3E000E6078 /* FMDBCache */ = {
 			isa = PBXGroup;
 			children = (
+				814D946323D5531F00446F9D /* HistoryManager */,
 				81901A7D23B9C86200CA0307 /* PlayNanager */,
 				811B5AAD23B620F200B3862B /* BookMarkManager */,
 				811B5A9923B2122400B3862B /* DownloadDataManager */,
@@ -1603,9 +1616,10 @@
 				81AFB51F239F6E3E000E6078 /* ShowRemindTool.m in Sources */,
 				81AFB5B1239F9309000E6078 /* SearchHeaderView.m in Sources */,
 				81AFB5A3239F8FC0000E6078 /* GSBrightnessAndVolumeView.m in Sources */,
-				81901A8023B9C8AB00CA0307 /* PlayNanager.m in Sources */,
+				81901A8023B9C8AB00CA0307 /* PlayManager.m in Sources */,
 				81AFB52D239F6E3E000E6078 /* GS_ConfigManager.m in Sources */,
 				811B5AAC23B5A8B000B3862B /* GSQRCodeView.m in Sources */,
+				814D946623D5535600446F9D /* HistoryManager.m in Sources */,
 				81AFB525239F6E3E000E6078 /* GSActionSheet.m in Sources */,
 				81AFB513239F6E3E000E6078 /* CCGS_NO_NetWorkView.m in Sources */,
 				811B5A7B23B2092700B3862B /* BNM3U8DownloadConfig.m in Sources */,

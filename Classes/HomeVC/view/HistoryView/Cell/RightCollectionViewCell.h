@@ -10,7 +10,7 @@
 
 @protocol MyRightCollectionViewCellDelegate <NSObject>
 
-- (void)mySelected_On_IndexItmeWithClick:(HistoryItmeModel *_Nullable)model;
+- (void)mySelected_On_IndexItmeWithClick:(PlayCacheModel *_Nullable)model;
 - (void)myDelete_itmeListCount:(NSInteger)deleteCount;
 
 @end

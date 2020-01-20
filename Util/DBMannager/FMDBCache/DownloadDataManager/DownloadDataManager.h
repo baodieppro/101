@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(void)deleteItmeData:(NSString *)url;
 //删除所有数据
 +(void)deleteAllData;
+//记录当前播放时长
++(void)updata_PlayTimeWithUrl:(NSString *)url currentTime:(NSString *)currentTime;
 
 @end
 
@@ -41,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy) NSString * progress;//!<下载进度
 @property (nonatomic,copy) NSString * isDown;//!<下载完成：1 未完成：0
 @property (nonatomic,copy) NSString * time;//!<下载时间
+@property (nonatomic,copy) NSString * currentTime;//!<当前播放时长
 
 @end
 
