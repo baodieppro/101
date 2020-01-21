@@ -84,7 +84,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HomeVC/view/DownloadView/Cell/DownloadCell.m"
-            timestampString = "601210337.549978"
+            timestampString = "601279780.884236"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
@@ -132,7 +132,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Lib/DownLoadManager/DownLoadManager.m"
-            timestampString = "601210337.55018"
+            timestampString = "601279780.884367"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -164,7 +164,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HomeVC/view/DownloadView/DownloadView.m"
-            timestampString = "601210337.550274"
+            timestampString = "601279780.884457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "170"
@@ -180,12 +180,12 @@
                   moduleName = "GSDlna"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Desktop/MyBrowser/Classes/HomeVC/view/DownloadView/DownloadView.m"
-                  timestampString = "601209806.21796"
+                  timestampString = "601279880.0599869"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "170"
                   endingLineNumber = "170"
-                  offsetFromSymbolStart = "378">
+                  offsetFromSymbolStart = "404">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -195,12 +195,12 @@
                   moduleName = "GSDlna"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Desktop/MyBrowser/Classes/HomeVC/view/DownloadView/DownloadView.m"
-                  timestampString = "601209806.219546"
+                  timestampString = "601279880.061148"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "177"
                   endingLineNumber = "177"
-                  offsetFromSymbolStart = "17">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -228,11 +228,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HomeVC/view/GSplayer/View/GSPlayView.m"
-            timestampString = "601210337.550362"
+            timestampString = "601279780.884539"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "783"
-            endingLineNumber = "783"
+            startingLineNumber = "792"
+            endingLineNumber = "792"
             landmarkName = "-playFinished:"
             landmarkType = "7">
          </BreakpointContent>
@@ -244,7 +244,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Util/DBMannager/FMDBCache/DownloadDataManager/DownloadDataManager.m"
-            timestampString = "601210337.550442"
+            timestampString = "601279780.8846149"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
@@ -260,11 +260,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HomeVC/view/GSplayer/View/GSPlayView.m"
-            timestampString = "601210337.5505"
+            timestampString = "601279780.884666"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1237"
-            endingLineNumber = "1237"
+            startingLineNumber = "1246"
+            endingLineNumber = "1246"
             landmarkName = "-leftPlayClick"
             landmarkType = "7">
          </BreakpointContent>
@@ -276,7 +276,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HomeVC/view/HistoryView/Cell/RightCollectionViewCell.m"
-            timestampString = "601210337.550566"
+            timestampString = "601279780.88473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
@@ -292,7 +292,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HomeVC/view/HistoryView/Cell/RightCollectionViewCell.m"
-            timestampString = "601210337.55062"
+            timestampString = "601279780.884779"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "194"
@@ -308,7 +308,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HomeVC/controller/PlayViewController.m"
-            timestampString = "601210337.5506721"
+            timestampString = "601279780.884828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
@@ -324,7 +324,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Util/DBMannager/FMDBCache/PlayNanager/PlayManager.m"
-            timestampString = "601210337.5507261"
+            timestampString = "601279780.885604"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
@@ -340,11 +340,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/HomeVC/view/GSplayer/View/GSPlayView.m"
-            timestampString = "601210337.550786"
+            timestampString = "601279780.885679"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "649"
-            endingLineNumber = "649"
+            startingLineNumber = "658"
+            endingLineNumber = "658"
             landmarkName = "-updataCurrentTime"
             landmarkType = "7">
          </BreakpointContent>
@@ -356,7 +356,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Util/DBMannager/FMDBCache/PlayNanager/PlayManager.m"
-            timestampString = "601210337.550846"
+            timestampString = "601279780.885752"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "16"
@@ -372,7 +372,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Util/DBMannager/FMDBCache/PlayNanager/PlayManager.m"
-            timestampString = "601210337.550905"
+            timestampString = "601279780.885821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -387,77 +387,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/HomeVC/view/GSplayer/View/GSPlayView.m"
-            timestampString = "601210337.550965"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "609"
-            endingLineNumber = "609"
-            landmarkName = "-play_gestureDragProgress:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Classes/HomeVC/view/GSplayer/View/GSPlayView.m"
-            timestampString = "601210337.55102"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "601"
-            endingLineNumber = "601"
-            landmarkName = "-isCache:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Classes/HomeVC/view/GSplayer/View/GSPlayView.m"
-            timestampString = "601210337.55107"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "605"
-            endingLineNumber = "605"
-            landmarkName = "-isCache:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Classes/HomeVC/view/GSplayer/View/GSPlayView.m"
-            timestampString = "601210337.551125"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "579"
-            endingLineNumber = "579"
-            landmarkName = "-isCache:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Classes/HomeVC/controller/WebViewController.m"
-            timestampString = "601210337.55118"
+            timestampString = "601279780.885888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
             endingLineNumber = "85"
             landmarkName = "-g_init"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classes/HomeVC/view/GSplayer/View/GSPlayView.m"
+            timestampString = "601279876.865494"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1228"
+            endingLineNumber = "1228"
+            landmarkName = "-dlanClick"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

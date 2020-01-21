@@ -494,12 +494,22 @@ static id _instance;
 
 #pragma mark - 定位播放数据
 -(void)playListIndex:(NSInteger)index{
-    self.playIndex = [self protectionListIndexMaxCount:index];
-    PlayCacheModel * model = self.playDataArr[self.playIndex];
-    [self playWithPlayName:model.title];
-    [self playWithPlayInfo:model.url];
-    self.playlistView.playListIndex = self.playIndex;
-    [self setListWithindex:index Count:self.playDataArr.count];
+    if (self.playStyle == playStyleTypeNormal) {
+        self.playIndex = [self protectionListIndexMaxCount:index];
+        PlayCacheModel * model = self.playDataArr[self.playIndex];
+        [self playWithPlayName:model.title];
+        [self playWithPlayInfo:model.url];
+        self.playlistView.playListIndex = self.playIndex;
+        [self setListWithindex:index Count:self.playDataArr.count];
+    }else{
+        self.playIndex = [self protectionListIndexMaxCount:index];
+        Download_FMDBDataModel * model = self.playDataArr[self.playIndex];
+        [self playWithPlayName:model.title];
+        [self playWithPlayInfo:model.downLoadUrl];
+        self.playlistView.playListIndex = self.playIndex;
+        [self setListWithindex:index Count:self.playDataArr.count];
+    }
+   
     
 }
 
@@ -599,7 +609,6 @@ static id _instance;
         [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         PlayCacheModel * model = [PlayManager itmefromeKeyURL:playUrl];
         currentTime = [model.currentTime floatValue];
-
     }
      //定点播放
     [self play_gestureDragProgress:currentTime];
@@ -1614,7 +1623,12 @@ static id _instance;
 }
 -(NSMutableArray *)playDataArr{
     if (!_playDataArr) {
-       _playDataArr = [[NSMutableArray alloc]initWithArray:[PlayManager readDataList]];
+        if (self.playStyle == playStyleTypeNormal) {
+            _playDataArr = [[NSMutableArray alloc]initWithArray:[PlayManager readDataList]];
+        }else{
+            _playDataArr = [[NSMutableArray alloc]initWithArray:[DownloadDataManager readDownLoadDataList]];
+        }
+
 //        if ([EntireManageMent isExisedManager:PLAY_History_Cache]) {
 //            [HistoryModel writeResponseDict:[EntireManageMent dictionaryWithJsonString:[EntireManageMent readCacheDataWithName:PLAY_History_Cache]] dataArrName:_playDataArr cacheName:PLAY_History_Cache];
 //        }

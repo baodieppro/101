@@ -160,6 +160,8 @@
     [self gs_hideHudImmediately];
     [self.dlnaManager endService];
     [self removeFromSuperview];
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+
 }
 #pragma mark - 添加手势识别器
 - (void)addGesture
@@ -215,6 +217,10 @@
 //    {
 //        [self.delegate gs_dlnaStartPlay:model listIndex:self.listIndex];
 //    }
+    // 设置屏幕常亮，默认是NO
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    // 设置窗口亮度大小，范围是0.1 - 1.0
+    [[UIScreen mainScreen] setBrightness: 0.4];
 }
 #pragma mark - UITableViewDataSource
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView

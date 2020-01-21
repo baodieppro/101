@@ -485,7 +485,6 @@ MyBookmarkVCDelegate
         case HomeStyleType:
         {
             [self.webView loadURLString:[BookMarkManager readDefUrl]?:__Def_Url__];
-            
         }
             break;
         default:
@@ -576,6 +575,7 @@ MyBookmarkVCDelegate
 }
 #pragma mark - 分享
 - (void)shareShow{
+    __kAppDelegate__.allowRotation = NO;//关闭横屏仅允许竖屏
     UIImage * img = [UIImage snapshotScreenInView:self.view rect:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     UIImage * image = [UIImage addImage:[GSQRCodeTool SG_generateWithLogoQRCodeData:self.webUrl logoImageName:@"" logoScaleToSuperView:2.0] toImage:img];
     NSArray * arr = @[image];

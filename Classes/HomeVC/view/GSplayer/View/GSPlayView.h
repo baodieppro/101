@@ -51,6 +51,7 @@ typedef NS_ENUM(NSInteger,ClickType){
 @property (nonatomic, assign) PlayType playType;//!<播放类型
 @property (nonatomic, assign) DataType dataType;//!<数据读取类型
 @property (nonatomic, assign) ScreenType screenType;//!<展示样式
+@property (nonatomic,assign) PlayStyleType playStyle;//!<数据打开方式
 
 @property (nonatomic, strong) NSNumber *leftConstraint;
 @property (nonatomic, strong) NSNumber *topConstraint;

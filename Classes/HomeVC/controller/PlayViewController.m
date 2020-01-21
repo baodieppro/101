@@ -134,9 +134,14 @@
         playerView.topConstraint = @(0);
 //            playerView.widthConstraint = @(__kScreenWidth__);
 //            playerView.heightConstraint = @(__kScreenHeight__);
-            playerView.widthConstraint = @(__kScreenHeight__);
-            playerView.heightConstraint = @(__kScreenWidth__);
+        playerView.widthConstraint = @(__kScreenHeight__);
+        playerView.heightConstraint = @(__kScreenWidth__);
         playerView.delegate = self;
+        if (self.playHistoryDataList.count != 0) {
+            playerView.playStyle = self.playStyle;
+        }else{
+            playerView.playStyle = playStyleTypeNormal;
+        }
         _playerView = playerView;
         [self.myView addSubview:_playerView];
         
@@ -145,11 +150,7 @@
 }
 -(NSMutableArray *)playHistoryDataList{
     if (!_playHistoryDataList) {
-        _playHistoryDataList = [[NSMutableArray alloc]init];
-        //查询浏览器访问历史
-        if ([EntireManageMent isExisedManager:PLAY_History_Cache]) {
-            [HistoryModel writeResponseDict:[EntireManageMent dictionaryWithJsonString:[EntireManageMent readCacheDataWithName:PLAY_History_Cache]] dataArrName:_playHistoryDataList cacheName:PLAY_History_Cache];
-        }
+        _playHistoryDataList = [[NSMutableArray alloc]initWithArray:[DownloadDataManager readDownLoadDataList]];
     }
     return _playHistoryDataList;
 }
