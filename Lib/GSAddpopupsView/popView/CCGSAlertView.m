@@ -7,7 +7,20 @@
 //
 
 #import "CCGSAlertView.h"
+#import "GSAddpopupsView.h"
 
+typedef void(^completeAlert)(NSInteger code);//1:确定 0:取消
+
+@interface CCGSAlertView ()
+
+@property (nonatomic,strong) GSAddpopupsView * gsAddpopupsView;
+@property (nonatomic,strong) UILabel * titleLable;
+@property (nonatomic,strong) UILabel * subtitleLable;
+@property (nonatomic,strong) UIButton * determineButton;
+@property (nonatomic,strong) UIButton * cancelButton;
+@property(nonatomic, strong) completeAlert blockAlert;
+
+@end
 @implementation CCGSAlertView
 
 -(instancetype)initWithFrame:(CGRect)frame
@@ -22,9 +35,11 @@
 }
 
 -(void)g_Init{
-    self.backgroundColor = [UIColor whiteColor];
+    
+    self.frame = CGRectMake((__kScreenWidth__ - __kNewSize(290*2))/2, (__kScreenHeight__ - __kNewSize(174*2))/2, __kNewSize(290*2), __kNewSize(174*2));
     self.layer.masksToBounds = YES;
-    self.layer.cornerRadius = 30;
+    self.layer.cornerRadius = 10;
+    self.backgroundColor = [UIColor whiteColor];
 }
 -(void)g_CreateUI{
     [self addSubview:self.titleLable];
@@ -34,31 +49,55 @@
 }
 -(void)g_LayoutFrame{
     [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(__kNewSize(20*2), __kNewSize(20*2), 0, __kNewSize(20*2)));
+        make.top.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(__kNewSize(20*2), __kNewSize(15*2), 0, __kNewSize(15*2)));
         make.centerX.mas_equalTo(self);
         make.height.mas_equalTo(__kNewSize(25*2));
     }];
     [_subtitleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(__kNewSize(60*2), __kNewSize(20*2), 0, __kNewSize(20*2)));
+        make.top.mas_equalTo(self.titleLable.mas_bottom).mas_offset(__kNewSize(4*2));
+        make.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, __kNewSize(15*2), 0, __kNewSize(15*2)));
         make.centerX.mas_equalTo(self);
-        make.height.mas_equalTo(__kNewSize(25*2));
+        make.height.mas_equalTo(__kNewSize(60*2));
     }];
     [_determineButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.subtitleLable.mas_bottom).mas_offset(__kNewSize(20*2));
-        make.left.mas_equalTo(self.mas_left).mas_offset(__kNewSize(35*2));
-        make.size.mas_equalTo(CGSizeMake(__kNewSize(90*2), __kNewSize(44*2)));
+        make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-__kNewSize(20*2));
+        make.right.mas_equalTo(self.mas_right).mas_offset(-__kNewSize(15*2));
+        make.size.mas_equalTo(CGSizeMake(__kNewSize(100*2), __kNewSize(36*2)));
     }];
     [_cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.subtitleLable.mas_bottom).mas_offset(__kNewSize(20*2));
-        make.right.mas_equalTo(self.mas_right).mas_offset(-__kNewSize(35*2));
-        make.size.mas_equalTo(CGSizeMake(__kNewSize(90*2), __kNewSize(44*2)));
+       make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-__kNewSize(20*2));
+        make.left.mas_equalTo(self.mas_left).mas_offset(__kNewSize(15*2));
+        make.size.mas_equalTo(CGSizeMake(__kNewSize(100*2), __kNewSize(36*2)));
     }];
 }
 #pragma mark - 公共方法
--(void)customInitWithTitle:(NSString *)title subTitle:(NSString *)subtitle Complete:(void (^)(NSInteger))complete;
+-(void)customInitWithTitle:(NSString *)title
+                  subTitle:(NSString *)subtitle
+                   sureBtn:(NSString *)sureTitle
+                 cancleBtn:(NSString *)cancleTitle
+                  Complete:(void (^)(NSInteger))complete
 {
-    self.titleLable.text = title;
-    self.subtitleLable.text = subtitle;
+    if (title) {
+        self.titleLable.text = title;
+
+    }else{
+        self.titleLable.hidden = YES;
+
+    }
+    if (subtitle) {
+        self.subtitleLable.text = subtitle;
+
+    }else{
+        self.subtitleLable.hidden = YES;
+
+    }
+    if (sureTitle) {
+        [_determineButton setTitle:sureTitle forState:UIControlStateNormal];
+
+    }
+    if (cancleTitle) {
+        [_cancelButton setTitle:cancleTitle forState:UIControlStateNormal];
+    }
     self.blockAlert = ^(NSInteger code) {
         complete(code);
     };
@@ -69,13 +108,23 @@
     if (self.blockAlert) {
         self.blockAlert(1);
     }
+    [self dismiss];
 }
 -(void)cancelClick{
     if (self.blockAlert) {
         self.blockAlert(0);
     }
+    [self dismiss];
 }
 #pragma mark - UI
+-(GSAddpopupsView *)gsAddpopupsView{
+    if (!_gsAddpopupsView) {
+        _gsAddpopupsView = [[GSAddpopupsView alloc] initWithCustomView:self popStyle:GSAnimationPopStyleScale dismissStyle:GSAnimationDismissStyleScale newStyle:GSAnimationPopStyleTapYes];
+        _gsAddpopupsView.popBGAlpha = 0.5f;
+        _gsAddpopupsView.isClickBGDismiss = YES;
+    }
+    return _gsAddpopupsView;
+}
 -(UILabel *)titleLable{
     if (!_titleLable) {
         // 创建对象
@@ -104,6 +153,7 @@
         UILabel *label = [[UILabel alloc] init];
         // 颜色
         label.backgroundColor = [UIColor clearColor];
+        label.numberOfLines = 4;
         // 内容
         label.text = @"副标题";
         // 对齐方式
@@ -124,12 +174,12 @@
     if (!_determineButton) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:@"确定" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:255/255.0 green:212/255.0 blue:84/255.0 alpha:1.0] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor whiteColor];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor colorWithRed:7/255.0 green:189/255.0 blue:68/255.0 alpha:1.0];
         button.layer.masksToBounds = YES;
-        button.layer.cornerRadius = __kNewSize(44*2)/2;
-        button.layer.borderWidth =1.0f;
-        button.layer.borderColor = [UIColor colorWithRed:255/255.0 green:212/255.0 blue:84/255.0 alpha:1.0].CGColor;
+        button.layer.cornerRadius = 10;
+//        button.layer.borderWidth =1.0f;
+//        button.layer.borderColor = [UIColor colorWithRed:255/255.0 green:212/255.0 blue:84/255.0 alpha:1.0].CGColor;
         [button addTarget:self action:@selector(determineClick) forControlEvents:UIControlEventTouchUpInside];
         _determineButton = button;
     }
@@ -139,14 +189,39 @@
     if (!_cancelButton) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:@"取消" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor colorWithRed:255/255.0 green:212/255.0 blue:84/255.0 alpha:1.0];
+        [button setTitleColor:[UIColor colorWithRed:7/255.0 green:189/255.0 blue:68/255.0 alpha:1.0] forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor whiteColor];
         button.layer.masksToBounds = YES;
-        button.layer.cornerRadius = __kNewSize(44*2)/2;
+        button.layer.cornerRadius = 10;
+        button.layer.borderWidth =1.0f;
+        button.layer.borderColor = [UIColor colorWithRed:7/255.0 green:189/255.0 blue:68/255.0 alpha:1.0].CGColor;
         [button addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
         _cancelButton = button;
     }
     return _cancelButton;
 }
+#pragma mark - 公共方法
+- (void)showPop{
+    [self.gsAddpopupsView pop];
+}
+-(void)dismiss{
+    [self.gsAddpopupsView dismiss];
+    [self removeFromSuperview];
+}
++(void)show{
+    CCGSAlertView * popview = [[CCGSAlertView alloc] init];
+    [popview showPop];
+}
+#pragma mark - 公共方法
++(void)initWithTitle:(NSString *)title
+            subTitle:(NSString *)subtitle
+            sureBtn:(NSString *)sureTitle
+            cancleBtn:(NSString *)cancleTitle
+            Complete:(void (^)(NSInteger))complete;
+{
+    CCGSAlertView * popview = [[CCGSAlertView alloc] init];
+    [popview customInitWithTitle:title subTitle:subtitle sureBtn:sureTitle cancleBtn:cancleTitle Complete:complete];
+    [popview showPop];
 
+}
 @end

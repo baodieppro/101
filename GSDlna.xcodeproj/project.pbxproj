@@ -149,6 +149,13 @@
 		81AFB68723A7697D000E6078 /* NSURLProtocol+WKWebVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB68523A7697D000E6078 /* NSURLProtocol+WKWebVIew.m */; };
 		81B04D1723CED8F000521D55 /* ShareTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B04D1623CED8F000521D55 /* ShareTool.m */; };
 		A73D40B1EFDD4529F809769D /* Pods_GSDlna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65560B17962D9138E624365 /* Pods_GSDlna.framework */; };
+		AF5BE04324E68A8E00334AD9 /* LocalPushCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE03F24E68A8E00334AD9 /* LocalPushCenter.m */; };
+		AF5BE04424E68A8E00334AD9 /* GSNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE04024E68A8E00334AD9 /* GSNotificationManager.m */; };
+		AF5BE04724E6929200334AD9 /* AppDelegate+Action.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE04624E6929200334AD9 /* AppDelegate+Action.m */; };
+		AF5BE04A24E6A04400334AD9 /* TimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE04824E6A04300334AD9 /* TimeManager.m */; };
+		AF5BE04D24E6A0BE00334AD9 /* HistoryData.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE04C24E6A0BE00334AD9 /* HistoryData.m */; };
+		AF5BE0B524E789E200334AD9 /* Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5BE0B324E789E100334AD9 /* Arrow@2x.png */; };
+		AF5BE0B624E789E200334AD9 /* Arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5BE0B424E789E100334AD9 /* Arrow@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -466,6 +473,19 @@
 		81AFB68623A7697D000E6078 /* NSURLProtocol+WKWebVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLProtocol+WKWebVIew.h"; sourceTree = "<group>"; };
 		81B04D1523CED8F000521D55 /* ShareTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareTool.h; sourceTree = "<group>"; };
 		81B04D1623CED8F000521D55 /* ShareTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareTool.m; sourceTree = "<group>"; };
+		AF5BE03F24E68A8E00334AD9 /* LocalPushCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPushCenter.m; sourceTree = "<group>"; };
+		AF5BE04024E68A8E00334AD9 /* GSNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSNotificationManager.m; sourceTree = "<group>"; };
+		AF5BE04124E68A8E00334AD9 /* LocalPushCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPushCenter.h; sourceTree = "<group>"; };
+		AF5BE04224E68A8E00334AD9 /* GSNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSNotificationManager.h; sourceTree = "<group>"; };
+		AF5BE04524E6929200334AD9 /* AppDelegate+Action.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Action.h"; sourceTree = "<group>"; };
+		AF5BE04624E6929200334AD9 /* AppDelegate+Action.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Action.m"; sourceTree = "<group>"; };
+		AF5BE04824E6A04300334AD9 /* TimeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeManager.m; sourceTree = "<group>"; };
+		AF5BE04924E6A04400334AD9 /* TimeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeManager.h; sourceTree = "<group>"; };
+		AF5BE04B24E6A0BE00334AD9 /* HistoryData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryData.h; sourceTree = "<group>"; };
+		AF5BE04C24E6A0BE00334AD9 /* HistoryData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryData.m; sourceTree = "<group>"; };
+		AF5BE09224E779E800334AD9 /* HistoryDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryDef.h; sourceTree = "<group>"; };
+		AF5BE0B324E789E100334AD9 /* Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow@2x.png"; sourceTree = "<group>"; };
+		AF5BE0B424E789E100334AD9 /* Arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow@3x.png"; sourceTree = "<group>"; };
 		C65560B17962D9138E624365 /* Pods_GSDlna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GSDlna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF913827C02EBF66CA9616C6 /* Pods-GSDlna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSDlna.release.xcconfig"; path = "Target Support Files/Pods-GSDlna/Pods-GSDlna.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -610,8 +630,13 @@
 		814D946323D5531F00446F9D /* HistoryManager */ = {
 			isa = PBXGroup;
 			children = (
+				AF5BE04924E6A04400334AD9 /* TimeManager.h */,
+				AF5BE04824E6A04300334AD9 /* TimeManager.m */,
 				814D946423D5535600446F9D /* HistoryManager.h */,
 				814D946523D5535600446F9D /* HistoryManager.m */,
+				AF5BE04B24E6A0BE00334AD9 /* HistoryData.h */,
+				AF5BE04C24E6A0BE00334AD9 /* HistoryData.m */,
+				AF5BE09224E779E800334AD9 /* HistoryDef.h */,
 			);
 			path = HistoryManager;
 			sourceTree = "<group>";
@@ -716,6 +741,8 @@
 		81AFB3EA239F67C4000E6078 /* GSDlna */ = {
 			isa = PBXGroup;
 			children = (
+				AF5BE04524E6929200334AD9 /* AppDelegate+Action.h */,
+				AF5BE04624E6929200334AD9 /* AppDelegate+Action.m */,
 				81AFB3EB239F67C4000E6078 /* AppDelegate.h */,
 				81AFB3EC239F67C4000E6078 /* AppDelegate.m */,
 				81AFB3F1239F67C4000E6078 /* Main.storyboard */,
@@ -832,6 +859,7 @@
 		81AFB47F239F6E3D000E6078 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				AF5BE03E24E68A8E00334AD9 /* LocalPushCenter */,
 				81901AF423BB4D5600CA0307 /* GSUMmanager */,
 				81901AA523BB457500CA0307 /* ShareManager */,
 				8154211223A7804D001E884C /* DownLoadManager */,
@@ -1391,6 +1419,8 @@
 				81AFB61E23A362EE000E6078 /* YUFoldingTableView.m */,
 				81AFB61F23A362EE000E6078 /* YUFoldingSectionHeader.m */,
 				81AFB62023A362EE000E6078 /* YUFoldingTableView.h */,
+				AF5BE0B324E789E100334AD9 /* Arrow@2x.png */,
+				AF5BE0B424E789E100334AD9 /* Arrow@3x.png */,
 				81AFB62123A362EE000E6078 /* YUFolding_arrow.png */,
 				81AFB62223A362EE000E6078 /* YUFoldingSectionHeader.h */,
 			);
@@ -1415,6 +1445,17 @@
 				81B04D1623CED8F000521D55 /* ShareTool.m */,
 			);
 			path = ShareTool;
+			sourceTree = "<group>";
+		};
+		AF5BE03E24E68A8E00334AD9 /* LocalPushCenter */ = {
+			isa = PBXGroup;
+			children = (
+				AF5BE03F24E68A8E00334AD9 /* LocalPushCenter.m */,
+				AF5BE04024E68A8E00334AD9 /* GSNotificationManager.m */,
+				AF5BE04124E68A8E00334AD9 /* LocalPushCenter.h */,
+				AF5BE04224E68A8E00334AD9 /* GSNotificationManager.h */,
+			);
+			path = LocalPushCenter;
 			sourceTree = "<group>";
 		};
 		D181CE151C9B062A1583D19B /* Frameworks */ = {
@@ -1535,6 +1576,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF5BE0B524E789E200334AD9 /* Arrow@2x.png in Resources */,
+				AF5BE0B624E789E200334AD9 /* Arrow@3x.png in Resources */,
 				81AFB3F8239F67C5000E6078 /* LaunchScreen.storyboard in Resources */,
 				81AFB62523A362EF000E6078 /* YUFolding_arrow.png in Resources */,
 				81AFB3F5239F67C5000E6078 /* Assets.xcassets in Resources */,
@@ -1661,6 +1704,7 @@
 				81AFB516239F6E3E000E6078 /* SubViewController.m in Sources */,
 				81AFB5ED23A08A45000E6078 /* GSStaticModel.m in Sources */,
 				811B5A7923B2092700B3862B /* BNM3U8AnalysisService.m in Sources */,
+				AF5BE04424E68A8E00334AD9 /* GSNotificationManager.m in Sources */,
 				81AFB5A1239F8FC0000E6078 /* GSLoadingView.m in Sources */,
 				81AFB528239F6E3E000E6078 /* LSGraintCircleLayer.m in Sources */,
 				81AFB539239F6E3E000E6078 /* UIDevice+GSDevice.m in Sources */,
@@ -1724,7 +1768,9 @@
 				81AFB53F239F6E3E000E6078 /* NSString+SKYExtension.m in Sources */,
 				81AFB53B239F6E3E000E6078 /* UITabBarController+Autorotate.m in Sources */,
 				811B5AB023B6212C00B3862B /* BookMarkManager.m in Sources */,
+				AF5BE04D24E6A0BE00334AD9 /* HistoryData.m in Sources */,
 				811B5AA823B5A82800B3862B /* QRCodeViewController.m in Sources */,
+				AF5BE04324E68A8E00334AD9 /* LocalPushCenter.m in Sources */,
 				81AFB511239F6E3E000E6078 /* BaseCenterTipsView.m in Sources */,
 				81AFB515239F6E3E000E6078 /* BaseNavigationController.m in Sources */,
 				81901AB423BB45F600CA0307 /* SecurityStrategy.m in Sources */,
@@ -1732,9 +1778,11 @@
 				81AFB5A8239F8FC0000E6078 /* GSPlayView.m in Sources */,
 				81901AAE23BB45C600CA0307 /* GShareView.m in Sources */,
 				81AFB5F223A08A45000E6078 /* GSWebProgressLayer.m in Sources */,
+				AF5BE04A24E6A04400334AD9 /* TimeManager.m in Sources */,
 				81AFB60623A0FF91000E6078 /* HistoryManagerHeaderView.m in Sources */,
 				81AFB53D239F6E3E000E6078 /* UIView+Extension.m in Sources */,
 				81AFB53E239F6E3E000E6078 /* NSString+Time.m in Sources */,
+				AF5BE04724E6929200334AD9 /* AppDelegate+Action.m in Sources */,
 				81AFB3ED239F67C4000E6078 /* AppDelegate.m in Sources */,
 				811B5A7C23B2092700B3862B /* BNM3U8DownloadOperation.m in Sources */,
 				81AFB5A4239F8FC0000E6078 /* GSSlider.m in Sources */,
@@ -1913,7 +1961,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KL3MS86T88;
+				DEVELOPMENT_TEAM = D64MLPR4J3;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Util/Define/PrefixHeader.pch";
 				INFOPLIST_FILE = GSDlna/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1921,7 +1969,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gs.Dlna;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bdkj.Dlna;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1934,7 +1982,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KL3MS86T88;
+				DEVELOPMENT_TEAM = D64MLPR4J3;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Util/Define/PrefixHeader.pch";
 				INFOPLIST_FILE = GSDlna/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1942,7 +1990,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gs.Dlna;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bdkj.Dlna;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

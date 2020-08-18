@@ -28,25 +28,22 @@ typedef NS_ENUM(NSUInteger, YUFoldingSectionHeaderArrowPosition) {
 @end
 
 
-@interface YUFoldingSectionHeader : UITableViewHeaderFooterView
+@interface YUFoldingSectionHeader : UIView
 
-@property (nonatomic, weak) id <YUFoldingSectionHeaderDelegate> tapDelegate;
+@property (nonatomic, weak)id<YUFoldingSectionHeaderDelegate> tapDelegate;
 
-@property (nonatomic, assign) BOOL autoHiddenSeperatorLine;
+-(instancetype)initWithFrame:(CGRect)frame withTag:(NSInteger)tag;
 
-@property (nonatomic, strong) UIColor *separatorLineColor;
-
-- (void)configWithBackgroundColor:(UIColor *)backgroundColor
-                      titleString:(NSString *)titleString
-                       titleColor:(UIColor *)titleColor
-                        titleFont:(UIFont *)titleFont
-                descriptionString:(NSString *)descriptionString
-                 descriptionColor:(UIColor *)descriptionColor
-                  descriptionFont:(UIFont *)descriptionFont
-                       arrowImage:(UIImage *)arrowImage
-                    arrowPosition:(YUFoldingSectionHeaderArrowPosition)arrowPosition
-                     sectionState:(YUFoldingSectionState)sectionState
-                     sectionIndex:(NSInteger)sectionIndex;
+-(void)setupWithBackgroundColor:(UIColor *)backgroundColor
+                    titleString:(NSString *)titleString
+                     titleColor:(UIColor *)titleColor
+                      titleFont:(UIFont *)titleFont
+              descriptionString:(NSString *)descriptionString
+               descriptionColor:(UIColor *)descriptionColor
+                descriptionFont:(UIFont *)descriptionFont
+                     arrowImage:(UIImage *)arrowImage
+                  arrowPosition:(YUFoldingSectionHeaderArrowPosition)arrowPosition
+                   sectionState:(YUFoldingSectionState)sectionState;
 
 
 

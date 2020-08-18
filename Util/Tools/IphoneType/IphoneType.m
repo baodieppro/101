@@ -389,8 +389,10 @@ static id _PHO;
 //        return  [NSString stringWithFormat:@"%@ (%@; %@ %@; %@) %@", appVersion, deviceName, OSName, OSVersion, locale,[HistoryData ua]];
 //
 //    }
-//
-      return  [NSString stringWithFormat:@"%@ (%@; %@ %@; %@)", appVersion, deviceName, OSName, OSVersion, locale];
+//n
+    NSString * baiduUa = @"AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143Safari/601.1 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)";
+      return  [NSString stringWithFormat:@"%@ (%@; %@ %@; %@) %@", appVersion, deviceName, OSName, OSVersion, locale,baiduUa];
+    return baiduUa;
 }
 
 

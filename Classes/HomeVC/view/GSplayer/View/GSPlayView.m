@@ -345,16 +345,21 @@ static id _instance;
         
         [_loadedView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.bottomView);
-            make.left.mas_equalTo(self.bottomView.mas_left).mas_offset(__kNewSize(61*2));
-            make.right.mas_equalTo(self.bottomView.mas_right).mas_offset(-__kNewSize(61*2));
+            make.left.mas_equalTo(self.currentTimeLabel.mas_right).mas_offset(__kNewSize(24));
+            make.right.mas_equalTo(self.totalTimeLabel.mas_left).mas_offset(-__kNewSize(24));
+            make.left.mas_lessThanOrEqualTo(self.currentTimeLabel.mas_right).mas_offset(__kNewSize(24));  // 设置距离左边最小距离
+            make.right.mas_lessThanOrEqualTo(self.totalTimeLabel.mas_left).mas_offset(-__kNewSize(24));  // 设置距离右边最小距离
             make.height.mas_equalTo(__kNewSize(6*2));
         }];
         //滑杆
         [_progressSlider mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.bottomView);
-            make.left.mas_equalTo(self.bottomView.mas_left).mas_offset(__kNewSize(61*2));
-            make.right.mas_equalTo(self.bottomView.mas_right).mas_offset(-__kNewSize(61*2));
-            make.height.mas_equalTo(__kNewSize(6*2));
+//            make.centerY.mas_equalTo(self.bottomView);
+//            make.left.mas_equalTo(self.bottomView.mas_left).mas_offset(__kNewSize(61*2));
+//            make.right.mas_equalTo(self.bottomView.mas_right).mas_offset(-__kNewSize(61*2));
+//            make.left.mas_lessThanOrEqualTo(self.currentTimeLabel.mas_right).mas_offset(-__kNewSize(24));  // 设置距离左边最小距离
+//            make.right.mas_lessThanOrEqualTo(self.totalTimeLabel.mas_left).mas_offset(-__kNewSize(24));  // 设置距离右边最小距离
+//            make.height.mas_equalTo(__kNewSize(6*2));
+            make.edges.mas_equalTo(self.loadedView);
         }];
         [_currentTimeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self).mas_offset(__kNewSize(20*2));
@@ -610,6 +615,8 @@ static id _instance;
         PlayCacheModel * model = [PlayManager itmefromeKeyURL:playUrl];
         currentTime = [model.currentTime floatValue];
     }
+ UIImage *img = [self firstFrameWithVideoURL:[NSURL URLWithString:playUrl] size:CGSizeMake(130, 74)];
+    GSLog(@"%@",img);
      //定点播放
     [self play_gestureDragProgress:currentTime];
 }
@@ -653,25 +660,35 @@ static id _instance;
     }
     return _playerLayer;
 }
+
 #pragma mark -  记录当前播放位置
-- (void)updataCurrentTime{
+- (void)updataCurrentTime:(BOOL)isPlayOver{
     switch (self.dataType) {
         case playRequestType:
-            [PlayManager updata_PlayTimeWithUrl:gsPlayUrl currentTime:[NSString stringWithFormat:@"%f",self.progressSlider.value]];
+//            if (isPlayOver == YES) {
+//                [PlayManager updata_PlayTimeWithUrl:gsPlayUrl currentTime:@"0"];
+//            }else{
+                [PlayManager updata_PlayTimeWithUrl:gsPlayUrl currentTime:[NSString stringWithFormat:@"%f",self.progressSlider.value]];
+//            }
             break;
         case playCacheType:
-              [DownloadDataManager updata_PlayTimeWithUrl:gsPlayUrl currentTime:[NSString stringWithFormat:@"%f",self.progressSlider.value]];
+//            if (isPlayOver == YES) {
+//                [DownloadDataManager updata_PlayTimeWithUrl:gsPlayUrl currentTime:@"0"];
+//            }else{
+                [DownloadDataManager updata_PlayTimeWithUrl:gsPlayUrl currentTime:[NSString stringWithFormat:@"%f",self.progressSlider.value]];
+//            }
             break;
         default:
             break;
     }
 }
+
 #pragma mark -  重置播放器
 - (void)resetPlayer
 {
     if (self.playerItem) {
         //记录当前视频播放位置
-        [self updataCurrentTime];
+        [self updataCurrentTime:YES];
         [self.player pause];
         [self removePlayItemObserverAndNotification];
         [self removeTimeObserver];
@@ -788,7 +805,7 @@ static id _instance;
 #pragma mark - KVO监测到播放完调用
 - (void)playFinished:(NSNotification *)note {
     //播放完成重制播放时间点
-    [self updataCurrentTime];
+    [self updataCurrentTime:YES];
 
     if (self.isCycleReplay == YES) {
         [self replay];
@@ -841,6 +858,8 @@ static id _instance;
             [self playOrPauseAction];
 //            [self.coverPictureNode startAnimating];
 //            [self.waitingView stopAnimating];
+//            UIImage * img = [self getPixelBufferForItem:playItem];
+//            GSLog(@"第一帧图片：%@",img);
         } else if (status == AVPlayerStatusFailed) { // 播放错误 资源不存在 网络问题等等
 //            [self.waitingView startAnimating];
             GSLog(@"播放错误 资源不存在");
@@ -989,6 +1008,61 @@ static id _instance;
 //        return nil;
 //    }
 //}
+#pragma mark ---- 获取图片第一帧
+- (UIImage *)firstFrameWithVideoURL:(NSURL *)url size:(CGSize)size
+{
+    // 获取视频第一帧
+    NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
+    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];
+    AVAssetImageGenerator *generator = [AVAssetImageGenerator assetImageGeneratorWithAsset:urlAsset];
+    generator.appliesPreferredTrackTransform = YES;
+    generator.maximumSize = CGSizeMake(size.width, size.height);
+    NSError *error = nil;
+    CGImageRef img = [generator copyCGImageAtTime:CMTimeMake(0, 10) actualTime:NULL error:&error];
+    {
+        return [UIImage imageWithCGImage:img];
+    }
+    return nil;
+}
+
+//获取m3u8视频帧画面
+- (UIImage *)getPixelBufferForItem:(AVPlayerItem *)playerItem{
+
+    AVPlayerItemVideoOutput *output = [[AVPlayerItemVideoOutput alloc] init];
+    [playerItem addOutput:output];
+    CVPixelBufferRef ref =[output copyPixelBufferForItemTime:CMTimeMake(10, 60) itemTimeForDisplay:nil];
+    UIImage *image = [self CVImageToUIImage:ref];
+    return image;
+}
+//CVPixelBufferRef转UIImage
+- (UIImage *)CVImageToUIImage:(CVPixelBufferRef)imageBuffer{
+    CVPixelBufferLockBaseAddress(imageBuffer, 0);
+    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+    size_t width = CVPixelBufferGetWidth(imageBuffer);
+    size_t height = CVPixelBufferGetHeight(imageBuffer);
+    size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
+    size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer, 0);
+    
+    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, baseAddress, bufferSize, NULL);
+    
+    CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, rgbColorSpace, kCGImageAlphaNoneSkipFirst|kCGBitmapByteOrder32Little, provider, NULL, true, kCGRenderingIntentDefault);
+    
+    
+    UIImage *image = [UIImage imageWithCGImage:cgImage];
+    
+    CGImageRelease(cgImage);
+    CGDataProviderRelease(provider);
+    CGColorSpaceRelease(rgbColorSpace);
+    
+    NSData* imageData = UIImageJPEGRepresentation(image, 1.0);
+    image = [UIImage imageWithData:imageData];
+    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+    return image;
+
+}
+
+
 #pragma mark - 强制切换屏幕方向
 - (void)setForceDeviceOrientation:(UIDeviceOrientation)deviceOrientation
 {
@@ -1038,7 +1112,7 @@ static id _instance;
 //        }
 //    }else{
         //更新当前播放进度
-        [self updataCurrentTime];
+        [self updataCurrentTime:NO];
         if (self.player.rate == 1.0) {
             return YES;
         }else if (self.player.rate == 0.0)
@@ -1216,12 +1290,14 @@ static id _instance;
 #pragma mark - CLick
 -(void)backClick{
     NSLog(@"返回");
+    [self updataCurrentTime:NO];
     [self.player pause];
     [self removeFromAllview];
     [self set_delegateClickType:backClickType];
 }
 -(void)dlanClick{
     NSLog(@"投屏");
+    [self updataCurrentTime:NO];
     [self.player pause];
     [self addSubview:self.gsDLNAView];
     self.gsDLNAView.playUrl = gsPlayUrl;

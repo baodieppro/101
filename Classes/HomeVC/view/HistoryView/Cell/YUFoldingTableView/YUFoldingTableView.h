@@ -3,7 +3,7 @@
 //  YUFoldingTableView
 //
 //  Created by administrator on 16/8/24.
-//  Copyright © 2016年 timelywind. All rights reserved.
+//  Copyright © 2016年 liufengting. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,70 +15,146 @@
 
 @required
 /**
- *  返回section的个数
+ *  perferedArrowPositionForYUFoldingTableView
+ *
+ *  @param yuTableView YUFoldingTableView
+ *
+ *  @return YUFoldingSectionHeaderArrowPosition
+ */
+- (YUFoldingSectionHeaderArrowPosition)perferedArrowPositionForYUFoldingTableView:(YUFoldingTableView *)yuTableView;
+/**
+ *  numberOfSectionForYUFoldingTableView
+ *
+ *  @param yuTableView YUFoldingTableView
+ *
+ *  @return NSInteger
  */
 - (NSInteger )numberOfSectionForYUFoldingTableView:(YUFoldingTableView *)yuTableView;
 /**
- *  cell的个数
+ *  numberOfRowsInSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return NSInteger
  */
 - (NSInteger )yuFoldingTableView:(YUFoldingTableView *)yuTableView numberOfRowsInSection:(NSInteger )section;
 /**
- *  header的高度
+ *  heightForHeaderInSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return CGFloat
  */
 - (CGFloat )yuFoldingTableView:(YUFoldingTableView *)yuTableView heightForHeaderInSection:(NSInteger )section;
 /**
- *  cell的高度
+ *  heightForRowAtIndexPath
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param indexPath   NSIndexPath
+ *
+ *  @return CGFloat
  */
 - (CGFloat )yuFoldingTableView:(YUFoldingTableView *)yuTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 /**
- *  返回cell
+ *  titleForHeaderInSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return NSString
+ */
+- (NSString *)yuFoldingTableView:(YUFoldingTableView *)yuTableView titleForHeaderInSection:(NSInteger )section;
+/**
+ *  cellForRowAtIndexPath
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param indexPath   NSIndexPath
+ *
+ *  @return UITableViewCell
  */
 - (UITableViewCell *)yuFoldingTableView:(YUFoldingTableView *)yuTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+/**
+ *  didSelectRowAtIndexPath
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param indexPath   NSIndexPath
+ */
+- (void )yuFoldingTableView:(YUFoldingTableView *)yuTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+/**
+ *  删除单个cell
+ *
+ *  @param tableView    YUFoldingTableView
+ *  @param editingStyle editingStyle
+ *  @param indexPath    indexPath
+ */
+-(void)gxpFoldingTableView:(YUFoldingTableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
 
 /**
- *  点击cell
- */
-- (void )yuFoldingTableView:(YUFoldingTableView *)yuTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
-
-/**
- *  点击sectionHeaderView
- */
-- (void )yuFoldingTableView:(YUFoldingTableView *)yuTableView didSelectHeaderViewAtSection:(NSInteger)section;
-
-/**
- *  返回HeaderView
- */
-- (UIView *)yuFoldingTableView:(UITableView *)yuTableView viewForHeaderInSection:(NSInteger)section;
-
-/************* 下面是关于headerView一些属性的设置 ************/
-
-/**
- *  header的标题
- */
-- (NSString *)yuFoldingTableView:(YUFoldingTableView *)yuTableView titleForHeaderInSection:(NSInteger )section;
-
-/**
- *  箭头的位置
- */
-- (YUFoldingSectionHeaderArrowPosition)perferedArrowPositionForYUFoldingTableView:(YUFoldingTableView *)yuTableView;
-
-/**
- *  箭头图片
+ *  arrowImageForSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return UIImage
  */
 - (UIImage *)yuFoldingTableView:(YUFoldingTableView *)yuTableView arrowImageForSection:(NSInteger )section;
-
+/**
+ *  descriptionForHeaderInSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return NSString
+ */
 - (NSString *)yuFoldingTableView:(YUFoldingTableView *)yuTableView descriptionForHeaderInSection:(NSInteger )section;
-
+/**
+ *  backgroundColorForHeaderInSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return UIColor
+ */
 - (UIColor *)yuFoldingTableView:(YUFoldingTableView *)yuTableView backgroundColorForHeaderInSection:(NSInteger )section;
-
+/**
+ *  fontForTitleInSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return UIFont
+ */
 - (UIFont *)yuFoldingTableView:(YUFoldingTableView *)yuTableView fontForTitleInSection:(NSInteger )section;
-
+/**
+ *  fontForDescriptionInSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return UIFont
+ */
 - (UIFont *)yuFoldingTableView:(YUFoldingTableView *)yuTableView fontForDescriptionInSection:(NSInteger )section;
-
+/**
+ *  textColorForTitleInSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return UIColor
+ */
 - (UIColor *)yuFoldingTableView:(YUFoldingTableView *)yuTableView textColorForTitleInSection:(NSInteger )section;
-
+/**
+ *  textColorForDescriptionInSection
+ *
+ *  @param yuTableView YUFoldingTableView
+ *  @param section     NSInteger
+ *
+ *  @return UIColor
+ */
 - (UIColor *)yuFoldingTableView:(YUFoldingTableView *)yuTableView textColorForDescriptionInSection:(NSInteger )section;
 
 @end
@@ -87,11 +163,11 @@
 
 @property (nonatomic, weak) id<YUFoldingTableViewDelegate> foldingDelegate;
 
-@property (nonatomic, assign) YUFoldingSectionState foldingState;
+@property (nonatomic,assign) BOOL isHidHeader;//!<是否创建头视图
+/**
+ *  刷新
+ */
+-(void)gxpReloadData;
 
-@property (nonatomic, strong, readonly) NSMutableArray *statusArray;
-
-// 控制默认section的展开状态
-@property (nonatomic, copy) NSArray *sectionStateArray;
 
 @end

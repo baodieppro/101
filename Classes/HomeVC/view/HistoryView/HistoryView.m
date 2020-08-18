@@ -100,12 +100,12 @@ MyHistoryManagerFooterViewDelegate
     playVC.playStyle = playStyleTypeHistory;
     [[self getCurrentVC] presentViewController:playVC animated:NO completion:nil];
 }
--(void)mySelected_Under_IndexItmeWithClick:(HistoryItmeModel *)model{
+-(void)mySelected_Under_IndexItmeWithClick:(History_FMDBDataModel *)model{
 //    WebViewController * webVC = [[WebViewController alloc] init];
 //    webVC.url = model.h_url;
 //    [[self getCurrentVC] presentViewController:webVC animated:NO completion:nil];
     if ([self.delegate respondsToSelector:@selector(mySelectAtIndexPathItmeUrl:)]) {
-        [self.delegate mySelectAtIndexPathItmeUrl:model.h_url];
+        [self.delegate mySelectAtIndexPathItmeUrl:model.url];
     }
 }
 -(void)mySelectAllClick:(BOOL)isAll{

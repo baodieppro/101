@@ -52,7 +52,11 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //更新数据
                     [self addDownLoadCacheUrl:m3u8DownUrl name:m3u8DownTitle pathUrl:localPlayUrl progress:@"100%"isDown:@"1"];
-                    
+                    [GSNotificationManager starPushType:[GSTimeTools getCurrentTimes] title:m3u8DownTitle body:localPlayUrl forKey:m3u8DownUrl Complete:^{
+                        
+                    } failed:^{
+                        
+                    }];
                 });
             }
         }

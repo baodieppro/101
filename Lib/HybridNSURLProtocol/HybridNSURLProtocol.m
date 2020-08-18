@@ -146,10 +146,11 @@ static NSString* const KHybridNSURLProtocolHKey = @"KHybridNSURLProtocol";
         NSString *result =[[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         GSLog(@"捕获_html：%@",result);
         //屏蔽广告
-        if ([result containsString:@"https://xn--"]||[result containsString:@"var ads ="]) {
+        if ([result containsString:@"https://xn--"]||[result containsString:@"var ads ="] ||[result containsString:@"window[a]"]) {
             string=[result stringByReplacingOccurrencesOfString:@"https://xn--"withString:@"gs"];
             string=[result stringByReplacingOccurrencesOfString:@"var ads ="withString:@"gs"];
             NSLog(@"replaceStr=%@",string);
+            string=[result stringByReplacingOccurrencesOfString:@"isPC() == 0"withString:@"gs"];
             data1 =[string dataUsingEncoding:NSUTF8StringEncoding];
         }
     }

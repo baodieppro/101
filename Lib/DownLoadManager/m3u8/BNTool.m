@@ -24,16 +24,18 @@
     {
         return urlStr;
     }
-    //m3u8下载地址解析例子：
-    if([m3u8Str containsString:@"EXT-X-STREAM-INF"]){
-      
-        urlStr = [BNTool setParsingWithM3u8Url:urlStr m3u8Str:m3u8Str];
-
-        m3u8Str = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr] usedEncoding:0 error:&error];
-    }
     if (m3u8Str.length == 0)
     {
         NSLog(@"原始m3u8文件内容为空");
+        //m3u8下载地址解析例子：
+        if([m3u8Str containsString:@"EXT-X"]){
+          
+            urlStr = [BNTool setParsingWithM3u8Url:urlStr m3u8Str:m3u8Str];
+            m3u8Str = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr] usedEncoding:0 error:&error];
+            if (m3u8Str.length == 0){
+                NSLog(@"二次验证原始m3u8文件内容还是为空");
+            }
+        }
         return urlStr;
     }
     return urlStr;
@@ -41,20 +43,23 @@
 }
  //m3u8下载地址解析例子：
 + (NSString *)setParsingWithM3u8Url:(NSString *)urlStr m3u8Str:(NSString *)m3u8Str{
-    NSString *  dUrl  ;
-    NSString * downLoadM3U8Url ;
-    if([m3u8Str containsString:@"EXT-X-STREAM-INF"]){
-        m3u8Str = [m3u8Str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        if([m3u8Str containsString:@"1000k"]){
-            dUrl = [m3u8Str subStringFrom:@"1000k" to:@".m3u8"];
-            downLoadM3U8Url = [BNTool newisHttpOrHttps:[NSString stringWithFormat:@"1000k%@.m3u8",dUrl] orUrl:urlStr];
-        }else{
-            dUrl = [m3u8Str subStringFrom:@"/" to:@".m3u8"];
-            downLoadM3U8Url = [BNTool newisHttpOrHttps:[NSString stringWithFormat:@"%@.m3u8",dUrl] orUrl:urlStr];
+        NSString *  dUrl  ;
+        NSString * downLoadM3U8Url ;
+        if([m3u8Str containsString:@"EXT-X"]){
+            m3u8Str = [m3u8Str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            if([m3u8Str containsString:@"kb"]){
+                if ([m3u8Str containsString:@".m3u8"]) {
+                    dUrl = [m3u8Str subStringFrom:@"kb" to:@".m3u8"];
+                    downLoadM3U8Url = [BNTool newisHttpOrHttps:[NSString stringWithFormat:@"kb%@.m3u8",dUrl] orUrl:urlStr];
+                }
+
+            }else{
+                dUrl = [m3u8Str subStringFrom:@"/" to:@".m3u8"];
+                downLoadM3U8Url = [BNTool newisHttpOrHttps:[NSString stringWithFormat:@"%@.m3u8",dUrl] orUrl:urlStr];
+            }
         }
-    }
-       return  downLoadM3U8Url;
-        
+           return  downLoadM3U8Url;
+
 }
 
 +(NSString *)newisHttpOrHttps:(NSString *)url orUrl:(NSString *)orUrl

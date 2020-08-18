@@ -10,7 +10,7 @@
 
 @protocol MyLeftCollectionViewCellDelegate <NSObject>
 
-- (void)mySelected_Under_IndexItmeWithClick:(HistoryItmeModel *_Nullable)model;
+- (void)mySelected_Under_IndexItmeWithClick:(History_FMDBDataModel *_Nullable)model;
 
 - (void)myDelete_itmeListCount:(NSInteger)deleteCount;
 

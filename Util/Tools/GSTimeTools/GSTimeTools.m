@@ -15,7 +15,7 @@
     
     // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
     
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
 
     //现在时间,你可以输出来看下是什么格式
     
@@ -45,7 +45,36 @@
     //    NSLog(@"%@", timeNow);
     return timeNow;
 }
-
++(NSString *)getYearMonth
+{
+    NSString* date;
+    
+    NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
+    //    [formatter setDateFormat:@"YYYY.MM.dd.hh.mm.ss"];
+    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    
+    [formatter setDateFormat:@"YYYY-MM"];
+    //    [formatter setDateFormat:@" hh:mm:ss -- SSS"];
+    date = [formatter stringFromDate:[NSDate date]];
+    NSString * timeNow = [[NSString alloc] initWithFormat:@"%@", date];
+    //    NSLog(@"%@", timeNow);
+    return timeNow;
+}
++(NSString *)newYearMonth
+{
+    NSString* date;
+    
+    NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
+    //    [formatter setDateFormat:@"YYYY.MM.dd.hh.mm.ss"];
+    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    
+    [formatter setDateFormat:@"YYYY年MM月"];
+    //    [formatter setDateFormat:@" hh:mm:ss -- SSS"];
+    date = [formatter stringFromDate:[NSDate date]];
+    NSString * timeNow = [[NSString alloc] initWithFormat:@"%@", date];
+    //    NSLog(@"%@", timeNow);
+    return timeNow;
+}
 //换算时差
 +(NSDate *)dateStr:(NSDate *)timeDate{
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
@@ -101,14 +130,24 @@
         return @"0天";
     }
 }
++(NSDate *)setDateYYMMDDHHSSMM:(NSString *)time{
+    NSDateFormatter *inputFormatter= [[NSDateFormatter alloc] init];
+    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [inputFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSDate*date = [inputFormatter dateFromString:time];
+    //补8小时时差
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: date];
+    NSDate *localeDate = [date  dateByAddingTimeInterval: interval];
+    return localeDate;
+}
 +(NSDate *)setDateFormatter:(NSString *)time{
     NSDateFormatter *inputFormatter= [[NSDateFormatter alloc] init];
     [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     [inputFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate*date = [inputFormatter dateFromString:time];
-       return date;
+    return date;
 }
-
 +(NSInteger )year:(NSDate *)date{
     NSInteger year = [[self dateComponentNew:date] year];
     return year;
@@ -131,7 +170,8 @@
     return dateComponent;
 }
 
-+ (NSString *)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime{
+//获取时间差
++ (NSInteger)timeIntervalStartTime:(NSString *)startTime endTime:(NSString *)endTime{
     NSTimeZone *zone=[NSTimeZone systemTimeZone];//得到时区，根据手机系统时区设置（systemTimeZone）
 
     NSDateFormatter *date = [[NSDateFormatter alloc]init];
@@ -149,6 +189,15 @@
     NSDate *nowTime1=[endD dateByAddingTimeInterval:nowInterval1];
     
     NSTimeInterval time=[nowTime1 timeIntervalSinceDate:nowTime];
+    if (time <=0) {
+        //表示时间已经过去
+        return 1;
+    }
+    return time;
+}
++ (NSString *)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime{
+    
+    NSTimeInterval time=[self timeIntervalStartTime:startTime endTime:endTime];
     time = round(time/1.0);//最后选择四舍五入
     
     NSString *str;
@@ -220,117 +269,122 @@
     
     return [NSString stringWithFormat:@"%ld",(NSInteger)time];
 }
-
-+(NSString *)getDateDisplayString:(long long)miliSeconds{
+//传入 秒  得到  xx时xx分钟xx秒
++(NSString *)getHHMMSSFromSS:(NSString *)totalTime
+{
     
-     NSLog(@"-时间戳---%lld_----",miliSeconds);
+    NSInteger seconds = [totalTime integerValue];
+    NSInteger minute = seconds/60;
+    NSInteger second = seconds%60;
+    NSString *str_minute;
+    NSString *str_second;
+    NSString *format_time;
     
-     NSTimeInterval tempMilli = miliSeconds;
-    
-     NSTimeInterval seconds = tempMilli/1000.0;
-    
-     NSDate *myDate =[NSDate dateWithTimeIntervalSince1970:seconds];
-    
-     NSCalendar *calendar =[NSCalendar currentCalendar];
-    
-     int unit = NSCalendarUnitDay | NSCalendarUnitMonth |NSCalendarUnitYear;
-    
-     NSDateComponents *nowCmps =[calendar components:unit fromDate:[NSDate date]];
-    
-     NSDateComponents *myCmps =[calendar components:unit fromDate:myDate];
-    
-     NSDateFormatter *dateFmt =[[NSDateFormatter alloc]init];
-    
-     //2.指定日历对象,要去取日期对象的那些部分.
-    
-     NSDateComponents *comp = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:myDate];
-    
-    if(nowCmps.year != myCmps.year){
-
-        dateFmt.dateFormat = @"yyyy-MM-dd hh:mm";
-
-    } else {
-
-        if(nowCmps.day==myCmps.day){
-
-                dateFmt.AMSymbol = @"上午";
-
-                dateFmt.PMSymbol = @"下午";
-
-                dateFmt.dateFormat = @"aaa hh:mm";
-
-
-
-        } else if((nowCmps.day-myCmps.day)==1){
-
-                dateFmt.dateFormat = @"昨天";
-
-        } else {
-
-                if((nowCmps.day-myCmps.day)<=7){
-
-                    switch(comp.weekday){
-
-                        case 1:
-
-                         dateFmt.dateFormat = @"星期日";
-
-                         break;
-
-                        case 2:
-
-                        dateFmt.dateFormat = @"星期一";
-
-                        break;
-
-                        case 3:
-
-                        dateFmt.dateFormat = @"星期二";
-
-                        break;
-
-                        case 4:
-
-                        dateFmt.dateFormat = @"星期三";
-
-                        break;
-
-                        case 5:
-
-                        dateFmt.dateFormat = @"星期四";
-
-                        break;
-
-                        case 6:
-
-                        dateFmt.dateFormat = @"星期五";
-
-                        break;
-
-                        case 7:
-
-                        dateFmt.dateFormat = @"星期六";
-
-                        break;
-
-                        default:
-
-                    break;
-
-                    }
-
-                }else {
-
-                dateFmt.dateFormat = @"MM-dd hh:mm";
-
-                }
-
-            }
-
+    NSString *str_hour = [NSString stringWithFormat:@"%0ld",seconds/3600];
+    if (second<10) {
+        str_second = [NSString stringWithFormat:@"0%ld",seconds%60];
+    }else{
+        str_second = [NSString stringWithFormat:@"%ld",seconds%60];
     }
-
- return[dateFmt stringFromDate:myDate];
-
+    
+    if ([str_hour integerValue]!= 0) {
+        if (minute<10) {
+            str_minute = [NSString stringWithFormat:@"0%ld",(seconds%3600)/60];
+        }else{
+            str_minute = [NSString stringWithFormat:@"%ld",(seconds%3600)/60];
+        }
+        
+        format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
+        
+    }else{
+        if (minute<10) {
+            str_minute = [NSString stringWithFormat:@"0%ld",seconds/60];
+        }else{
+            str_minute = [NSString stringWithFormat:@"%ld",seconds/60];
+        }
+        
+        format_time = [NSString stringWithFormat:@"%@:%@",str_minute,str_second];
+        
+    }
+    //    NSLog(@"format_time : %@",format_time);
+    
+    return format_time;
+    
 }
 
+//判断两个日期是否是同一天
++(BOOL)isDateStartTime:(NSString *)startTime inSameDayAsDate:(NSString *)endTime{
+    
+    NSTimeZone *zone=[NSTimeZone systemTimeZone];//得到时区，根据手机系统时区设置（systemTimeZone）
+      NSDateFormatter *date = [[NSDateFormatter alloc]init];
+      [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+      NSDate *startD =[date dateFromString:startTime];
+      NSInteger nowInterval=[zone secondsFromGMTForDate:startD];
+      //将偏移量加到当前日期
+      NSDate *nowTime=[startD dateByAddingTimeInterval:nowInterval];
+      NSDate *endD = [date dateFromString:endTime];
+      NSInteger nowInterval1=[zone secondsFromGMTForDate:endD];
+      //将偏移量加到当前日期
+      NSDate *nowTime1=[endD dateByAddingTimeInterval:nowInterval1];
+        BOOL isToday = [[NSCalendar currentCalendar] isDate:nowTime inSameDayAsDate:nowTime1];
+        if(isToday) {
+           return YES;
+        }
+    return NO;
+}
+
+//判断是否是今天
++ (BOOL)checkTheDate:(NSString *)string{
+    NSDateFormatter *format = [[NSDateFormatter alloc]init];
+    [format setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date = [format dateFromString:string];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: date];
+    NSDate *localeDate = [date  dateByAddingTimeInterval: interval];
+    BOOL isToday = [[NSCalendar currentCalendar] isDateInToday:localeDate];
+    if(isToday) {
+       return YES;
+    }
+return NO;
+}
+
+//判断一个日期是否是昨天
++ (BOOL)isDateInYesterday:(NSString *)string{
+    NSDate * date = [self setDateYYMMDDHHSSMM:string];
+        BOOL isToday = [[NSCalendar currentCalendar] isDateInYesterday:date];
+        if(isToday) {
+           return YES;
+        }
+    return NO;
+}
+
+//判断一个日期是否是明天
++ (BOOL)isDateInTomorrow:(NSString *)string{
+    
+    NSDate * date = [self setDateYYMMDDHHSSMM:string];
+        BOOL isToday = [[NSCalendar currentCalendar] isDateInTomorrow:date];
+        if(isToday) {
+           return YES;
+        }
+    return NO;
+}
+//判断一个日期是否是在本周
++ (BOOL)isDateInWeekend:(NSString *)string{
+    NSDate * date = [self setDateYYMMDDHHSSMM:string];
+        BOOL isToday = [[NSCalendar currentCalendar] isDateInWeekend:date];
+        if(isToday) {
+           return YES;
+        }
+    return NO;
+}
++(NSString *)compareDate:(NSString *)date{
+        
+    if ([self checkTheDate:date] == YES) {
+        return @"今天";
+    }else if ([self isDateInYesterday:date])
+    {
+        return @"昨天";
+    }
+    return date;
+}
 @end

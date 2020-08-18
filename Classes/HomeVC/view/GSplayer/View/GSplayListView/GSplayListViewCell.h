@@ -15,5 +15,6 @@
 -(void)setCurrentLabelAlpha_PlayListIndex:(NSInteger)alpha;
 -(void)setCurrentLabelTitle:(NSString *)text;
 
+@property (nonatomic,strong) PlayCacheModel *model;
 
 @end

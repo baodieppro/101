@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UIButton * goodsShareButton;//!<分享商品
 @property (nonatomic,strong) UILabel * splitLine;//!<分割线
 
-@property (nonatomic,strong) HistoryItmeModel * itmeModel;//!<数据映射
+@property (nonatomic,strong) History_FMDBDataModel * itmeModel;//!<数据映射
 @property (nonatomic,strong) PlayCacheModel * playItmeModel;//!<数据映射
 
 @property (nonatomic, assign) BOOL editSelected;//!<编辑

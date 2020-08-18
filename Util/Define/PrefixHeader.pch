@@ -18,6 +18,7 @@
 #import "CacheHeader.h"
 #import "EnumerateConfig.h"
 #import "FMDB_Name.h"
+#import "HistoryDef.h"
 
 //第三方库
 #import "Masonry.h"
@@ -34,6 +35,7 @@
 #import "GSTimeTools.h"
 #import "ShowRemindTool.h"
 #import "GSLAlertView.h"
+#import "CCGSAlertView.h"
 #import "ToolscreenShot.h"
 #import "GShareView.h"
 #import "GSQRCodeTool.h"
@@ -66,5 +68,8 @@
 
 //友盟
 #import "GSum.h"
+
+//本地推送
+#import "GSNotificationManager.h"
 
 #endif /* PrefixHeader_pch */

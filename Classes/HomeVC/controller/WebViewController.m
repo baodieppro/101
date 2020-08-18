@@ -212,6 +212,9 @@ MyBookmarkVCDelegate
     }
     return _favoriteDataList;
 }
+-(NSString *)cicId{
+    return [NSString stringWithFormat:@"%ld",[HistoryData allCount]];
+}
 #pragma mark - BookMarkDelegate
 -(void)myBookmarkVCRloadViewWithUrl:(NSString *)url{
     [self.webView stopLoading];
@@ -363,14 +366,19 @@ MyBookmarkVCDelegate
         self.webUrl = url;
         self.webTitle = title;
         [ToolscreenShot screenShot].qrCodeStr = self.webUrl ;
-        [HistoryModel addCacheName:WEB_History_Cache title:title url:url arr:self.historyDataList];
+//        [HistoryModel addCacheName:WEB_History_Cache title:title url:url arr:self.historyDataList];
        [self displayNoneAd:url];
 //        if (isplay == YES) {
 //            [PlayNanager addHistoryData:@{@"url":self.playUrl,@"title":self.webTitle}];
 //        }
         [[ToolsMenuView menu] isFavorite:[BookMarkManager isExistAppForUrl:self.webUrl]];
     }
-    
+    //历史记录
+    dispatch_async(dispatch_get_main_queue(), ^
+       {
+           NSDictionary * dict = @{@"url":url,@"title":title,@"historyId":@"1"};
+           [HistoryData addHistoryData:dict];
+       });
 }
 
 -(void)gswebView:(GSWebView *)webView url:(nonnull NSString *)url Title:(nonnull NSString *)title didFailLoadWithError:(nonnull NSError *)error{

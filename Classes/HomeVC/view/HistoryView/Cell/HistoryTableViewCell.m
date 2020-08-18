@@ -9,11 +9,11 @@
 #import "HistoryTableViewCell.h"
 @implementation HistoryTableViewCell
 
--(void)setItmeModel:(HistoryItmeModel *)itmeModel{
+-(void)setItmeModel:(History_FMDBDataModel *)itmeModel{
     _itmeModel = itmeModel;
-    _goodsNameLabel.text = itmeModel.h_name;
-    _goodsPriceLabel.text = itmeModel.h_url;
-    [self selectedBtnClick:itmeModel.isSeleted];
+    _goodsNameLabel.text = itmeModel.title;
+    _goodsPriceLabel.text = itmeModel.url;
+    [self selectedBtnClick:[itmeModel.isSeleted boolValue]];
 }
 -(void)setPlayItmeModel:(PlayCacheModel *)playItmeModel{
     _playItmeModel = playItmeModel;
@@ -43,8 +43,8 @@
 }
 - (void)setFrame:(CGRect)frame{
 //    frame.origin.x += __kNewSize(5*2);
-    frame.origin.y += __kNewSize(5*2);
-    frame.size.height -= __kNewSize(5*2);
+    frame.origin.y += 1;
+    frame.size.height -= 1;
 //    frame.size.width -= __kNewSize(30*2);
     [super setFrame:frame];
 }
@@ -76,16 +76,16 @@
         make.size.mas_equalTo(CGSizeMake(__kNewSize(30*2), __kNewSize(30*2)));
     }];
     [_goodsNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.goodsImageView).mas_offset(-__kNewSize(15*2));
+        make.top.mas_equalTo(self);
         make.left.mas_equalTo(self.goodsImageView.mas_right).mas_offset(__kNewSize(10*2));
         make.right.mas_equalTo(self.mas_right).mas_offset(-__kNewSize(15*2));
-        make.height.mas_equalTo(__kNewSize(48*2));
+        make.height.mas_equalTo(__kNewSize(55));
     }];
     [_goodsPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.goodsImageView.mas_bottom).mas_offset(__kNewSize(10*2));
+        make.bottom.mas_equalTo(self.mas_bottom);
         make.left.mas_equalTo(self.goodsNameLabel);
         make.right.mas_equalTo(self.mas_right).mas_offset(-__kNewSize(15*2));
-        make.height.mas_equalTo(__kNewSize(20*2));
+        make.height.mas_equalTo(__kNewSize(55));
     }];
     [_selectImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self);

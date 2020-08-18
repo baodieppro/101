@@ -5,8 +5,13 @@
 //  Created by Roger on 2019/10/15.
 //  Copyright © 2019 Roger. All rights reserved.
 //
+#import <AVFoundation/AVAsset.h>
+#import <AVFoundation/AVAssetImageGenerator.h>
+#import <AVFoundation/AVTime.h>
 
 #import "GSplayListViewCell.h"
+#import "BNTool.h"
+
 @interface GSplayListViewCell ()
 @property (nonatomic,strong) UILabel * currentLabel;//!<当前
 @property (nonatomic,strong) UIImageView * centerImageView;//!<
@@ -80,6 +85,13 @@ static NSString *cellID = @"GSplayListViewCell";
 }
 -(void)setCurrentLabelTitle:(NSString *)text{
     _titleLabel.text = text;
+}
+-(void)setModel:(PlayCacheModel *)model{
+    _titleLabel.text = model.title;
+//    _centerImageView.image = [self firstFrameWithVideoURL:[NSURL URLWithString:[BNTool m3u8Url:model.url]] size:_centerImageView.size];
+    _centerImageView.image = [self getVideoPreViewImage:model.url];
+//    _centerImageView.image = [self thumbnailImageForVideo:[NSURL URLWithString:model.url] atTime:10];
+
 }
 #pragma mark - UI
 -(UIImageView *)centerImageView{
@@ -157,6 +169,135 @@ static NSString *cellID = @"GSplayListViewCell";
         _progressLabel = label;
     }
     return _progressLabel;
+}
+// 获取视频第一帧
+#pragma mark ---- 获取图片第一帧
+- (UIImage *)firstFrameWithVideoURL:(NSURL *)url size:(CGSize)size
+{
+    // 获取视频第一帧
+    NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
+    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];
+    AVAssetImageGenerator *generator = [AVAssetImageGenerator assetImageGeneratorWithAsset:urlAsset];
+    generator.appliesPreferredTrackTransform = YES;
+    generator.maximumSize = CGSizeMake(size.width, size.height);
+    NSError *error = nil;
+    CGImageRef img = [generator copyCGImageAtTime:CMTimeMake(0, 10) actualTime:NULL error:&error];
+    {
+        return [UIImage imageWithCGImage:img];
+    }
+    return nil;
+}
+- (UIImage*) getVideoPreViewImage:(NSString *)path
+{
+//    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:path options:nil];
+//    AVPlayerItem * playerItem = [AVPlayerItem playerItemWithAsset:asset];
+
+//    AVAssetImageGenerator *assetGen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+//
+//    assetGen.appliesPreferredTrackTransform = YES;
+//    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+//    NSError *error = nil;
+//    CMTime actualTime;
+//    CGImageRef image = [assetGen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+//    UIImage *videoImage = [[UIImage alloc] initWithCGImage:image];
+//    CGImageRelease(image);
+//    return videoImage?:[UIImage imageNamed:@"img_popup_pretermit"];
+//    return [self getPixelBufferForItem:playerItem];
+    
+    //本地视频
+
+//       AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:path] options:nil];
+
+       //网络视频
+
+       AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL URLWithString:path] options:nil];
+
+      
+
+       AVAssetImageGenerator *assetGen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+
+       assetGen.appliesPreferredTrackTransform = YES;
+
+       CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+
+       NSError *error = nil;
+
+       CMTime actualTime;
+
+       CGImageRef image = [assetGen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+
+       UIImage *videoImage = [[UIImage alloc] initWithCGImage:image];
+
+       CGImageRelease(image);
+
+       if (videoImage == nil) {
+
+           videoImage = [UIImage imageNamed:@"img_popup_pretermit.png"];
+
+       }
+
+       return videoImage;
+
+}
+
+//获取m3u8视频帧画面
+- (UIImage *)getPixelBufferForItem:(AVPlayerItem *)playerItem{
+
+    AVPlayerItemVideoOutput *output = [[AVPlayerItemVideoOutput alloc] init];
+    [playerItem addOutput:output];
+    CVPixelBufferRef ref =[output copyPixelBufferForItemTime:CMTimeMake(10, 60) itemTimeForDisplay:nil];
+    UIImage *image = [self CVImageToUIImage:ref];
+    return image;
+}
+//CVPixelBufferRef转UIImage
+- (UIImage *)CVImageToUIImage:(CVPixelBufferRef)imageBuffer{
+    CVPixelBufferLockBaseAddress(imageBuffer, 0);
+    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+    size_t width = CVPixelBufferGetWidth(imageBuffer);
+    size_t height = CVPixelBufferGetHeight(imageBuffer);
+    size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
+    size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer, 0);
+    
+    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, baseAddress, bufferSize, NULL);
+    
+    CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, rgbColorSpace, kCGImageAlphaNoneSkipFirst|kCGBitmapByteOrder32Little, provider, NULL, true, kCGRenderingIntentDefault);
+    
+    
+    UIImage *image = [UIImage imageWithCGImage:cgImage];
+    
+    CGImageRelease(cgImage);
+    CGDataProviderRelease(provider);
+    CGColorSpaceRelease(rgbColorSpace);
+    
+    NSData* imageData = UIImageJPEGRepresentation(image, 1.0);
+    image = [UIImage imageWithData:imageData];
+    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+    return image;
+
+}
+- (UIImage*) thumbnailImageForVideo:(NSURL *)videoURL atTime:(NSTimeInterval)time {
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
+
+    NSParameterAssert(asset);
+
+    AVAssetImageGenerator *assetImageGenerator =[[AVAssetImageGenerator alloc] initWithAsset:asset];
+
+     assetImageGenerator.appliesPreferredTrackTransform = YES;
+
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+
+      CGImageRef thumbnailImageRef = NULL;
+
+    CFTimeInterval thumbnailImageTime = time;
+
+    NSError *thumbnailImageGenerationError = nil;
+    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60)actualTime:NULL error:&thumbnailImageGenerationError];
+    if(!thumbnailImageRef)
+    NSLog(@"thumbnailImageGenerationError %@",thumbnailImageGenerationError);
+    UIImage*thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage: thumbnailImageRef] : nil;
+    return thumbnailImage;
+
 }
 
 @end

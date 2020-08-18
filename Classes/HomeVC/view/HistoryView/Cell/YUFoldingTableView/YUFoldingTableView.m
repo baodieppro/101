@@ -3,29 +3,14 @@
 //  YUFoldingTableView
 //
 //  Created by administrator on 16/8/24.
-//  Copyright © 2016年 timelywind. All rights reserved.
+//  Copyright © 2016年 liufengting. All rights reserved.
 //
 
 #import "YUFoldingTableView.h"
 
-static NSString *YUFoldingSectionHeaderID = @"YUFoldingSectionHeader";
-static NSInteger addTag = 100;
-
-id YUSafeObject(NSArray *array, NSInteger index) {
-    
-    if (![array isKindOfClass:[NSArray class]]) {
-        return nil;
-    }
-    if (array.count <= index) {
-        return nil;
-    }
-    
-    return [array objectAtIndex:index];
-}
-
 @interface YUFoldingTableView () <YUFoldingSectionHeaderDelegate>
 
-@property (nonatomic, strong, readwrite) NSMutableArray *statusArray;
+@property (nonatomic, strong) NSMutableArray *statusArray;
 
 @end
 
@@ -33,7 +18,7 @@ id YUSafeObject(NSArray *array, NSInteger index) {
 
 #pragma mark - 初始化
 
-- (instancetype)initWithFrame:(CGRect)frame
+-(instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -43,7 +28,7 @@ id YUSafeObject(NSArray *array, NSInteger index) {
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
@@ -52,78 +37,41 @@ id YUSafeObject(NSArray *array, NSInteger index) {
     return self;
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-}
-
 #pragma mark - 创建数据源和代理
 
-- (void)setupDelegateAndDataSource
+-(void)setupDelegateAndDataSource
 {
-    // 适配iOS 11
-#ifdef __IPHONE_11_0
-//    if ([self respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
-//        self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//    }
-    self.estimatedRowHeight = 0;
-    self.estimatedSectionHeaderHeight = 0;
-    self.estimatedSectionFooterHeight = 0;
-#endif
     self.delegate = self;
     self.dataSource = self;
     if (self.style == UITableViewStylePlain) {
         self.tableFooterView = [[UIView alloc] init];
     }
-    
-    [self registerClass:[YUFoldingSectionHeader class] forHeaderFooterViewReuseIdentifier:YUFoldingSectionHeaderID];
-    
     // 添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onChangeStatusBarOrientationNotification:)  name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
-- (NSMutableArray *)statusArray
+-(NSMutableArray *)statusArray
 {
     if (!_statusArray) {
         _statusArray = [NSMutableArray array];
     }
-    
-    if (!_foldingState) {
-        _foldingState = YUFoldingSectionStateFlod;
-    }
-    
     if (_statusArray.count) {
         if (_statusArray.count > self.numberOfSections) {
             [_statusArray removeObjectsInRange:NSMakeRange(self.numberOfSections - 1, _statusArray.count - self.numberOfSections)];
         }else if (_statusArray.count < self.numberOfSections) {
             for (NSInteger i = self.numberOfSections - _statusArray.count; i < self.numberOfSections; i++) {
-                [_statusArray addObject:[NSNumber numberWithInteger:_foldingState]];
+                [_statusArray addObject:[NSNumber numberWithInteger:YUFoldingSectionStateFlod]];
             }
         }
     }else{
         for (NSInteger i = 0; i < self.numberOfSections; i++) {
-            [_statusArray addObject:[NSNumber numberWithInteger:_foldingState]];
+            [_statusArray addObject:[NSNumber numberWithInteger:YUFoldingSectionStateFlod]];
         }
     }
-    
-    if (_sectionStateArray.count) {
-        NSMutableArray *tempStatusArrayM = [NSMutableArray array];
-        for (int i = 0; i < _statusArray.count; i++) {
-            if (i < _sectionStateArray.count) {
-                [tempStatusArrayM addObject:_sectionStateArray[i]];
-            } else {
-                [tempStatusArrayM addObject:@"0"];
-            }
-        }
-        _statusArray = tempStatusArrayM;
-        _sectionStateArray = nil;
-    }
-    
-    
     return _statusArray;
 }
 
-- (void)onChangeStatusBarOrientationNotification:(NSNotification *)notification
+-(void)onChangeStatusBarOrientationNotification:(NSNotification *)notification
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self reloadData];
@@ -132,49 +80,49 @@ id YUSafeObject(NSArray *array, NSInteger index) {
 
 #pragma mark - UI Configration
 
-- (YUFoldingSectionHeaderArrowPosition )perferedArrowPosition
+-(YUFoldingSectionHeaderArrowPosition )perferedArrowPosition
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(perferedArrowPositionForYUFoldingTableView:)]) {
         return [_foldingDelegate perferedArrowPositionForYUFoldingTableView:self];
     }
     return YUFoldingSectionHeaderArrowPositionRight;
 }
-- (UIColor *)backgroundColorForSection:(NSInteger )section
+-(UIColor *)backgroundColorForSection:(NSInteger )section
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:backgroundColorForHeaderInSection:)]) {
         return [_foldingDelegate yuFoldingTableView:self backgroundColorForHeaderInSection:section];
     }
     return [UIColor colorWithRed:102/255.f green:102/255.f blue:255/255.f alpha:1.f];
 }
-- (NSString *)titleForSection:(NSInteger )section
+-(NSString *)titleForSection:(NSInteger )section
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:titleForHeaderInSection:)]) {
         return [_foldingDelegate yuFoldingTableView:self titleForHeaderInSection:section];
     }
     return [NSString string];
 }
-- (UIFont *)titleFontForSection:(NSInteger )section
+-(UIFont *)titleFontForSection:(NSInteger )section
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:fontForTitleInSection:)]) {
         return [_foldingDelegate yuFoldingTableView:self fontForTitleInSection:section];
     }
     return [UIFont boldSystemFontOfSize:16];
 }
-- (UIColor *)titleColorForSection:(NSInteger )section
+-(UIColor *)titleColorForSection:(NSInteger )section
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:textColorForTitleInSection:)]) {
         return [_foldingDelegate yuFoldingTableView:self textColorForTitleInSection:section];
     }
     return [UIColor whiteColor];
 }
-- (NSString *)descriptionForSection:(NSInteger )section
+-(NSString *)descriptionForSection:(NSInteger )section
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:descriptionForHeaderInSection:)]) {
         return [_foldingDelegate yuFoldingTableView:self descriptionForHeaderInSection:section];
     }
     return [NSString string];
 }
-- (UIFont *)descriptionFontForSection:(NSInteger )section
+-(UIFont *)descriptionFontForSection:(NSInteger )section
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:fontForDescriptionInSection:)]) {
         return [_foldingDelegate yuFoldingTableView:self fontForDescriptionInSection:section];
@@ -182,7 +130,7 @@ id YUSafeObject(NSArray *array, NSInteger index) {
     return [UIFont boldSystemFontOfSize:13];
 }
 
-- (UIColor *)descriptionColorForSection:(NSInteger )section
+-(UIColor *)descriptionColorForSection:(NSInteger )section
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:textColorForDescriptionInSection:)]) {
         return [_foldingDelegate yuFoldingTableView:self textColorForDescriptionInSection:section];
@@ -190,17 +138,17 @@ id YUSafeObject(NSArray *array, NSInteger index) {
     return [UIColor whiteColor];
 }
 
-- (UIImage *)arrowImageForSection:(NSInteger )section
+-(UIImage *)arrowImageForSection:(NSInteger )section
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:arrowImageForSection:)]) {
         return [_foldingDelegate yuFoldingTableView:self arrowImageForSection:section];
     }
-    return [UIImage imageNamed:@"YUFolding_arrow"];
+    return [UIImage imageNamed:@"Arrow"];
 }
 
-#pragma mark - UITableViewDelegate / UITableViewDataSource
+#pragma mark - UITableViewDelegate,UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(numberOfSectionForYUFoldingTableView:)]) {
         return [_foldingDelegate numberOfSectionForYUFoldingTableView:self];
@@ -208,16 +156,16 @@ id YUSafeObject(NSArray *array, NSInteger index) {
         return self.numberOfSections;
     }
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([YUSafeObject(self.statusArray, section) integerValue] == YUFoldingSectionStateShow) {
+    if (((NSNumber *)self.statusArray[section]).integerValue == YUFoldingSectionStateShow) {
         if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:numberOfRowsInSection:)]) {
             return [_foldingDelegate yuFoldingTableView:self numberOfRowsInSection:section];
         }
     }
     return 0;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:heightForHeaderInSection:)]) {
         return [_foldingDelegate yuFoldingTableView:self heightForHeaderInSection:section];
@@ -225,7 +173,7 @@ id YUSafeObject(NSArray *array, NSInteger index) {
         return self.sectionHeaderHeight;
     }
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:heightForRowAtIndexPath:)]) {
         return [_foldingDelegate yuFoldingTableView:self heightForRowAtIndexPath:indexPath];
@@ -233,7 +181,7 @@ id YUSafeObject(NSArray *array, NSInteger index) {
         return self.rowHeight;
     }
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (self.style == UITableViewStylePlain) {
         return 0;
@@ -241,66 +189,78 @@ id YUSafeObject(NSArray *array, NSInteger index) {
         return 0.001;
     }
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *sectionHeaderView = nil;
-    if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:viewForHeaderInSection:)]) {
-        sectionHeaderView = [_foldingDelegate yuFoldingTableView:self viewForHeaderInSection:section];
-        sectionHeaderView.tag = addTag + section;
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction:)];
-        [sectionHeaderView addGestureRecognizer:tapGesture];
-    } else {
-        sectionHeaderView = [self normalHeaderViewWithTableView:tableView section:section];
+    
+    if (_isHidHeader == YES){
+        YUFoldingSectionHeader *sectionHeaderView = [[YUFoldingSectionHeader alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, [self tableView:self heightForHeaderInSection:section])  withTag:section];
+        
+        [sectionHeaderView setupWithBackgroundColor:[self backgroundColorForSection:section]
+                                        titleString:[self titleForSection:section]
+                                         titleColor:[self titleColorForSection:section]
+                                          titleFont:[self titleFontForSection:section]
+                                  descriptionString:[self descriptionForSection:section]
+                                   descriptionColor:[self descriptionColorForSection:section]
+                                    descriptionFont:[self descriptionFontForSection:section]
+                                         arrowImage:[self arrowImageForSection:section]
+                                      arrowPosition:[self perferedArrowPosition]
+                                       sectionState:((NSNumber *)self.statusArray[section]).integerValue];
+        
+        sectionHeaderView.tapDelegate = self;
+        
+        if (self.statusArray.count != 0) {
+            return sectionHeaderView;
+        }
+
     }
-    return sectionHeaderView;
+        return nil;
+
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:cellForRowAtIndexPath:)]) {
         return [_foldingDelegate yuFoldingTableView:self cellForRowAtIndexPath:indexPath];
     }
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DefaultCellIndentifier"];
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:didSelectRowAtIndexPath:)]) {
         [_foldingDelegate yuFoldingTableView:self didSelectRowAtIndexPath:indexPath];
     }
 }
 
-
-#pragma mark - YUFoldingSectionHeader
-
-- (UIView *)normalHeaderViewWithTableView:(UITableView *)tableView section:(NSInteger)section
-{
-    YUFoldingSectionHeader *sectionHeaderView = [self dequeueReusableHeaderFooterViewWithIdentifier:YUFoldingSectionHeaderID];
-    [sectionHeaderView configWithBackgroundColor:[self backgroundColorForSection:section]
-                                     titleString:[self titleForSection:section]
-                                      titleColor:[self titleColorForSection:section]
-                                       titleFont:[self titleFontForSection:section]
-                               descriptionString:[self descriptionForSection:section]
-                                descriptionColor:[self descriptionColorForSection:section]
-                                 descriptionFont:[self descriptionFontForSection:section]
-                                      arrowImage:[self arrowImageForSection:section]
-                                   arrowPosition:[self perferedArrowPosition]
-                                    sectionState:[YUSafeObject(self.statusArray, section) integerValue]
-                                    sectionIndex:section];
-    sectionHeaderView.tapDelegate = self;
-    return sectionHeaderView;
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    //先调用父类
+    [super setEditing:editing animated:animated];
+    [self setEditing:!self.editing animated:YES];
 }
 
-- (void)tapGestureAction:(UIGestureRecognizer *)gesture
-{
-    [self yuFoldingSectionHeaderTappedAtIndex:gesture.view.tag - addTag];
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
 }
 
-- (void)yuFoldingSectionHeaderTappedAtIndex:(NSInteger)index
-{
-    if (self.statusArray.count <= index) {
-        return;
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(gxpFoldingTableView:commitEditingStyle:forRowAtIndexPath:)]) {
+        [_foldingDelegate gxpFoldingTableView:self commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
     }
-    BOOL currentIsOpen = [YUSafeObject(self.statusArray, index) boolValue];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+
+-(void)gxpReloadData{
+    [self reloadData];
+}
+
+#pragma mark - YUFoldingSectionHeaderDelegate
+
+-(void)yuFoldingSectionHeaderTappedAtIndex:(NSInteger)index
+{
+    BOOL currentIsOpen = ((NSNumber *)self.statusArray[index]).boolValue;
     
     [self.statusArray replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:!currentIsOpen]];
     
@@ -317,10 +277,6 @@ id YUSafeObject(NSArray *array, NSInteger index) {
         }else{
             [self insertRowsAtIndexPaths:[NSArray arrayWithArray:rowArray] withRowAnimation:UITableViewRowAnimationTop];
         }
-    }
-    
-    if (_foldingDelegate && [_foldingDelegate respondsToSelector:@selector(yuFoldingTableView:didSelectHeaderViewAtSection:)]) {
-        [_foldingDelegate yuFoldingTableView:self didSelectHeaderViewAtSection:index];
     }
 }
 

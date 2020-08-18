@@ -12,7 +12,7 @@
 #import <MediaPlayer/MPMusicPlayerController.h>
 
 #define GSGridCount 16
-#define GSProgressScale 8
+#define GSProgressScale 15
 
 @interface GSBrightnessEchoView : UIView
 @property (nonatomic, strong) NSMutableArray *gridArray;

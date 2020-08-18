@@ -174,7 +174,8 @@
             [cell setCurrentLabelAlpha_PlayListIndex:0];
         }
         PlayCacheModel * itmeModel = self.playListData[indexPath.row];
-        [cell setCurrentLabelTitle:itmeModel.title];
+//        [cell setCurrentLabelTitle:itmeModel.title];
+        [cell setModel:itmeModel];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor colorWithHexString:@"#333333"];
