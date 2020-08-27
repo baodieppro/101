@@ -89,7 +89,7 @@ static NSString *cellID = @"GSplayListViewCell";
 -(void)setModel:(PlayCacheModel *)model{
     _titleLabel.text = model.title;
 //    _centerImageView.image = [self firstFrameWithVideoURL:[NSURL URLWithString:[BNTool m3u8Url:model.url]] size:_centerImageView.size];
-    _centerImageView.image = [self getVideoPreViewImage:model.url];
+//    _centerImageView.image = [self getVideoPreViewImage:model.url];
 //    _centerImageView.image = [self thumbnailImageForVideo:[NSURL URLWithString:model.url] atTime:10];
 
 }

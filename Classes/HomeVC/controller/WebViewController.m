@@ -5,8 +5,8 @@
 //  Created by ios on 2019/12/11.
 //  Copyright © 2019 GSDlna_Developer. All rights reserved.
 //
-#define __Def_Url__ @"https://m.kankanwu.com/"
-
+#define __Def_Url__ @"http://m.zjmao.com/"
+#import "NSString+m3u8.h"
 #import "NSString+SKYExtension.h"
 #import "SearchViewController.h"
 #import "WebViewController.h"
@@ -22,7 +22,7 @@
 #import "HybridNSURLProtocol.h"
 #import "WebBottomView.h"
 #import "ToolsMenuView.h"
-
+#import "LSPlayerView.h"
 @interface WebViewController ()
 <
 GSWebViewDelegate,
@@ -34,7 +34,8 @@ MySearchViewControllerDelegate,
 MyToolsMenuViewDelegate,
 QRDelegate,
 MyHistoryViewControllerDelegate,
-MyBookmarkVCDelegate
+MyBookmarkVCDelegate,
+MyLSPlayerViewDelegate
 >
 {
     BOOL isplay;
@@ -49,6 +50,9 @@ MyBookmarkVCDelegate
 @property (nonatomic,strong) NSString * webTitle;
 @property (nonatomic,strong) NSString * webUrl;
 @property (nonatomic,strong) NSString * playUrl;
+@property (nonatomic,assign) BOOL isHiddenTopBar;
+@property (nonatomic,strong) LSPlayerView* playerView ;
+@property (nonatomic,assign) BOOL isplayView;//!<是否展示playView
 
 @property (nonatomic,strong) NSMutableArray * historyDataList;
 @property (nonatomic,strong) NSMutableArray * playHistoryDataList;
@@ -68,6 +72,13 @@ MyBookmarkVCDelegate
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+//    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+//
+//    [self prefersStatusBarHidden];
+//
+//    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+//
+//    }
      //通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardNotification:) name:NEED_PUSH_Pasteboard_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCaptureM3U8Notification:) name:NEED_M3U8_Capture_NOTIFICATION object:nil];
@@ -90,7 +101,8 @@ MyBookmarkVCDelegate
         self.url = [BookMarkManager readDefUrl]?:__Def_Url__;
     }
     isplay = NO;
-  
+    self.isHiddenTopBar = NO;
+    self.isplayView = NO;
 }
 -(void)g_CreateUI{
     [self.myView addSubview:self.webView];
@@ -193,6 +205,22 @@ MyBookmarkVCDelegate
     }
     return _downLoadBtn;
 }
+-(LSPlayerView *)playerView{
+    if (!_playerView) {
+        LSPlayerView* playerView = [LSPlayerView playerView];
+        playerView.index=0;
+        playerView.delegate = self;
+        //playerView.currentFrame=CGRectMake(0, 64, __kScreenWidth__, __KSize(340));
+        //必须先设置tempSuperView在设置videoURL
+        playerView.tempSuperView= [UIApplication sharedApplication].delegate.window;
+        __kWeakSelf__
+        playerView.backBlock = ^{
+            weakSelf.isplayView = NO;
+        };
+        _playerView = playerView;
+    }
+    return _playerView;
+}
 -(NSMutableArray *)historyDataList{
     if (!_historyDataList) {
         _historyDataList = [[NSMutableArray alloc]init];
@@ -241,7 +269,19 @@ MyBookmarkVCDelegate
     [self pushSearchVC];
     return NO;
 }
+#pragma mark - MyLSPlayerViewDelegate
+-(void)myPrefersStatusBarHidden:(BOOL)isHidden{
+    self.isHiddenTopBar = isHidden;
+    [[UIApplication sharedApplication] setStatusBarHidden:isHidden withAnimation:NO];
+    [self prefersStatusBarHidden];
 
+}
+- (BOOL)prefersStatusBarHidden
+{
+
+return self.isHiddenTopBar;
+
+}
 #pragma mark - 捕获M3U8通知
 -(void)pasteboardNotification:(NSNotification *)notification{
     GSLog(@"收到剪切板通知：%@",notification.object);
@@ -254,6 +294,12 @@ MyBookmarkVCDelegate
             [[GSLAlertView alertManager] createInitWithTitle:@"是否播放视频" message:self.playUrl sureBtn:@"确定" cancleBtn:@"取消"];
             [GSLAlertView alertManager].resultIndex = ^(NSInteger index) {
                 switch (index) {
+                    case 1:
+                    {
+                        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                        pasteboard.string = @"";
+                    }
+                        break;
                     case 2:
                     {
                         [weakSelf playVideoClick];
@@ -268,6 +314,12 @@ MyBookmarkVCDelegate
             [[GSLAlertView alertManager] createInitWithTitle:@"是否访问地址" message:url sureBtn:@"确定" cancleBtn:@"取消"];
             [GSLAlertView alertManager].resultIndex = ^(NSInteger index) {
                 switch (index) {
+                    case 1:
+                    {
+                        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                        pasteboard.string = @"";
+                    }
+                        break;
                     case 2:
                     {
                         [self.webView loadURLString:url];
@@ -362,23 +414,38 @@ MyBookmarkVCDelegate
     GSLog(@"页面加载完成  %@  %@ ",url ,title);
     [self refreshBackImage:YES];
     if (!kStringIsEmpty(title)) {
+
+        if ([url containsString:@"play/"]&&[url containsString:@".html"])
+        {
+            self.webTitle = [NSString stringWithFormat:@"%@%@",title,[url subStringFrom:@"play/" to:@".html"]];
+        }
+        else if ([url containsString:@"movie/"]&&[url containsString:@".html"])
+        {
+            self.webTitle = [NSString stringWithFormat:@"%@%@",title,[url subStringFrom:@"movie/" to:@".html"]];
+        }else {
+            self.webTitle = title;
+        }
         self.searchView.searchTextField.text = title;
         self.webUrl = url;
-        self.webTitle = title;
         [ToolscreenShot screenShot].qrCodeStr = self.webUrl ;
 //        [HistoryModel addCacheName:WEB_History_Cache title:title url:url arr:self.historyDataList];
        [self displayNoneAd:url];
-//        if (isplay == YES) {
-//            [PlayNanager addHistoryData:@{@"url":self.playUrl,@"title":self.webTitle}];
-//        }
+
         [[ToolsMenuView menu] isFavorite:[BookMarkManager isExistAppForUrl:self.webUrl]];
     }
-    //历史记录
-    dispatch_async(dispatch_get_main_queue(), ^
-       {
-           NSDictionary * dict = @{@"url":url,@"title":title,@"historyId":@"1"};
-           [HistoryData addHistoryData:dict];
-       });
+    if(![self.url isEqualToString:url]){
+        //历史记录
+           dispatch_async(dispatch_get_main_queue(), ^
+              {
+                  NSDictionary * dict = @{@"url":url,@"title":title,@"historyId":@"1"};
+                  [HistoryData addHistoryData:dict];
+              });
+    }
+   if(isplay == YES){
+       if (self.isplayView == YES) {
+            [self playVideo:self.playUrl];
+       }
+   }
 }
 
 -(void)gswebView:(GSWebView *)webView url:(nonnull NSString *)url Title:(nonnull NSString *)title didFailLoadWithError:(nonnull NSError *)error{
@@ -439,20 +506,22 @@ MyBookmarkVCDelegate
     _refreshBtn.selected = !_refreshBtn.selected;
 }
 -(void)playVideoClick{
-    [self pushPlayVC_Url:self.playUrl];
+    [self playVideo:self.playUrl];
+//    [self pushPlayVC_Url:self.playUrl];
 }
 -(void)downLoadPlayVideoClick{
     [self.myView gs_showTextHud:[NSString stringWithFormat:@"准备下载 - %@",self.webTitle]];
 
     if ([DownloadDataManager isExistAppForTitle:self.webTitle] == YES) {
         //已经下载过了
-//        [[GSLAlertView alertManager] createInitWithTitle:@"已经下载过了" message:self.webTitle sureBtn:@"知道了" cancleBtn:nil];
-//        [[GSLAlertView alertManager] showGSAlertView];
         [self.myView gs_showTextHud:[NSString stringWithFormat:@"已经下载过了 - %@",self.webTitle]];
 
     }else{
         //还没有下载过
-        [DownLoadManager start:self.playUrl Name:self.webTitle progressBlock:^(CGFloat progress) {
+        [DownLoadManager start:self.playUrl Name:self.webTitle errorBlock:^(NSError * _Nullable error) {
+            [self.myView gs_showTextHud:[NSString stringWithFormat:@"下载失败 \n %@",self.webTitle]];
+
+        } progressBlock:^(CGFloat progress) {
             
         }];
         [self.myView gs_showTextHud:[NSString stringWithFormat:@"下载中 \n %@",self.webTitle]];
@@ -667,11 +736,17 @@ MyBookmarkVCDelegate
 -(void)pushSearchVC{
     SearchViewController * searchVC = [[SearchViewController alloc]init];
     searchVC.delegate = self;
+    self.definesPresentationContext = YES;
+    //设置模态视图弹出样式
+    searchVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:searchVC animated:NO completion:nil];
 }
 -(void)push_HistoryVC{
     HistoryViewController * historyVC = [[HistoryViewController alloc]init];
     historyVC.delegate = self;
+    self.definesPresentationContext = YES;
+    //设置模态视图弹出样式
+    historyVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:historyVC animated:NO completion:nil];
 //    [self.navigationController pushViewController:historyVC animated:YES];
 }
@@ -691,7 +766,18 @@ MyBookmarkVCDelegate
     QRCodeViewController * qrVC = [[QRCodeViewController alloc] init];
     qrVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;    // 设置动画效果
     qrVC.delegate = self;
+    self.definesPresentationContext = YES;
+    //设置模态视图弹出样式
+    qrVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:qrVC animated:YES completion:nil];
+
+}
+#pragma mark - 自定义播放器
+-(void)playVideo:(NSString *)url{
+    [PlayManager addPlayData:@{@"title":self.webTitle,@"url":self.playUrl}];
+    [self stopVideoHtmlJavaScript];
+    self.playerView.videoURL=url;
+    self.isplayView = YES;
 
 }
 @end

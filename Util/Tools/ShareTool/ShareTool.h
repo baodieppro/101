@@ -10,7 +10,12 @@
 
 
 @interface ShareTool : NSObject
-- (void)shareWithTitle:(NSString *)title description:(NSString *)description url:(NSString *)url image:(UIImage *)image completionHandler:(UIActivityViewControllerCompletionHandler)completionHandler;
++ (void)shareWithTitle:(NSString *)title
+           description:(NSString *)description
+                   url:(NSString *)url
+                 image:(UIImage *)image
+                MySelf:(id)mySelf
+     completionHandler:(UIActivityViewControllerCompletionHandler)completionHandler;
 //分享内容 
 + (void)itmeTitle:(NSString *)title Icon:(NSString *)icon placeholderImage:(NSString *)image Url:(NSString *)url Complete:(void (^)(NSArray * itme))complete error:(void (^)(NSString * errorStr))error;;
 

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 //开始下载
 + (void)start:(NSString *)url
          Name:(NSString *)name
+        errorBlock:(void (^)(NSError * _Nullable error))ErrorBlock
         progressBlock:(void (^)(CGFloat progress))progressBlock;
 //单个取消
 + (void)cannel:(NSString *)url;

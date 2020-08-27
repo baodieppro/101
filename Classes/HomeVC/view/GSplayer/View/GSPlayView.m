@@ -539,7 +539,6 @@ static id _instance;
 //    [self addGesture];
     // 切换隐藏控制面板
     [self showOrHideControlPanel];
-//    [self showControlPanel];
     
     // 存储当前播放URL到本地 以便后面选集时比较哪个是当前播放的曲目
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -548,26 +547,17 @@ static id _instance;
     //判断是否有下载缓存
     [self isCache:playInfo];
     
-    // 因为replaceCurrentItemWithPlayerItem在使用时会卡住主线程 重新创建player解决
-//    if (self.player) return;
-
     // 设置播放器标题
 //    self.titleLabel.text = playInfo.title;
     self.placeHolderView.hidden = NO;
-//
-//    [self.waitingView stopAnimating];
-    
     // 建立串行调度组 确保截图任务的先后完成
     dispatch_group_t group = dispatch_group_create();
     dispatch_queue_t queue = dispatch_queue_create("queue", DISPATCH_QUEUE_SERIAL);
     dispatch_group_async(group, queue, ^{
         self.totalTime = CMTimeGetSeconds(self.asset.duration);
     });
-   
     
-//    [self removeFromAllview];
     [self setupPlayer];
-//    [self.player play];
     // 添加时间周期OB、OB和通知
     [self addTimerObserver];
     [self addPlayItemObserverAndNotification];
@@ -599,14 +589,13 @@ static id _instance;
             self.playerItem =  [AVPlayerItem playerItemWithURL:[NSURL URLWithString:model.pathUrl]];
             self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
 //            [self.player seekToTime:CMTimeMake([model.currentTime floatValue], 1.0)];
-
+            currentTime = [model.currentTime floatValue];
         }else{
             self.asset = [AVURLAsset assetWithURL:[NSURL URLWithString:model.downLoadUrl]];
             self.playerItem = [AVPlayerItem playerItemWithAsset:self.asset];
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         }
        
-        currentTime = [model.currentTime floatValue];
     }else{
         self.dataType = playRequestType;
         self.asset = [AVURLAsset assetWithURL:[NSURL URLWithString:playUrl]];
@@ -615,20 +604,22 @@ static id _instance;
         PlayCacheModel * model = [PlayManager itmefromeKeyURL:playUrl];
         currentTime = [model.currentTime floatValue];
     }
- UIImage *img = [self firstFrameWithVideoURL:[NSURL URLWithString:playUrl] size:CGSizeMake(130, 74)];
-    GSLog(@"%@",img);
+// UIImage *img = [self firstFrameWithVideoURL:[NSURL URLWithString:playUrl] size:CGSizeMake(130, 74)];
+//    GSLog(@"%@",img);
      //定点播放
     [self play_gestureDragProgress:currentTime];
 }
 #pragma mark -  定点播放
 - (void)play_gestureDragProgress:(CGFloat)currentTime{
     if (currentTime > 0) {
+        __kWeakSelf__
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.player seekToTime:CMTimeMake(currentTime, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:^(BOOL finished) {
+                __kStrongSelf__
+                [strongSelf.player seekToTime:CMTimeMake(currentTime, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:^(BOOL finished) {
                     if (finished) {
-                        [self.player pause];
-                        [self hideControlPanel];
+                        [strongSelf.player pause];
+                        [strongSelf hideControlPanel];
                     }
                 }];
             });
@@ -737,11 +728,11 @@ static id _instance;
 - (void)dragProgressAction:(UISlider *)sender {
     // 把播放器控制面板显示属性设置为NO 避免拖动时触发手势隐藏面板
     [self reShowControlPanel];
-    
     [self.player pause];
     [self removeTimeObserver];
     self.currentTimeLabel.text = [NSString formatTimeWithTimeInterVal:sender.value];
-    
+    [self updataCurrentTime:NO];
+
 }
 #pragma mark -  添加亮度和音量调节View
 - (void)setupBrightnessAndVolumeView
@@ -1364,7 +1355,9 @@ static id _instance;
     GSLog(@"下载 %@\n%@",self.titleLable.text,gsPlayUrl);
 //    if ([DownloadDataManager isisExistAppForUrl:gsPlayUrl] == YES) {
     
-        [DownLoadManager start:gsPlayUrl Name:self.titleLable.text progressBlock:^(CGFloat progress) {
+    [DownLoadManager start:gsPlayUrl Name:self.titleLable.text errorBlock:^(NSError * _Nullable error) {
+        [self gs_showTextHud:@"下载失败"];
+    } progressBlock:^(CGFloat progress) {
             NSLog(@"%@",[NSString stringWithFormat:@"%.00f%%",progress * 100]);
         }];
 

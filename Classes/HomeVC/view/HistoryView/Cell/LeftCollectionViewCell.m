@@ -338,22 +338,26 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewCellEditingStyleDelete;
 }
 -(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+   __kWeakSelf__
     void(^rowActionHandler)(UITableViewRowAction *, NSIndexPath *) = ^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         
-            History_FMDBDataModel * model = _dataArr[indexPath.row];
-            [_dataArr removeObjectAtIndex:indexPath.row];
-            if(_dayArr.count != 0){
+            History_FMDBDataModel * model = weakSelf.dataArr[indexPath.row];
+            [weakSelf.dataArr removeObjectAtIndex:indexPath.row];
+            if(weakSelf.dayArr.count != 0){
                 [[HistoryManager historyManager] deleteModelForTime:model.detailedTime];
             }
 
         [tableView reloadData];
     };
     void(^rowActionHandler1)(UITableViewRowAction *, NSIndexPath *) = ^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        History_FMDBDataModel * model = _dataArr[indexPath.row];
+        History_FMDBDataModel * model = weakSelf.dataArr[indexPath.row];
 //        _shareView.shareType = ShareViewType;
 //        _shareView.titleShare =model.title;
 //        _shareView.urlShare = model.url;
 //        [_shareView show];
+        [ShareTool shareWithTitle:model.title description:model.title url:model.url image:[UIImage imageNamed:@"icon_Img"] MySelf:self completionHandler:^(UIActivityType  _Nullable activityType, BOOL completed) {
+            
+        }];
         [tableView reloadData];
     };
     

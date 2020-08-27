@@ -73,6 +73,8 @@
         if (self.favoriteArr.count != 0) {
             BookMarkCacheModel * itmeModel = self.favoriteArr[indexPath.row];
             [cell setItmeModel:itmeModel];
+            GSLog(@"%@",itmeModel);
+
         }
         
         tableViewCell = cell;

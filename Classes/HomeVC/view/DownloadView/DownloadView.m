@@ -167,7 +167,9 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath{
 //            [self.tableView registerClass:[DownloadCell class] forCellReuseIdentifier:@"DownloadCell"];
 //            DownloadCell * newCell  = (DownloadCell *)[self tableView:self.tableView cellForRowAtIndexPath:cellIndexPath];
 //            __kWeakSelf__;
-            [DownLoadManager start:model.downLoadUrl Name:model.title progressBlock:^(CGFloat progress) {
+            [DownLoadManager start:model.downLoadUrl Name:model.title errorBlock:^(NSError * _Nullable error) {
+                
+            } progressBlock:^(CGFloat progress) {
 //                dispatch_async(dispatch_get_main_queue(), ^{
 //                    newCell.urlLabel.text = [NSString stringWithFormat:@"%.00f%%",progress * 100];
 ////                    newCell.loadedView.progress = progress;

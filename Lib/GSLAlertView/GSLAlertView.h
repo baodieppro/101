@@ -11,7 +11,7 @@ typedef void(^AlertResult)(NSInteger index);
 
 @interface GSLAlertView : UIView
 
-@property (nonatomic,copy) AlertResult resultIndex;
+@property (nonatomic,copy) AlertResult resultIndex;//!<1：取消  2：确定
 
 +(instancetype)alertManager;
 

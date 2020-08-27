@@ -98,7 +98,10 @@ MyHistoryManagerFooterViewDelegate
     playVC.playUrl = model.url;
     playVC.topName = model.title;
     playVC.playStyle = playStyleTypeHistory;
-    [[self getCurrentVC] presentViewController:playVC animated:NO completion:nil];
+    self.tagViewController.definesPresentationContext = YES;
+    //设置模态视图弹出样式
+    playVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self.tagViewController presentViewController:playVC animated:NO completion:nil];
 }
 -(void)mySelected_Under_IndexItmeWithClick:(History_FMDBDataModel *)model{
 //    WebViewController * webVC = [[WebViewController alloc] init];
@@ -263,6 +266,12 @@ MyHistoryManagerFooterViewDelegate
             make.bottom.mas_equalTo(self.mas_bottom);
             make.size.mas_equalTo(CGSizeMake(__kScreenWidth__, __TabBarH__));
         }];
+        [_collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headerView.mas_bottom).mas_offset(__kNewSize(15*2));
+            make.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, 0, 0, 0));
+            //        make.bottom.mas_equalTo(self.footerView.mas_top).mas_offset(-__kNewSize(15*2));
+            make.bottom.mas_equalTo(self.footerView.mas_top);
+        }];
         _collectionView.scrollEnabled = NO;
         
     }else{
@@ -270,7 +279,12 @@ MyHistoryManagerFooterViewDelegate
         [self.footerView removeFromSuperview];
         self.footerView = nil;
         _collectionView.scrollEnabled = YES;
-
+        [_collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headerView.mas_bottom).mas_offset(__kNewSize(15*2));
+            make.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, 0, 0, 0));
+            //        make.bottom.mas_equalTo(self.footerView.mas_top).mas_offset(-__kNewSize(15*2));
+            make.bottom.mas_equalTo(self.mas_bottom);
+        }];
     }
     [self returnPageCell];
     btn.selected = !btn.selected;

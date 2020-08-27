@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HistoryView : BaseView
 @property(nonatomic, assign) id<MyHistoryViewDelegate>delegate;
+@property(nonatomic, strong) UIViewController * tagViewController;
 
 @end
 

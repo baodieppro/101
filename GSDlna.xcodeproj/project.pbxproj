@@ -156,6 +156,14 @@
 		AF5BE04D24E6A0BE00334AD9 /* HistoryData.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE04C24E6A0BE00334AD9 /* HistoryData.m */; };
 		AF5BE0B524E789E200334AD9 /* Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5BE0B324E789E100334AD9 /* Arrow@2x.png */; };
 		AF5BE0B624E789E200334AD9 /* Arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5BE0B424E789E100334AD9 /* Arrow@3x.png */; };
+		AF5BE24124EF6EFD00334AD9 /* LSPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE23524EF6EE800334AD9 /* LSPlayerView.m */; };
+		AF5BE24224EF6EFD00334AD9 /* LSTopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE23624EF6EE800334AD9 /* LSTopWindow.m */; };
+		AF5BE24324EF6EFD00334AD9 /* LSNetworkSpeed.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE23724EF6EE800334AD9 /* LSNetworkSpeed.m */; };
+		AF5BE24424EF6EFD00334AD9 /* playerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AF5BE23924EF6EE800334AD9 /* playerView.bundle */; };
+		AF5BE24524EF6EFD00334AD9 /* LSPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF5BE23A24EF6EE800334AD9 /* LSPlayerView.xib */; };
+		AF5BE24624EF6EFD00334AD9 /* LSPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE23B24EF6EE800334AD9 /* LSPlayerMaskView.m */; };
+		AF5BE24724EF6EFD00334AD9 /* LSPlayerMaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF5BE23D24EF6EE800334AD9 /* LSPlayerMaskView.xib */; };
+		AF5BE24824EF6EFD00334AD9 /* NetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE23F24EF6EE800334AD9 /* NetworkReachabilityManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -486,6 +494,19 @@
 		AF5BE09224E779E800334AD9 /* HistoryDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryDef.h; sourceTree = "<group>"; };
 		AF5BE0B324E789E100334AD9 /* Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow@2x.png"; sourceTree = "<group>"; };
 		AF5BE0B424E789E100334AD9 /* Arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow@3x.png"; sourceTree = "<group>"; };
+		AF5BE23424EF6EE800334AD9 /* LSPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSPlayerMaskView.h; sourceTree = "<group>"; };
+		AF5BE23524EF6EE800334AD9 /* LSPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSPlayerView.m; sourceTree = "<group>"; };
+		AF5BE23624EF6EE800334AD9 /* LSTopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSTopWindow.m; sourceTree = "<group>"; };
+		AF5BE23724EF6EE800334AD9 /* LSNetworkSpeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSNetworkSpeed.m; sourceTree = "<group>"; };
+		AF5BE23824EF6EE800334AD9 /* NetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkReachabilityManager.h; sourceTree = "<group>"; };
+		AF5BE23924EF6EE800334AD9 /* playerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = playerView.bundle; sourceTree = "<group>"; };
+		AF5BE23A24EF6EE800334AD9 /* LSPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LSPlayerView.xib; sourceTree = "<group>"; };
+		AF5BE23B24EF6EE800334AD9 /* LSPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSPlayerMaskView.m; sourceTree = "<group>"; };
+		AF5BE23C24EF6EE800334AD9 /* LSPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSPlayerView.h; sourceTree = "<group>"; };
+		AF5BE23D24EF6EE800334AD9 /* LSPlayerMaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LSPlayerMaskView.xib; sourceTree = "<group>"; };
+		AF5BE23E24EF6EE800334AD9 /* LSNetworkSpeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSNetworkSpeed.h; sourceTree = "<group>"; };
+		AF5BE23F24EF6EE800334AD9 /* NetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkReachabilityManager.m; sourceTree = "<group>"; };
+		AF5BE24024EF6EE800334AD9 /* LSTopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSTopWindow.h; sourceTree = "<group>"; };
 		C65560B17962D9138E624365 /* Pods_GSDlna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GSDlna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF913827C02EBF66CA9616C6 /* Pods-GSDlna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSDlna.release.xcconfig"; path = "Target Support Files/Pods-GSDlna/Pods-GSDlna.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1251,6 +1272,7 @@
 		81AFB586239F8FC0000E6078 /* GSplayer */ = {
 			isa = PBXGroup;
 			children = (
+				AF5BE23324EF6EE700334AD9 /* PlayerView */,
 				81AFB587239F8FC0000E6078 /* View */,
 			);
 			path = GSplayer;
@@ -1458,6 +1480,26 @@
 			path = LocalPushCenter;
 			sourceTree = "<group>";
 		};
+		AF5BE23324EF6EE700334AD9 /* PlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				AF5BE23424EF6EE800334AD9 /* LSPlayerMaskView.h */,
+				AF5BE23524EF6EE800334AD9 /* LSPlayerView.m */,
+				AF5BE23624EF6EE800334AD9 /* LSTopWindow.m */,
+				AF5BE23724EF6EE800334AD9 /* LSNetworkSpeed.m */,
+				AF5BE23824EF6EE800334AD9 /* NetworkReachabilityManager.h */,
+				AF5BE23924EF6EE800334AD9 /* playerView.bundle */,
+				AF5BE23A24EF6EE800334AD9 /* LSPlayerView.xib */,
+				AF5BE23B24EF6EE800334AD9 /* LSPlayerMaskView.m */,
+				AF5BE23C24EF6EE800334AD9 /* LSPlayerView.h */,
+				AF5BE23D24EF6EE800334AD9 /* LSPlayerMaskView.xib */,
+				AF5BE23E24EF6EE800334AD9 /* LSNetworkSpeed.h */,
+				AF5BE23F24EF6EE800334AD9 /* NetworkReachabilityManager.m */,
+				AF5BE24024EF6EE800334AD9 /* LSTopWindow.h */,
+			);
+			path = PlayerView;
+			sourceTree = "<group>";
+		};
 		D181CE151C9B062A1583D19B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1576,12 +1618,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF5BE24524EF6EFD00334AD9 /* LSPlayerView.xib in Resources */,
 				AF5BE0B524E789E200334AD9 /* Arrow@2x.png in Resources */,
 				AF5BE0B624E789E200334AD9 /* Arrow@3x.png in Resources */,
+				AF5BE24424EF6EFD00334AD9 /* playerView.bundle in Resources */,
 				81AFB3F8239F67C5000E6078 /* LaunchScreen.storyboard in Resources */,
 				81AFB62523A362EF000E6078 /* YUFolding_arrow.png in Resources */,
 				81AFB3F5239F67C5000E6078 /* Assets.xcassets in Resources */,
 				81AFB3F3239F67C4000E6078 /* Main.storyboard in Resources */,
+				AF5BE24724EF6EFD00334AD9 /* LSPlayerMaskView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1716,8 +1761,10 @@
 				81AFB5AB239F8FC0000E6078 /* GSplayListViewCell.m in Sources */,
 				81AFB519239F6E3E000E6078 /* BaseModel.m in Sources */,
 				811B5A8023B20C1D00B3862B /* DownloadView.m in Sources */,
+				AF5BE24124EF6EFD00334AD9 /* LSPlayerView.m in Sources */,
 				81AFB535239F6E3E000E6078 /* UINavigationController+Autorotate.m in Sources */,
 				81AFB60F23A0FFA9000E6078 /* HistoryTableViewCell.m in Sources */,
+				AF5BE24324EF6EFD00334AD9 /* LSNetworkSpeed.m in Sources */,
 				81AFB540239F6E3E000E6078 /* UIColor+GSColor.m in Sources */,
 				811B5AA523B4D2E900B3862B /* ToolsMenuView.m in Sources */,
 				81AFB5A5239F8FC0000E6078 /* GSDLNAView.m in Sources */,
@@ -1731,12 +1778,14 @@
 				8154217D23AA23B9001E884C /* BookmarkClickVC.m in Sources */,
 				81AFB524239F6E3E000E6078 /* WLNetworking.m in Sources */,
 				81AFB52F239F6E3E000E6078 /* GS_CacheManager.m in Sources */,
+				AF5BE24224EF6EFD00334AD9 /* LSTopWindow.m in Sources */,
 				81AFB523239F6E3E000E6078 /* CheckNetwork.m in Sources */,
 				81AFB61423A20F87000E6078 /* SearchHistoryView.m in Sources */,
 				81AFB5DE23A08A03000E6078 /* WebViewController.m in Sources */,
 				81AFB51D239F6E3E000E6078 /* GSpopMananger.m in Sources */,
 				81AFB5DB239FAA01000E6078 /* DLNAManager.m in Sources */,
 				81AFB51A239F6E3E000E6078 /* GSLAlertView.m in Sources */,
+				AF5BE24824EF6EFD00334AD9 /* NetworkReachabilityManager.m in Sources */,
 				81AFB5EF23A08A45000E6078 /* GSPanLoad.m in Sources */,
 				81AFB522239F6E3E000E6078 /* Reachability.m in Sources */,
 				81AFB5F523A0ADEC000E6078 /* HistoryViewController.m in Sources */,
@@ -1757,6 +1806,7 @@
 				81AFB51B239F6E3E000E6078 /* CCWeChatpopView.m in Sources */,
 				81AFB52E239F6E3E000E6078 /* ConfigModel.m in Sources */,
 				81AFB3FB239F67C5000E6078 /* main.m in Sources */,
+				AF5BE24624EF6EFD00334AD9 /* LSPlayerMaskView.m in Sources */,
 				811B5A7623B2092700B3862B /* BNM3U8fileInfo.m in Sources */,
 				81AFB512239F6E3E000E6078 /* BaseTextField.m in Sources */,
 				81AFB52A239F6E3E000E6078 /* IphoneType.m in Sources */,

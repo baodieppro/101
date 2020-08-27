@@ -83,7 +83,10 @@
         [btn setTitle:@"暂停" forState:UIControlStateNormal];
         __kWeakSelf__;
         [DownLoadManager cannel:self.downLoadModel.downLoadUrl];
-        [DownLoadManager start:self.downLoadModel.downLoadUrl Name:self.downLoadModel.title progressBlock:^(CGFloat progress) {
+        [DownLoadManager start:self.downLoadModel.downLoadUrl Name:self.downLoadModel.title errorBlock:^(NSError * _Nullable error) {
+            btn.hidden = YES;
+            weakSelf.urlLabel.text = @"无效下载地址";
+        } progressBlock:^(CGFloat progress)  {
             NSLog(@"下载进度: %@",[NSString stringWithFormat:@"%.00f%%",progress * 100]);
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.urlLabel.text = [NSString stringWithFormat:@"%.00f%%",progress * 100];

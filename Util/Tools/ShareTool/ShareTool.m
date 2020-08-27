@@ -13,19 +13,44 @@
 @property (nonatomic, copy) UIActivityViewControllerCompletionHandler completionHandler;
 @end
 @implementation ShareTool
-- (void)shareWithTitle:(NSString *)title description:(NSString *)description url:(NSString *)url image:(UIImage *)image completionHandler:(UIActivityViewControllerCompletionHandler)completionHandler
++ (void)shareWithTitle:(NSString *)title
+           description:(NSString *)description
+                   url:(NSString *)url
+                 image:(UIImage *)image
+                MySelf:(id)mySelf
+     completionHandler:(UIActivityViewControllerCompletionHandler)completionHandler
 {
     NSMutableArray *items = [[NSMutableArray alloc] init];
+    //分享的标题
     [items addObject:title?:@""];
+    //分享的图片
     if (image) {
         [items addObject:image];
     }
+    //分享的url
     if (url) {
-        [items addObject:url];
+        [items addObject:[NSURL URLWithString:url]];
     }
     if(description){
         [items addObject:description];
     }
+       // 创建分享vc
+       UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
+       // 设置不出现在活动的项目
+       activityVC.excludedActivityTypes =
+       @[UIActivityTypePrint,UIActivityTypeMessage,UIActivityTypeMail,
+       UIActivityTypePrint,UIActivityTypeAddToReadingList,UIActivityTypeOpenInIBooks,
+       UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
+       
+       [[self getCurrentVC] presentViewController:activityVC animated:TRUE completion:nil];
+          activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+              if (completionHandler) {
+                  completionHandler(activityType, completed);
+                  
+              }
+          };
+    
+//    [self shareWithItem:items MySelf:mySelf completionHandler:completionHandler];
     
 //    NSMutableArray *activities = [[NSMutableArray alloc] init];
     
@@ -40,19 +65,18 @@
 //    [activities addObjectsFromArray:@[weixinActivity, weixinFriendsActivity]];
     
     
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
-    NSMutableArray *excludedActivityTypes =  [NSMutableArray arrayWithArray:@[UIActivityTypeAirDrop, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeMail, UIActivityTypePostToTencentWeibo, UIActivityTypeSaveToCameraRoll, UIActivityTypeMessage, UIActivityTypePostToTwitter]];
-    
-    activityViewController.excludedActivityTypes = excludedActivityTypes;
-    AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [tempAppDelegate.window.rootViewController presentViewController:activityViewController animated:YES completion:nil];
-    
-    activityViewController.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
-        if (completionHandler) {
-            completionHandler(activityType, completed);
-            self.completionHandler = nil;
-        }
-    };
+//    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
+//    NSMutableArray *excludedActivityTypes =  [NSMutableArray arrayWithArray:@[UIActivityTypeAirDrop, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeMail, UIActivityTypePostToTencentWeibo, UIActivityTypeSaveToCameraRoll, UIActivityTypeMessage, UIActivityTypePostToTwitter]];
+//
+//    activityViewController.excludedActivityTypes = excludedActivityTypes;
+//    AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    [tempAppDelegate.window.rootViewController presentViewController:activityViewController animated:YES completion:nil];
+//
+//    activityViewController.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+//        if (completionHandler) {
+//            completionHandler(activityType, completed);
+//        }
+//    };
 //    activityViewController.completionHandler = ^(NSString *activityType, BOOL complted){
 //        if (completionHandler) {
 //            completionHandler(activityType, complted);
@@ -124,7 +148,10 @@
 //    activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook,UIActivityTypePostToTwitter, UIActivityTypeMessage,UIActivityTypeMail,UIActivityTypePrint,UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop];
     
     if (activityViewController) {
-        [mySelf presentViewController:activityViewController animated:TRUE completion:nil];
+        if (mySelf) {
+            mySelf = [self getCurrentVC];
+        }
+        [[self getCurrentVC] presentViewController:activityViewController animated:TRUE completion:nil];
         activityViewController.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
             if (completionHandler) {
                 completionHandler(activityType, completed);
@@ -134,5 +161,41 @@
 
     }
 
+}
++ (UIViewController *)recursiveFindCurrentShowViewControllerFromViewController:(UIViewController *)fromVC
+{
+    if ([fromVC isKindOfClass:[UINavigationController class]]) {
+        
+        return [self recursiveFindCurrentShowViewControllerFromViewController:[((UINavigationController *)fromVC) visibleViewController]];
+        
+    } else if ([fromVC isKindOfClass:[UITabBarController class]]) {
+        
+        return [self recursiveFindCurrentShowViewControllerFromViewController:[((UITabBarController *)fromVC) selectedViewController]];
+        
+    } else {
+        
+        if (fromVC.presentedViewController) {
+            
+            return [self recursiveFindCurrentShowViewControllerFromViewController:fromVC.presentedViewController];
+            
+        } else {
+            
+            return fromVC;
+            
+        }
+        
+    }
+    
+}
+
+
+
+/** 查找当前显示的ViewController*/
+
++ (UIViewController *)getCurrentVC
+{
+    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *currentShowVC = [self recursiveFindCurrentShowViewControllerFromViewController:rootVC];
+    return currentShowVC;
 }
 @end

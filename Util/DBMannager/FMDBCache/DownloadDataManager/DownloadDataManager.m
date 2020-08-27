@@ -205,8 +205,7 @@ static DownloadCacheManager *manager=nil;
     
 //    [database open];
     NSString * str = [NSString stringWithFormat:@"UPDATE DOWNLOADVIDEO SET fileName ='%@',title ='%@',time ='%@',pathUrl ='%@',progress ='%@',isDown ='%@',currentTime ='%@' WHERE downLoadUrl ='%@' ",appModel.fileName,appModel.title,appModel.time,appModel.pathUrl,appModel.progress,appModel.isDown,appModel.currentTime,appModel.downLoadUrl];
-//     NSString * str = [NSString stringWithFormat:@"UPDATE DOWNLOADVIDEO SET fileName ='%@',title ='%@',time ='%@',pathUrl ='%@',progress ='%@',isDown ='%@' WHERE downLoadUrl ='%@' ",appModel.fileName,appModel.title,appModel.time,appModel.pathUrl,appModel.progress,appModel.isDown,appModel.downLoadUrl];
-    //    NSString *sql = @"updata COLLECTION set  where title = ?";
+
     BOOL isSuccess = [database executeUpdate:str];
     // NSLog(@"%@-----------MusModel--------",rs);
     if (isSuccess) {//查看是否存在 下条记录 如果存在 肯定 数据库中有记录

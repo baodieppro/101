@@ -85,6 +85,8 @@
 +(NSDictionary *)getInFoSchemes;
 
 +(void)newOpenURL:(NSURL *)url;
+/** 查找当前显示的ViewController*/
++ (UIViewController *)getCurrentVC;
 
 //http://itunes.apple.com/cn/lookup?id=
 @end

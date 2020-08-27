@@ -31,7 +31,7 @@
 }
 - (void)g_layoutFrame{
     [_historyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(self.myView).insets(UIEdgeInsetsMake(ToolbarHeight+10, 0, 0, 0));
+        make.top.left.bottom.right.mas_equalTo(self.myView).insets(UIEdgeInsetsMake(StatusBarHeight, 0, 0, 0));
     }];
 }
 #pragma mark - 代理实现
@@ -47,6 +47,7 @@
     if (!_historyView) {
         _historyView = [[HistoryView alloc]init];
         _historyView.delegate = self;
+        _historyView.tagViewController = self;
     }
     return _historyView;
 }

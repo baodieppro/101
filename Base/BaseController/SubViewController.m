@@ -50,7 +50,8 @@
 -(void)sub_LayoutFrame{
     if (self.navigationController == nil) {
         [_backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.mas_equalTo(self.myView).insets(UIEdgeInsetsMake(__kNavigationBarHeight__/2, 20, 0, 0));
+            make.top.mas_equalTo(self.myView).mas_offset(StatusBarHeight);
+            make.left.mas_equalTo(self.myView).mas_offset(20);
         }];
     }
 }

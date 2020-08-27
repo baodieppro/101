@@ -4,7 +4,7 @@
 //
 //  Created by ios on 2019/12/27.
 //  Copyright © 2019 GSDlna_Developer. All rights reserved.
-//
+//==
 
 #import "QRCodeViewController.h"
 #import "GSQRCodeView.h"

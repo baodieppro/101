@@ -114,7 +114,7 @@
 //===========================================================================================================
 
 #define __kWeakSelf__ __weak typeof(self) weakSelf = self;
-#define __kStrongSelf__ __strong typeof(self) srongSelf = weakSelf;
+#define __kStrongSelf__ __strong typeof(self) strongSelf = weakSelf;
 
 //===========================================================================================================
 //取view的坐标及长宽

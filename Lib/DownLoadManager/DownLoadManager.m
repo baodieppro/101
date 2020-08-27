@@ -30,7 +30,10 @@
     BNHttpLocalServer.shareInstance.port = 8080;
 }
 //开始下载
-+ (void)start:(NSString *)url Name:(NSString *)name progressBlock:(void (^)(CGFloat progress))progressBlock
++ (void)start:(NSString *)url
+         Name:(NSString *)name
+    errorBlock:(void (^)(NSError * _Nullable error))ErrorBlock
+    progressBlock:(void (^)(CGFloat progress))progressBlock
 {
     NSString * m3u8DownUrl = [BNTool m3u8Url:url];
     NSString * m3u8DownTitle = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -46,6 +49,9 @@
     [BNM3U8Manager.shareInstance downloadVideoWithConfig:dlConfig progressBlock:progressBlock resultBlock:^(NSError * _Nullable error, NSString * _Nullable localPlayUrl) {
         if (error != nil) {
             GSLog(@"m3u8_DownLoad-Error:%@",error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                ErrorBlock(error);
+                });
         }else{
             if(localPlayUrl)
             {
