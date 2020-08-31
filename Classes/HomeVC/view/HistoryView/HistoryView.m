@@ -34,6 +34,7 @@ MyHistoryManagerFooterViewDelegate
 @property (nonatomic,strong) RightCollectionViewCell * right_On_Cell;//!<
 @property (nonatomic,strong) HistoryManagerFooterView * footerView;
 @property (nonatomic,strong) UIButton * editBtn;//!<编辑：YES / 完成：NO
+@property (nonatomic, strong) UIButton *backButton;//!<返回按钮
 
 @end
 @implementation HistoryView
@@ -56,16 +57,23 @@ MyHistoryManagerFooterViewDelegate
     [self addSubview:self.headerView];
     [self addSubview:self.editBtn];
     [self addSubview:self.collectionView];
+    [self addSubview:self.backButton];
+
 }
 -(void)g_LayoutFrame{
+
     [_headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(__kNewSize(15*2), __kNewSize(80*2), 0, __kNewSize(80*2)));
+        make.top.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(__kNewSize(15*2)+StatusBarHeight, __kNewSize(80*2), 0, __kNewSize(80*2)));
         make.height.mas_equalTo(__kNewSize(30*2));
     }];
     [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.headerView);
         make.right.mas_equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(__kNavigationBarHeight__, __kNavigationBarHeight__));
+        make.size.mas_equalTo(CGSizeMake(__kNavigationBarHeight__, __kNewSize(88)));
+    }];
+    [_backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.headerView);
+        make.left.mas_equalTo(self).mas_offset(20);
     }];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headerView.mas_bottom).mas_offset(__kNewSize(15*2));
@@ -99,9 +107,13 @@ MyHistoryManagerFooterViewDelegate
     playVC.topName = model.title;
     playVC.playStyle = playStyleTypeHistory;
     self.tagViewController.definesPresentationContext = YES;
-    //设置模态视图弹出样式
-    playVC.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self.tagViewController presentViewController:playVC animated:NO completion:nil];
+    if (iPhoneX_New == NO) {
+        //设置模态视图弹出样式
+        playVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self.tagViewController presentViewController:playVC animated:NO completion:nil];
+    }else{
+        [self.tagViewController.navigationController pushViewController:playVC animated:NO];
+    }
 }
 -(void)mySelected_Under_IndexItmeWithClick:(History_FMDBDataModel *)model{
 //    WebViewController * webVC = [[WebViewController alloc] init];
@@ -165,7 +177,10 @@ MyHistoryManagerFooterViewDelegate
     return cell;
 }
 -(void)myDelete_itmeListCount:(NSInteger)deleteCount{
-    self.footerView.numberLabel.text = [NSString stringWithFormat:@"%ld",deleteCount];
+    self.footerView.numberLabel.text = [NSString stringWithFormat:@"%ld",(long)deleteCount];
+    if (deleteCount == 0) {
+        self.footerView.isSelected = NO;
+    }
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -286,8 +301,12 @@ MyHistoryManagerFooterViewDelegate
             make.bottom.mas_equalTo(self.mas_bottom);
         }];
     }
+    [self.collectionView reloadData];
     [self returnPageCell];
     btn.selected = !btn.selected;
+}
+-(void)backAction{
+    [self popViewControllerAnimated:NO];
 }
 #pragma mark - 懒加载
 - (UICollectionView *)collectionView
@@ -341,5 +360,13 @@ MyHistoryManagerFooterViewDelegate
         _editBtn = button;
     }
     return _editBtn;
+}
+-(UIButton *)backButton{
+    if (!_backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setImage:[UIImage imageNamed:@"icon_subject_back"] forState:UIControlStateNormal];
+        [_backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchCancel];
+    }
+    return _backButton;
 }
 @end

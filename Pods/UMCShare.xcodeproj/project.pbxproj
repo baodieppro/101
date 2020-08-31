@@ -30,38 +30,48 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01A8DC9FA76086AD3A05A0C8E931D75A /* libSocialWeChat.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libSocialWeChat.a; path = UMShare/SocialLibraries/WeChat/libSocialWeChat.a; sourceTree = "<group>"; };
-		4A51274E3A4CC5F097C42F68B16A9133 /* UMShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMShare.framework; path = UMShare/UMShare.framework; sourceTree = "<group>"; };
-		71037ABE89A81C5C74C3233583B2D577 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UMSocialWechatHandler.h; path = UMShare/SocialLibraries/WeChat/UMSocialWechatHandler.h; sourceTree = "<group>"; };
+		04CB26ADB1AA3B88FC1778D4AEAAEF45 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UMSocialWechatHandler.h; path = UMShare/SocialLibraries/WeChat/UMSocialWechatHandler.h; sourceTree = "<group>"; };
+		41FF227782880486F62636A495EE0D0E /* libSocialWeChat.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libSocialWeChat.a; path = UMShare/SocialLibraries/WeChat/libSocialWeChat.a; sourceTree = "<group>"; };
+		7E640C174715C9473F70734D934C3705 /* UMCShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UMCShare.release.xcconfig; sourceTree = "<group>"; };
+		96A421A941EB4D60280F0D8F99329D46 /* UMShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMShare.framework; path = UMShare/UMShare.framework; sourceTree = "<group>"; };
 		C7DD305E353AFB58657356EC37D23886 /* UMCCommon */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UMCCommon; path = UMCCommon.xcodeproj; sourceTree = "<group>"; };
-		F0ADA0169D6F1AB16348521B2D3D3C94 /* UMCShare.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UMCShare.xcconfig; sourceTree = "<group>"; };
+		E9AD714EDC050FE00A3470E3A13FC821 /* UMCShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UMCShare.debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		01C0447C8B37524825B6CE5A50E61DEE /* Support Files */ = {
+		0389D8FB236638AD1F873BF7343D87E1 /* Social */ = {
 			isa = PBXGroup;
 			children = (
-				F0ADA0169D6F1AB16348521B2D3D3C94 /* UMCShare.xcconfig */,
+				2780C87701358CBD9B12BB9C1483E0A1 /* ReducedWeChat */,
+			);
+			name = Social;
+			sourceTree = "<group>";
+		};
+		19E200CAE0232AEC4D0F2DF8B668BC1C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E9AD714EDC050FE00A3470E3A13FC821 /* UMCShare.debug.xcconfig */,
+				7E640C174715C9473F70734D934C3705 /* UMCShare.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/UMCShare";
 			sourceTree = "<group>";
 		};
-		205256E25842706B4299C087A790E960 /* Frameworks */ = {
+		2780C87701358CBD9B12BB9C1483E0A1 /* ReducedWeChat */ = {
 			isa = PBXGroup;
 			children = (
-				4A51274E3A4CC5F097C42F68B16A9133 /* UMShare.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		35A40EF26267908509439875CCCD8008 /* ReducedWeChat */ = {
-			isa = PBXGroup;
-			children = (
-				71037ABE89A81C5C74C3233583B2D577 /* UMSocialWechatHandler.h */,
-				AA56DB11D8C3C8D741481DF1504044D0 /* Frameworks */,
+				04CB26ADB1AA3B88FC1778D4AEAAEF45 /* UMSocialWechatHandler.h */,
+				3A55A5ABA18837D3DFB8F49F31ECA1D2 /* Frameworks */,
 			);
 			name = ReducedWeChat;
+			sourceTree = "<group>";
+		};
+		3A55A5ABA18837D3DFB8F49F31ECA1D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				41FF227782880486F62636A495EE0D0E /* libSocialWeChat.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		3BD50FBBBA838123EA9AB51909E2D27E = {
@@ -70,16 +80,8 @@
 				A04155CB70EC5BB17B2C47B437C0395D /* Dependencies */,
 				F17E0F7C16D0889170F9F8F25CBD20E1 /* Frameworks */,
 				831252F855BA52AA524115DC9AF21DA5 /* Products */,
-				D62CBD6FA989EE8F0F3F4C3C5B4D774B /* UMCShare */,
+				A8D134A26A3823C184C4106C91651DDC /* UMCShare */,
 			);
-			sourceTree = "<group>";
-		};
-		72CFA572BADB1E821B4A892CBF695FBE /* Social */ = {
-			isa = PBXGroup;
-			children = (
-				35A40EF26267908509439875CCCD8008 /* ReducedWeChat */,
-			);
-			name = Social;
 			sourceTree = "<group>";
 		};
 		831252F855BA52AA524115DC9AF21DA5 /* Products */ = {
@@ -87,6 +89,14 @@
 			children = (
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		86B955B44A51902363FA857C0098CA93 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				ADF9C42856FE7705C452DA65839A0C26 /* Frameworks */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		A04155CB70EC5BB17B2C47B437C0395D /* Dependencies */ = {
@@ -97,23 +107,23 @@
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		AA56DB11D8C3C8D741481DF1504044D0 /* Frameworks */ = {
+		A8D134A26A3823C184C4106C91651DDC /* UMCShare */ = {
 			isa = PBXGroup;
 			children = (
-				01A8DC9FA76086AD3A05A0C8E931D75A /* libSocialWeChat.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D62CBD6FA989EE8F0F3F4C3C5B4D774B /* UMCShare */ = {
-			isa = PBXGroup;
-			children = (
-				FD3966217CFFE4EF5E8CEE6754FB0554 /* Core */,
-				72CFA572BADB1E821B4A892CBF695FBE /* Social */,
-				01C0447C8B37524825B6CE5A50E61DEE /* Support Files */,
+				86B955B44A51902363FA857C0098CA93 /* Core */,
+				0389D8FB236638AD1F873BF7343D87E1 /* Social */,
+				19E200CAE0232AEC4D0F2DF8B668BC1C /* Support Files */,
 			);
 			name = UMCShare;
 			path = UMCShare;
+			sourceTree = "<group>";
+		};
+		ADF9C42856FE7705C452DA65839A0C26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96A421A941EB4D60280F0D8F99329D46 /* UMShare.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F17E0F7C16D0889170F9F8F25CBD20E1 /* Frameworks */ = {
@@ -121,14 +131,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FD3966217CFFE4EF5E8CEE6754FB0554 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				205256E25842706B4299C087A790E960 /* Frameworks */,
-			);
-			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,9 +174,9 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		370B2E6026669B4F32C4818E1D2D7AEA /* Release */ = {
+		4F544FB8FBF03EB8FBC5548F95972524 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0ADA0169D6F1AB16348521B2D3D3C94 /* UMCShare.xcconfig */;
+			baseConfigurationReference = 7E640C174715C9473F70734D934C3705 /* UMCShare.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -189,9 +191,9 @@
 			};
 			name = Release;
 		};
-		5BFEC337856AFE07F01E3626FFA5AAD3 /* Debug */ = {
+		53505486D314076EF7F589C92201DAEB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0ADA0169D6F1AB16348521B2D3D3C94 /* UMCShare.xcconfig */;
+			baseConfigurationReference = E9AD714EDC050FE00A3470E3A13FC821 /* UMCShare.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -344,8 +346,8 @@
 		F88A5C70400C0EE1A7BB184AD38E6B17 /* Build configuration list for PBXAggregateTarget "UMCShare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5BFEC337856AFE07F01E3626FFA5AAD3 /* Debug */,
-				370B2E6026669B4F32C4818E1D2D7AEA /* Release */,
+				53505486D314076EF7F589C92201DAEB /* Debug */,
+				4F544FB8FBF03EB8FBC5548F95972524 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -40,7 +40,6 @@
 		81901AFA23BB4D5600CA0307 /* GSUMConfigInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AF523BB4D5600CA0307 /* GSUMConfigInstance.m */; };
 		81901AFB23BB4D5600CA0307 /* GSUMShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 81901AF723BB4D5600CA0307 /* GSUMShare.m */; };
 		81AFB3ED239F67C4000E6078 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB3EC239F67C4000E6078 /* AppDelegate.m */; };
-		81AFB3F0239F67C4000E6078 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81AFB3EF239F67C4000E6078 /* ViewController.m */; };
 		81AFB3F3239F67C4000E6078 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AFB3F1239F67C4000E6078 /* Main.storyboard */; };
 		81AFB3F5239F67C5000E6078 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81AFB3F4239F67C5000E6078 /* Assets.xcassets */; };
 		81AFB3F8239F67C5000E6078 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AFB3F6239F67C5000E6078 /* LaunchScreen.storyboard */; };
@@ -164,6 +163,15 @@
 		AF5BE24624EF6EFD00334AD9 /* LSPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE23B24EF6EE800334AD9 /* LSPlayerMaskView.m */; };
 		AF5BE24724EF6EFD00334AD9 /* LSPlayerMaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF5BE23D24EF6EE800334AD9 /* LSPlayerMaskView.xib */; };
 		AF5BE24824EF6EFD00334AD9 /* NetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE23F24EF6EE800334AD9 /* NetworkReachabilityManager.m */; };
+		AF82B0B424F8FD4400D8C424 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82B0B324F8FD4100D8C424 /* SetViewController.m */; };
+		AF82B0B624F9E76C00D8C424 /* SetList.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF82B0B524F9E76C00D8C424 /* SetList.plist */; };
+		AF82B0B924F9EB6D00D8C424 /* BasePlistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82B0B824F9EB6D00D8C424 /* BasePlistModel.m */; };
+		AF82B0EC24FA01EB00D8C424 /* SetConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82B0EB24FA01EA00D8C424 /* SetConfigView.m */; };
+		AF82B0F024FA03D000D8C424 /* MySwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82B0EF24FA03D000D8C424 /* MySwitch.m */; };
+		AF82B0F324FA040C00D8C424 /* SetViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82B0F224FA040C00D8C424 /* SetViewCell.m */; };
+		AF82B0F924FA3A3900D8C424 /* SetConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82B0F824FA3A3900D8C424 /* SetConfigModel.m */; };
+		AF82B11F24FA532C00D8C424 /* GSTextLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82B11B24FA532C00D8C424 /* GSTextLoading.m */; };
+		AF82B12024FA532C00D8C424 /* GSLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82B11C24FA532C00D8C424 /* GSLoading.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -253,11 +261,9 @@
 		81901AF723BB4D5600CA0307 /* GSUMShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSUMShare.m; sourceTree = "<group>"; };
 		81901AF823BB4D5600CA0307 /* GSUMConfigInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSUMConfigInstance.h; sourceTree = "<group>"; };
 		81901AF923BB4D5600CA0307 /* GSUMShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSUMShare.h; sourceTree = "<group>"; };
-		81AFB3E8239F67C4000E6078 /* GSDlna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSDlna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AFB3E8239F67C4000E6078 /* GS浏览器.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GS浏览器.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AFB3EB239F67C4000E6078 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		81AFB3EC239F67C4000E6078 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		81AFB3EE239F67C4000E6078 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		81AFB3EF239F67C4000E6078 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		81AFB3F2239F67C4000E6078 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		81AFB3F4239F67C5000E6078 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81AFB3F7239F67C5000E6078 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -507,6 +513,23 @@
 		AF5BE23E24EF6EE800334AD9 /* LSNetworkSpeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSNetworkSpeed.h; sourceTree = "<group>"; };
 		AF5BE23F24EF6EE800334AD9 /* NetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkReachabilityManager.m; sourceTree = "<group>"; };
 		AF5BE24024EF6EE800334AD9 /* LSTopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSTopWindow.h; sourceTree = "<group>"; };
+		AF82B0B224F8FD4100D8C424 /* SetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
+		AF82B0B324F8FD4100D8C424 /* SetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
+		AF82B0B524F9E76C00D8C424 /* SetList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = SetList.plist; path = Classes/HomeVC/controller/SetList.plist; sourceTree = SOURCE_ROOT; };
+		AF82B0B724F9EB6D00D8C424 /* BasePlistModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasePlistModel.h; sourceTree = "<group>"; };
+		AF82B0B824F9EB6D00D8C424 /* BasePlistModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasePlistModel.m; sourceTree = "<group>"; };
+		AF82B0EA24FA01EA00D8C424 /* SetConfigView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetConfigView.h; sourceTree = "<group>"; };
+		AF82B0EB24FA01EA00D8C424 /* SetConfigView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetConfigView.m; sourceTree = "<group>"; };
+		AF82B0EE24FA03D000D8C424 /* MySwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySwitch.h; sourceTree = "<group>"; };
+		AF82B0EF24FA03D000D8C424 /* MySwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySwitch.m; sourceTree = "<group>"; };
+		AF82B0F124FA040C00D8C424 /* SetViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetViewCell.h; sourceTree = "<group>"; };
+		AF82B0F224FA040C00D8C424 /* SetViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetViewCell.m; sourceTree = "<group>"; };
+		AF82B0F724FA3A3900D8C424 /* SetConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetConfigModel.h; sourceTree = "<group>"; };
+		AF82B0F824FA3A3900D8C424 /* SetConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetConfigModel.m; sourceTree = "<group>"; };
+		AF82B11B24FA532C00D8C424 /* GSTextLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTextLoading.m; sourceTree = "<group>"; };
+		AF82B11C24FA532C00D8C424 /* GSLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLoading.m; sourceTree = "<group>"; };
+		AF82B11D24FA532C00D8C424 /* GSTextLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTextLoading.h; sourceTree = "<group>"; };
+		AF82B11E24FA532C00D8C424 /* GSLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLoading.h; sourceTree = "<group>"; };
 		C65560B17962D9138E624365 /* Pods_GSDlna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GSDlna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF913827C02EBF66CA9616C6 /* Pods-GSDlna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSDlna.release.xcconfig"; path = "Target Support Files/Pods-GSDlna/Pods-GSDlna.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -752,7 +775,7 @@
 		81AFB3E9239F67C4000E6078 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				81AFB3E8239F67C4000E6078 /* GSDlna.app */,
+				81AFB3E8239F67C4000E6078 /* GS浏览器.app */,
 				81AFB400239F67C6000E6078 /* GSDlnaTests.xctest */,
 				81AFB40B239F67C6000E6078 /* GSDlnaUITests.xctest */,
 			);
@@ -865,6 +888,10 @@
 				81AFB477239F6E3D000E6078 /* BaseModel.m */,
 				81AFB478239F6E3D000E6078 /* BaseViewModel.h */,
 				81AFB479239F6E3D000E6078 /* BaseModel.h */,
+				AF82B0B724F9EB6D00D8C424 /* BasePlistModel.h */,
+				AF82B0B824F9EB6D00D8C424 /* BasePlistModel.m */,
+				AF82B0F724FA3A3900D8C424 /* SetConfigModel.h */,
+				AF82B0F824FA3A3900D8C424 /* SetConfigModel.m */,
 			);
 			path = BaseModel;
 			sourceTree = "<group>";
@@ -880,6 +907,8 @@
 		81AFB47F239F6E3D000E6078 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				AF82B11A24FA532C00D8C424 /* GSLoding */,
+				AF82B0ED24FA03D000D8C424 /* MySwitch */,
 				AF5BE03E24E68A8E00334AD9 /* LocalPushCenter */,
 				81901AF423BB4D5600CA0307 /* GSUMmanager */,
 				81901AA523BB457500CA0307 /* ShareManager */,
@@ -991,6 +1020,7 @@
 		81AFB4A1239F6E3E000E6078 /* Plists */ = {
 			isa = PBXGroup;
 			children = (
+				AF82B0B524F9E76C00D8C424 /* SetList.plist */,
 			);
 			path = Plists;
 			sourceTree = "<group>";
@@ -1204,8 +1234,6 @@
 		81AFB542239F6E76000E6078 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				81AFB3EE239F67C4000E6078 /* ViewController.h */,
-				81AFB3EF239F67C4000E6078 /* ViewController.m */,
 				81AFB5B3239F9AB3000E6078 /* PlayViewController.h */,
 				81AFB5B4239F9AB3000E6078 /* PlayViewController.m */,
 				81AFB5B6239F9BDA000E6078 /* SearchViewController.h */,
@@ -1222,6 +1250,8 @@
 				8154217C23AA23B9001E884C /* BookmarkClickVC.m */,
 				811B5AA623B5A82800B3862B /* QRCodeViewController.h */,
 				811B5AA723B5A82800B3862B /* QRCodeViewController.m */,
+				AF82B0B224F8FD4100D8C424 /* SetViewController.h */,
+				AF82B0B324F8FD4100D8C424 /* SetViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1238,6 +1268,7 @@
 		81AFB544239F6E76000E6078 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				AF82B0E824FA01C500D8C424 /* SetView */,
 				811B5AA923B5A86200B3862B /* GSQRCodeView */,
 				811B5A7D23B20C0B00B3862B /* DownloadView */,
 				8154218223AA54B3001E884C /* BookmarkClickView */,
@@ -1500,6 +1531,45 @@
 			path = PlayerView;
 			sourceTree = "<group>";
 		};
+		AF82B0E824FA01C500D8C424 /* SetView */ = {
+			isa = PBXGroup;
+			children = (
+				AF82B0EA24FA01EA00D8C424 /* SetConfigView.h */,
+				AF82B0EB24FA01EA00D8C424 /* SetConfigView.m */,
+				AF82B0E924FA01D200D8C424 /* Cell */,
+			);
+			path = SetView;
+			sourceTree = "<group>";
+		};
+		AF82B0E924FA01D200D8C424 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AF82B0F124FA040C00D8C424 /* SetViewCell.h */,
+				AF82B0F224FA040C00D8C424 /* SetViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		AF82B0ED24FA03D000D8C424 /* MySwitch */ = {
+			isa = PBXGroup;
+			children = (
+				AF82B0EE24FA03D000D8C424 /* MySwitch.h */,
+				AF82B0EF24FA03D000D8C424 /* MySwitch.m */,
+			);
+			path = MySwitch;
+			sourceTree = "<group>";
+		};
+		AF82B11A24FA532C00D8C424 /* GSLoding */ = {
+			isa = PBXGroup;
+			children = (
+				AF82B11B24FA532C00D8C424 /* GSTextLoading.m */,
+				AF82B11C24FA532C00D8C424 /* GSLoading.m */,
+				AF82B11D24FA532C00D8C424 /* GSTextLoading.h */,
+				AF82B11E24FA532C00D8C424 /* GSLoading.h */,
+			);
+			path = GSLoding;
+			sourceTree = "<group>";
+		};
 		D181CE151C9B062A1583D19B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1527,7 +1597,7 @@
 			);
 			name = GSDlna;
 			productName = GSDlna;
-			productReference = 81AFB3E8239F67C4000E6078 /* GSDlna.app */;
+			productReference = 81AFB3E8239F67C4000E6078 /* GS浏览器.app */;
 			productType = "com.apple.product-type.application";
 		};
 		81AFB3FF239F67C6000E6078 /* GSDlnaTests */ = {
@@ -1625,6 +1695,7 @@
 				81AFB3F8239F67C5000E6078 /* LaunchScreen.storyboard in Resources */,
 				81AFB62523A362EF000E6078 /* YUFolding_arrow.png in Resources */,
 				81AFB3F5239F67C5000E6078 /* Assets.xcassets in Resources */,
+				AF82B0B624F9E76C00D8C424 /* SetList.plist in Resources */,
 				81AFB3F3239F67C4000E6078 /* Main.storyboard in Resources */,
 				AF5BE24724EF6EFD00334AD9 /* LSPlayerMaskView.xib in Resources */,
 			);
@@ -1702,6 +1773,7 @@
 				81AFB50B239F6E3E000E6078 /* BaseImageTopButton.m in Sources */,
 				811B5AB523B6316400B3862B /* BookmarkViewCell.m in Sources */,
 				81AFB51F239F6E3E000E6078 /* ShowRemindTool.m in Sources */,
+				AF82B0B424F8FD4400D8C424 /* SetViewController.m in Sources */,
 				81AFB5B1239F9309000E6078 /* SearchHeaderView.m in Sources */,
 				81AFB5A3239F8FC0000E6078 /* GSBrightnessAndVolumeView.m in Sources */,
 				81901A8023B9C8AB00CA0307 /* PlayManager.m in Sources */,
@@ -1718,6 +1790,7 @@
 				81AFB67F23A3A9D0000E6078 /* DownloadViewController.m in Sources */,
 				81AFB5F823A0B179000E6078 /* HistoryModel.m in Sources */,
 				81AFB529239F6E3E000E6078 /* LSProgressHUD.m in Sources */,
+				AF82B12024FA532C00D8C424 /* GSLoading.m in Sources */,
 				81AFB510239F6E3E000E6078 /* BaseNavigationView.m in Sources */,
 				81AFB5A9239F8FC0000E6078 /* GSCoverPictureNode.m in Sources */,
 				81AFB5F123A08A45000E6078 /* GSTool.m in Sources */,
@@ -1727,6 +1800,7 @@
 				81AFB53A239F6E3E000E6078 /* UIView+HUD.m in Sources */,
 				81901AFA23BB4D5600CA0307 /* GSUMConfigInstance.m in Sources */,
 				81AFB61823A213B8000E6078 /* SearchHistoryCell.m in Sources */,
+				AF82B0F024FA03D000D8C424 /* MySwitch.m in Sources */,
 				81AFB5C1239FA57A000E6078 /* BaseVerticalViewController.m in Sources */,
 				81901AFB23BB4D5600CA0307 /* GSUMShare.m in Sources */,
 				81AFB530239F6E3E000E6078 /* GS_CacheModel.m in Sources */,
@@ -1738,6 +1812,7 @@
 				81AFB5AA239F8FC0000E6078 /* GSplayListView.m in Sources */,
 				81901AA823BB45B000CA0307 /* GOpenUrl.m in Sources */,
 				81AFB527239F6E3E000E6078 /* GSKeychain.m in Sources */,
+				AF82B0F924FA3A3900D8C424 /* SetConfigModel.m in Sources */,
 				81AFB50E239F6E3E000E6078 /* BaseNewButton.m in Sources */,
 				81AFB531239F6E3E000E6078 /* EntireManageMent.m in Sources */,
 				81AFB5EE23A08A45000E6078 /* GSWebView.m in Sources */,
@@ -1753,7 +1828,6 @@
 				81AFB5A1239F8FC0000E6078 /* GSLoadingView.m in Sources */,
 				81AFB528239F6E3E000E6078 /* LSGraintCircleLayer.m in Sources */,
 				81AFB539239F6E3E000E6078 /* UIDevice+GSDevice.m in Sources */,
-				81AFB3F0239F67C4000E6078 /* ViewController.m in Sources */,
 				811B5A7723B2092700B3862B /* BNTool.m in Sources */,
 				81AFB532239F6E3E000E6078 /* NSDictionary+Additions.m in Sources */,
 				811B5A7A23B2092700B3862B /* BNFileManager.m in Sources */,
@@ -1782,9 +1856,12 @@
 				81AFB523239F6E3E000E6078 /* CheckNetwork.m in Sources */,
 				81AFB61423A20F87000E6078 /* SearchHistoryView.m in Sources */,
 				81AFB5DE23A08A03000E6078 /* WebViewController.m in Sources */,
+				AF82B0F324FA040C00D8C424 /* SetViewCell.m in Sources */,
 				81AFB51D239F6E3E000E6078 /* GSpopMananger.m in Sources */,
+				AF82B0EC24FA01EB00D8C424 /* SetConfigView.m in Sources */,
 				81AFB5DB239FAA01000E6078 /* DLNAManager.m in Sources */,
 				81AFB51A239F6E3E000E6078 /* GSLAlertView.m in Sources */,
+				AF82B0B924F9EB6D00D8C424 /* BasePlistModel.m in Sources */,
 				AF5BE24824EF6EFD00334AD9 /* NetworkReachabilityManager.m in Sources */,
 				81AFB5EF23A08A45000E6078 /* GSPanLoad.m in Sources */,
 				81AFB522239F6E3E000E6078 /* Reachability.m in Sources */,
@@ -1804,6 +1881,7 @@
 				81AFB50C239F6E3E000E6078 /* BaseView.m in Sources */,
 				81AFB51E239F6E3E000E6078 /* GSAddpopupsView.m in Sources */,
 				81AFB51B239F6E3E000E6078 /* CCWeChatpopView.m in Sources */,
+				AF82B11F24FA532C00D8C424 /* GSTextLoading.m in Sources */,
 				81AFB52E239F6E3E000E6078 /* ConfigModel.m in Sources */,
 				81AFB3FB239F67C5000E6078 /* main.m in Sources */,
 				AF5BE24624EF6EFD00334AD9 /* LSPlayerMaskView.m in Sources */,
@@ -2012,6 +2090,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D64MLPR4J3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/UMCCommon",
+					"$(PROJECT_DIR)/Pods/LBLelinkKit",
+					"$(PROJECT_DIR)/Pods/UMCShare/UMShare",
+					"$(PROJECT_DIR)/Pods/UMCAnalytics",
+					"$(PROJECT_DIR)/Pods/UMCSecurityPlugins/thirdparties",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Util/Define/PrefixHeader.pch";
 				INFOPLIST_FILE = GSDlna/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2019,8 +2105,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/UMCShare/UMShare/SocialLibraries/WeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bdkj.Dlna;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "GS浏览器";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2033,6 +2123,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D64MLPR4J3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/UMCCommon",
+					"$(PROJECT_DIR)/Pods/LBLelinkKit",
+					"$(PROJECT_DIR)/Pods/UMCShare/UMShare",
+					"$(PROJECT_DIR)/Pods/UMCAnalytics",
+					"$(PROJECT_DIR)/Pods/UMCSecurityPlugins/thirdparties",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Util/Define/PrefixHeader.pch";
 				INFOPLIST_FILE = GSDlna/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2040,8 +2138,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/UMCShare/UMShare/SocialLibraries/WeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bdkj.Dlna;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "GS浏览器";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

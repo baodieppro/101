@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SubViewController : BaseViewController
-
+@property (nonatomic,strong) NSString * naviTitle;
 @property (nonatomic, strong) UIButton *backButton;//!<返回按钮
 
 -(void)backVC_Click;

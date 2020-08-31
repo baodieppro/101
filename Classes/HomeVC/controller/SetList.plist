@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>img</key>
+		<string>order_icon_alipay</string>
+		<key>title</key>
+		<string>无痕浏览</string>
+		<key>isSel</key>
+		<string>0</string>
+		<key>type</key>
+		<string>0</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>order_icon_alipay</string>
+		<key>title</key>
+		<string>保留最后浏览页面</string>
+		<key>isSel</key>
+		<string>0</string>
+		<key>type</key>
+		<string>1</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>order_icon_alipay</string>
+		<key>title</key>
+		<string>全屏模式</string>
+		<key>isSel</key>
+		<string>0</string>
+		<key>type</key>
+		<string>2</string>
+	</dict>
+</array>
+</plist>

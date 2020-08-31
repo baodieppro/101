@@ -19,24 +19,36 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXFileReference section */
-		4B3C86C2CB6AC6719833397464DA8F34 /* UMCCommon.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UMCCommon.xcconfig; sourceTree = "<group>"; };
-		50DFA708A52A03B443735AED8A99565C /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
+		44C358670C480B61AC755D3BAD8A7F07 /* UMCCommon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UMCCommon.release.xcconfig; sourceTree = "<group>"; };
+		60276FC692914E20AC82AB69771C83BA /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
+		EA543E23356A968A937875ED7D8527B3 /* UMCCommon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UMCCommon.debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		3945E8535B817EE458C0A7F2C0DB82D3 /* Support Files */ = {
+		78600300B481259B86CBECC14729D66F /* UMCCommon */ = {
 			isa = PBXGroup;
 			children = (
-				4B3C86C2CB6AC6719833397464DA8F34 /* UMCCommon.xcconfig */,
+				B0049AE75183AE08E45642CDFC8A6400 /* Frameworks */,
+				8235BF40A8DCBE92D1FA3334804710B9 /* Support Files */,
+			);
+			name = UMCCommon;
+			path = UMCCommon;
+			sourceTree = "<group>";
+		};
+		8235BF40A8DCBE92D1FA3334804710B9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA543E23356A968A937875ED7D8527B3 /* UMCCommon.debug.xcconfig */,
+				44C358670C480B61AC755D3BAD8A7F07 /* UMCCommon.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/UMCCommon";
 			sourceTree = "<group>";
 		};
-		6A3DCEC41BFC185636FD273C28BEB582 /* Frameworks */ = {
+		B0049AE75183AE08E45642CDFC8A6400 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				50DFA708A52A03B443735AED8A99565C /* UMCommon.framework */,
+				60276FC692914E20AC82AB69771C83BA /* UMCommon.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -46,16 +58,6 @@
 			children = (
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		C3C9A79B8F689FA76B24F16F54CE1851 /* UMCCommon */ = {
-			isa = PBXGroup;
-			children = (
-				6A3DCEC41BFC185636FD273C28BEB582 /* Frameworks */,
-				3945E8535B817EE458C0A7F2C0DB82D3 /* Support Files */,
-			);
-			name = UMCCommon;
-			path = UMCCommon;
 			sourceTree = "<group>";
 		};
 		F86F24F6E853421FD1D93B2787F75EC5 /* Frameworks */ = {
@@ -70,7 +72,7 @@
 			children = (
 				F86F24F6E853421FD1D93B2787F75EC5 /* Frameworks */,
 				B2FDF661343DCDE8AC0456BDF50D5C54 /* Products */,
-				C3C9A79B8F689FA76B24F16F54CE1851 /* UMCCommon */,
+				78600300B481259B86CBECC14729D66F /* UMCCommon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +104,23 @@
 /* End PBXProject section */
 
 /* Begin XCBuildConfiguration section */
+		2101F767BCF4D89DA7AE9E9476D92881 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44C358670C480B61AC755D3BAD8A7F07 /* UMCCommon.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		3468C1F4ACE609A9E3EDD2B1C0374838 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -166,9 +185,9 @@
 			};
 			name = Debug;
 		};
-		78BF43C6722343E2CA877FA9F8E59E9F /* Debug */ = {
+		49AAF9DB03E6A22BCC3D83EE43A6F55E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B3C86C2CB6AC6719833397464DA8F34 /* UMCCommon.xcconfig */;
+			baseConfigurationReference = EA543E23356A968A937875ED7D8527B3 /* UMCCommon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -181,23 +200,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		9285E67926A3B3F83248323B5522A033 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B3C86C2CB6AC6719833397464DA8F34 /* UMCCommon.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
 		};
 		A43252FAEFD5870065FCA768FF62071D /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -274,8 +276,8 @@
 		D00DCEFDCDFC76DF5557CB861902F665 /* Build configuration list for PBXAggregateTarget "UMCCommon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				78BF43C6722343E2CA877FA9F8E59E9F /* Debug */,
-				9285E67926A3B3F83248323B5522A033 /* Release */,
+				49AAF9DB03E6A22BCC3D83EE43A6F55E /* Debug */,
+				2101F767BCF4D89DA7AE9E9476D92881 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

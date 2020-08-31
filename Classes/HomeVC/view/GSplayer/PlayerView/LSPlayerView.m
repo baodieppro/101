@@ -229,7 +229,7 @@ static LSTopWindow* window = nil;
         return;
     
     //全屏状态下
-    if (self.fullScreen) {
+    if(self.locationType != LSPlayerViewLocationTypeBottom){
         static BOOL progress = YES;
         static CGFloat currentTime;
         static CGFloat totalTime;
@@ -274,13 +274,15 @@ static LSTopWindow* window = nil;
                     self.lightLabel.text = [self durationStringWithTime:lastTime];
                 }
                 else {
-                    if (self.leftVertialMoved) {
-                        [UIScreen mainScreen].brightness -= velocity.y / 2000;
-                        self.lightLabel.text = [NSString stringWithFormat:@"亮度:%.0lf", [UIScreen mainScreen].brightness * 100];
-                        self.lightLabel.hidden = NO;
-                    }
-                    else {
-                        self.volumeViewSlider.value -= velocity.y / 2000;
+                    if (self.fullScreen) {
+                        if (self.leftVertialMoved) {
+                            [UIScreen mainScreen].brightness -= velocity.y / 2000;
+                            self.lightLabel.text = [NSString stringWithFormat:@"亮度:%.0lf", [UIScreen mainScreen].brightness * 100];
+                            self.lightLabel.hidden = NO;
+                        }
+                        else {
+                            self.volumeViewSlider.value -= velocity.y / 2000;
+                        }
                     }
                 }
                 break;
@@ -299,7 +301,7 @@ static LSTopWindow* window = nil;
                 break;
         }
         
-        return;
+//        return;
     }
     //不在全屏状态下 是拖动
     if (self.locationType == LSPlayerViewLocationTypeTop) {
@@ -517,12 +519,12 @@ static LSTopWindow* window = nil;
     [self stopTimer];
     
     //每次都先移除监听
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
     
-    if (self.playerItem) {
-        [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
-        [self.playerItem removeObserver:self forKeyPath:@"status"];
-    }
+//    if (self.playerItem) {
+//        [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+//        [self.playerItem removeObserver:self forKeyPath:@"status"];
+//    }
     
     //第一次才添加
     if (self.superview == nil) {
@@ -705,9 +707,7 @@ static LSTopWindow* window = nil;
 #pragma mark - 关闭按钮点击事件
 - (void)closeClick
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:LSNetworkChangeNotification object:nil];
 //    [self removeObserver:self.playerMaskView.closeButton forKeyPath:@"closeClick"];
 
     _allowWWAN = NO;
@@ -753,6 +753,8 @@ static LSTopWindow* window = nil;
     [self.playerItem removeObserver:self forKeyPath:@"status"];
     [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
 //    [self.tempSuperView removeObserver:self forKeyPath:kLSPlayerViewContentOffset];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LSNetworkChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark -  创建定时器

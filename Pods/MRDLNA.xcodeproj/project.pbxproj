@@ -7,30 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		050718D455751A433E25FF0C384BE9A2 /* CLUPnPRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF79EB7F18F152953720DA5B6CA5E8 /* CLUPnPRenderer.m */; };
-		1ADFA6557F271F46968919F0C665C6F9 /* CLUPnPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D21178181CE503F447FCAE86F3AEEC5 /* CLUPnPServer.m */; };
-		209D9A19C783AB26A188EF17978EBB77 /* MRDLNA-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 98B33F2D307760B18C50C04E3DA657DD /* MRDLNA-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		21465B70160E268F91762D37BD8BD9F7 /* CLUPnPRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = ACB2299C0A803381BF2C54676E494CD1 /* CLUPnPRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		234F9E6231C31071DCED3D5A05253760 /* CLUPnPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ACD21EC867B63B1789B1B2C7AAA7455 /* CLUPnPDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3D36B92C14ADB8CA0BEFC0FC31FFD25E /* CLUPnPAction.h in Headers */ = {isa = PBXBuildFile; fileRef = CB8FF2AF345EBFD0667E766F39BDBCF3 /* CLUPnPAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3F1C917A2B6E7EB559B3358D42DE65E2 /* SetUrl.xml in Sources */ = {isa = PBXBuildFile; fileRef = 94EC7A67CAB3949375437A242AFCB8F6 /* SetUrl.xml */; };
-		3F7182670CB5D27A262C7AFA9DE485BE /* CLUPnPAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 860640211B257E0B10AA9FFF60125B00 /* CLUPnPAction.m */; };
+		050718D455751A433E25FF0C384BE9A2 /* CLUPnPRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D92C44E1DD777E37B1F06ED732B33 /* CLUPnPRenderer.m */; };
+		1ADFA6557F271F46968919F0C665C6F9 /* CLUPnPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = D12ED77FAFECE6F94623D9CD4FE40F5E /* CLUPnPServer.m */; };
+		209D9A19C783AB26A188EF17978EBB77 /* MRDLNA-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F62FF6769F06F41361C326D9A1D83C /* MRDLNA-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		21465B70160E268F91762D37BD8BD9F7 /* CLUPnPRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = B3924E3C5BD9A2266B18991477E83BE7 /* CLUPnPRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		234F9E6231C31071DCED3D5A05253760 /* CLUPnPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A61236765BB6EDE520DE0CF3ACA03F1 /* CLUPnPDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D36B92C14ADB8CA0BEFC0FC31FFD25E /* CLUPnPAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 9801289E1FD59FC35522268647598B56 /* CLUPnPAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F1C917A2B6E7EB559B3358D42DE65E2 /* SetUrl.xml in Sources */ = {isa = PBXBuildFile; fileRef = 4F3218D8E8B60E6499744AF60720C8AE /* SetUrl.xml */; };
+		3F7182670CB5D27A262C7AFA9DE485BE /* CLUPnPAction.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E4EACC79A927D085C6FC7B2C97E0F9 /* CLUPnPAction.m */; };
 		49A07A2683845A3F9D1BFCD8AC9043B5 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07403D6622AF46BC6AC9BE3DA7518214 /* CocoaAsyncSocket.framework */; };
 		5C307C95619369873E828D2CEE6590BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9577EA362113EE58E1A080953BC06FB /* Foundation.framework */; };
-		660F21548113BA296D3D873A9D022285 /* CLUPnPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 972EAC230DEDCBC2AB1CD5EA2A23AE42 /* CLUPnPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6913D2638F0B7AF10B270984F416D897 /* StopAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D364733DE2892258F735445EDD7CAFA /* StopAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6D93FC8AD4C49A5F9F8C0C9BC9AE592C /* CLUPnPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 927046FF023C7A20E5D9BB3902A2F70B /* CLUPnPDevice.m */; };
-		8518C0F783AFA64CC3049C9CE2CB7520 /* MRDLNA.m in Sources */ = {isa = PBXBuildFile; fileRef = E925B6C80DD592536E02CF78E9A59579 /* MRDLNA.m */; };
-		A1DE590D572693ACC221678B29CDE464 /* MRDLNA.h in Headers */ = {isa = PBXBuildFile; fileRef = BEC08FED65D86C033ADA1F3E82E6B37C /* MRDLNA.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD8DD5E59D56CC564093802C932150AF /* StopAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E781DD2FB24CB9F92F11DC165D4364ED /* StopAction.m */; };
-		B66B4C4CCCDB222BEDD8FC2FA8DB4EA4 /* CLUPnP.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C18E4FF692031EDF652E2AC48B08A05 /* CLUPnP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B73E3EA6F404BE1CC9943836FB9BF160 /* CLUPnPResponseDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EC75359CC23DFB456FED1DEA77D209F3 /* CLUPnPResponseDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BD8947671F599C1C662ABD2EF6A8EBE0 /* MRDLNA-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 943FAB76FC5D2F57C1899D8D7E5A52E8 /* MRDLNA-dummy.m */; };
-		DA97D6EC3E62AA8D06538FB3EDB42B06 /* GDataXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 22E02F1DBC0FF5F7CEBA8449147EF323 /* GDataXMLNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DCD5F21709C173F1766BF0FAD175F47F /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 454B132F33633A23794D92643D2272EE /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		DFF56DC4858C270C340305A3CCE485B4 /* CLUPnPAVPositionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C42F201F48E771FDA440DFCAC36CEC /* CLUPnPAVPositionInfo.m */; };
-		E5E27FD7E0CEAAF3D862036A8F83C065 /* CLUPnPAVPositionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D4D960B621ED3F9596316BB9547122E0 /* CLUPnPAVPositionInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC7158DB99B44D10BAF13B6950029B33 /* Device.xml in Sources */ = {isa = PBXBuildFile; fileRef = DFFAE3A8ECD275A3544D09E50490E445 /* Device.xml */; };
+		660F21548113BA296D3D873A9D022285 /* CLUPnPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 513E55D188DB910D0F4FE0264E19717C /* CLUPnPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6913D2638F0B7AF10B270984F416D897 /* StopAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 50F91E64B6197B84A0E7E131A86E0813 /* StopAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D93FC8AD4C49A5F9F8C0C9BC9AE592C /* CLUPnPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 76937DDD993965B18B9E1B43F5FEEFA0 /* CLUPnPDevice.m */; };
+		8518C0F783AFA64CC3049C9CE2CB7520 /* MRDLNA.m in Sources */ = {isa = PBXBuildFile; fileRef = BD51EF338924CB677AB0106B010F1AFE /* MRDLNA.m */; };
+		A1DE590D572693ACC221678B29CDE464 /* MRDLNA.h in Headers */ = {isa = PBXBuildFile; fileRef = E40E7F04E02372296CACDFD33832E717 /* MRDLNA.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD8DD5E59D56CC564093802C932150AF /* StopAction.m in Sources */ = {isa = PBXBuildFile; fileRef = D9FB8901CF33C9F1F56FDB77A25B998A /* StopAction.m */; };
+		B66B4C4CCCDB222BEDD8FC2FA8DB4EA4 /* CLUPnP.h in Headers */ = {isa = PBXBuildFile; fileRef = 2933E4119E3F6BE4A8A6E4535D52F07A /* CLUPnP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B73E3EA6F404BE1CC9943836FB9BF160 /* CLUPnPResponseDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E65FB3A74613B00BBD189EBDEFF0F9C /* CLUPnPResponseDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD8947671F599C1C662ABD2EF6A8EBE0 /* MRDLNA-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB2D99B81B1DBD7D5261576F25337B3 /* MRDLNA-dummy.m */; };
+		DA97D6EC3E62AA8D06538FB3EDB42B06 /* GDataXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 04912B129AC46699E5DD0A8E55991050 /* GDataXMLNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCD5F21709C173F1766BF0FAD175F47F /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7554917B9E5D042FD844966F5697D /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DFF56DC4858C270C340305A3CCE485B4 /* CLUPnPAVPositionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 404C01124D27CA800DEDC35BC90A2EAD /* CLUPnPAVPositionInfo.m */; };
+		E5E27FD7E0CEAAF3D862036A8F83C065 /* CLUPnPAVPositionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 15B6C959FCFB5451407D45E3079C9E3E /* CLUPnPAVPositionInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC7158DB99B44D10BAF13B6950029B33 /* Device.xml in Sources */ = {isa = PBXBuildFile; fileRef = A6B052D87B6A12DC8D0436CA1DFAC561 /* Device.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,36 +44,37 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04912B129AC46699E5DD0A8E55991050 /* GDataXMLNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GDataXMLNode.h; path = MRDLNA/Classes/MRC/GData/GDataXMLNode.h; sourceTree = "<group>"; };
 		07403D6622AF46BC6AC9BE3DA7518214 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaAsyncSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		22E02F1DBC0FF5F7CEBA8449147EF323 /* GDataXMLNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GDataXMLNode.h; path = MRDLNA/Classes/MRC/GData/GDataXMLNode.h; sourceTree = "<group>"; };
-		247A0A5125781AACCAB4DB2B552A8D37 /* MRDLNA.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MRDLNA.xcconfig; sourceTree = "<group>"; };
+		0DB2D99B81B1DBD7D5261576F25337B3 /* MRDLNA-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MRDLNA-dummy.m"; sourceTree = "<group>"; };
+		15B6C959FCFB5451407D45E3079C9E3E /* CLUPnPAVPositionInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPAVPositionInfo.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPAVPositionInfo.h; sourceTree = "<group>"; };
+		1F8392EF48AA138F627F5E9411E1618D /* MRDLNA-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MRDLNA-Info.plist"; sourceTree = "<group>"; };
 		25C4A30F137AA49B95A60B066932F591 /* MRDLNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MRDLNA.framework; path = MRDLNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D21178181CE503F447FCAE86F3AEEC5 /* CLUPnPServer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPServer.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPServer.m; sourceTree = "<group>"; };
-		3CDF79EB7F18F152953720DA5B6CA5E8 /* CLUPnPRenderer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPRenderer.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPRenderer.m; sourceTree = "<group>"; };
-		454B132F33633A23794D92643D2272EE /* GDataXMLNode.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GDataXMLNode.m; path = MRDLNA/Classes/MRC/GData/GDataXMLNode.m; sourceTree = "<group>"; };
-		4D364733DE2892258F735445EDD7CAFA /* StopAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = StopAction.h; path = MRDLNA/Classes/ARC/DLNA/StopAction.h; sourceTree = "<group>"; };
-		6384B705440547F65D7AB1057B469B79 /* MRDLNA.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MRDLNA.modulemap; sourceTree = "<group>"; };
-		6ACD21EC867B63B1789B1B2C7AAA7455 /* CLUPnPDevice.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPDevice.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPDevice.h; sourceTree = "<group>"; };
-		7C18E4FF692031EDF652E2AC48B08A05 /* CLUPnP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnP.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnP.h; sourceTree = "<group>"; };
-		7E74D6EF2532328040DD8EEB33A1B6B0 /* MRDLNA-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MRDLNA-prefix.pch"; sourceTree = "<group>"; };
-		860640211B257E0B10AA9FFF60125B00 /* CLUPnPAction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPAction.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPAction.m; sourceTree = "<group>"; };
+		2933E4119E3F6BE4A8A6E4535D52F07A /* CLUPnP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnP.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnP.h; sourceTree = "<group>"; };
+		2E3D92C44E1DD777E37B1F06ED732B33 /* CLUPnPRenderer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPRenderer.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPRenderer.m; sourceTree = "<group>"; };
+		404C01124D27CA800DEDC35BC90A2EAD /* CLUPnPAVPositionInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPAVPositionInfo.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPAVPositionInfo.m; sourceTree = "<group>"; };
+		4A61236765BB6EDE520DE0CF3ACA03F1 /* CLUPnPDevice.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPDevice.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPDevice.h; sourceTree = "<group>"; };
+		4F3218D8E8B60E6499744AF60720C8AE /* SetUrl.xml */ = {isa = PBXFileReference; includeInIndex = 1; name = SetUrl.xml; path = MRDLNA/Classes/ARC/DLNA/SetUrl.xml; sourceTree = "<group>"; };
+		4FDE80B1E3037E810130BA0A415E8E8C /* MRDLNA.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MRDLNA.modulemap; sourceTree = "<group>"; };
+		50F91E64B6197B84A0E7E131A86E0813 /* StopAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = StopAction.h; path = MRDLNA/Classes/ARC/DLNA/StopAction.h; sourceTree = "<group>"; };
+		513E55D188DB910D0F4FE0264E19717C /* CLUPnPServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPServer.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPServer.h; sourceTree = "<group>"; };
+		5E65FB3A74613B00BBD189EBDEFF0F9C /* CLUPnPResponseDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPResponseDelegate.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPResponseDelegate.h; sourceTree = "<group>"; };
+		76937DDD993965B18B9E1B43F5FEEFA0 /* CLUPnPDevice.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPDevice.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPDevice.m; sourceTree = "<group>"; };
 		89EC06A998C9D6B756BD8C8C77FBD93E /* CocoaAsyncSocket */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaAsyncSocket; path = CocoaAsyncSocket.xcodeproj; sourceTree = "<group>"; };
-		927046FF023C7A20E5D9BB3902A2F70B /* CLUPnPDevice.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPDevice.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPDevice.m; sourceTree = "<group>"; };
-		943FAB76FC5D2F57C1899D8D7E5A52E8 /* MRDLNA-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MRDLNA-dummy.m"; sourceTree = "<group>"; };
-		94EC7A67CAB3949375437A242AFCB8F6 /* SetUrl.xml */ = {isa = PBXFileReference; includeInIndex = 1; name = SetUrl.xml; path = MRDLNA/Classes/ARC/DLNA/SetUrl.xml; sourceTree = "<group>"; };
-		972EAC230DEDCBC2AB1CD5EA2A23AE42 /* CLUPnPServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPServer.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPServer.h; sourceTree = "<group>"; };
-		98B33F2D307760B18C50C04E3DA657DD /* MRDLNA-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MRDLNA-umbrella.h"; sourceTree = "<group>"; };
-		9CA360CD519CF2CBB769C8E79146D751 /* MRDLNA-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MRDLNA-Info.plist"; sourceTree = "<group>"; };
-		ACB2299C0A803381BF2C54676E494CD1 /* CLUPnPRenderer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPRenderer.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPRenderer.h; sourceTree = "<group>"; };
-		BEC08FED65D86C033ADA1F3E82E6B37C /* MRDLNA.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRDLNA.h; path = MRDLNA/Classes/ARC/MRDLNA.h; sourceTree = "<group>"; };
+		9801289E1FD59FC35522268647598B56 /* CLUPnPAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPAction.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPAction.h; sourceTree = "<group>"; };
+		A3E4EACC79A927D085C6FC7B2C97E0F9 /* CLUPnPAction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPAction.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPAction.m; sourceTree = "<group>"; };
+		A6B052D87B6A12DC8D0436CA1DFAC561 /* Device.xml */ = {isa = PBXFileReference; includeInIndex = 1; name = Device.xml; path = MRDLNA/Classes/ARC/DLNA/Device.xml; sourceTree = "<group>"; };
+		A8F62FF6769F06F41361C326D9A1D83C /* MRDLNA-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MRDLNA-umbrella.h"; sourceTree = "<group>"; };
+		B3924E3C5BD9A2266B18991477E83BE7 /* CLUPnPRenderer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPRenderer.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPRenderer.h; sourceTree = "<group>"; };
+		BCC6279A2496F93E87F79938CA65B753 /* MRDLNA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MRDLNA.release.xcconfig; sourceTree = "<group>"; };
+		BD51EF338924CB677AB0106B010F1AFE /* MRDLNA.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRDLNA.m; path = MRDLNA/Classes/ARC/MRDLNA.m; sourceTree = "<group>"; };
 		C9577EA362113EE58E1A080953BC06FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		CB8FF2AF345EBFD0667E766F39BDBCF3 /* CLUPnPAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPAction.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPAction.h; sourceTree = "<group>"; };
-		D4D960B621ED3F9596316BB9547122E0 /* CLUPnPAVPositionInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPAVPositionInfo.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPAVPositionInfo.h; sourceTree = "<group>"; };
-		DFFAE3A8ECD275A3544D09E50490E445 /* Device.xml */ = {isa = PBXFileReference; includeInIndex = 1; name = Device.xml; path = MRDLNA/Classes/ARC/DLNA/Device.xml; sourceTree = "<group>"; };
-		E0C42F201F48E771FDA440DFCAC36CEC /* CLUPnPAVPositionInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPAVPositionInfo.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPAVPositionInfo.m; sourceTree = "<group>"; };
-		E781DD2FB24CB9F92F11DC165D4364ED /* StopAction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = StopAction.m; path = MRDLNA/Classes/ARC/DLNA/StopAction.m; sourceTree = "<group>"; };
-		E925B6C80DD592536E02CF78E9A59579 /* MRDLNA.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRDLNA.m; path = MRDLNA/Classes/ARC/MRDLNA.m; sourceTree = "<group>"; };
-		EC75359CC23DFB456FED1DEA77D209F3 /* CLUPnPResponseDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLUPnPResponseDelegate.h; path = MRDLNA/Classes/ARC/DLNA/CLUPnPResponseDelegate.h; sourceTree = "<group>"; };
+		D12ED77FAFECE6F94623D9CD4FE40F5E /* CLUPnPServer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLUPnPServer.m; path = MRDLNA/Classes/ARC/DLNA/CLUPnPServer.m; sourceTree = "<group>"; };
+		D5166EED6438B8966A074B683A72B405 /* MRDLNA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MRDLNA.debug.xcconfig; sourceTree = "<group>"; };
+		D9FB8901CF33C9F1F56FDB77A25B998A /* StopAction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = StopAction.m; path = MRDLNA/Classes/ARC/DLNA/StopAction.m; sourceTree = "<group>"; };
+		E40E7F04E02372296CACDFD33832E717 /* MRDLNA.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRDLNA.h; path = MRDLNA/Classes/ARC/MRDLNA.h; sourceTree = "<group>"; };
+		EB10A968710F8121DC3EAB8DFC266991 /* MRDLNA-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MRDLNA-prefix.pch"; sourceTree = "<group>"; };
+		F4A7554917B9E5D042FD844966F5697D /* GDataXMLNode.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GDataXMLNode.m; path = MRDLNA/Classes/MRC/GData/GDataXMLNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +90,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06A59280B0F7E4E1689A493B019BB196 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4FDE80B1E3037E810130BA0A415E8E8C /* MRDLNA.modulemap */,
+				0DB2D99B81B1DBD7D5261576F25337B3 /* MRDLNA-dummy.m */,
+				1F8392EF48AA138F627F5E9411E1618D /* MRDLNA-Info.plist */,
+				EB10A968710F8121DC3EAB8DFC266991 /* MRDLNA-prefix.pch */,
+				A8F62FF6769F06F41361C326D9A1D83C /* MRDLNA-umbrella.h */,
+				D5166EED6438B8966A074B683A72B405 /* MRDLNA.debug.xcconfig */,
+				BCC6279A2496F93E87F79938CA65B753 /* MRDLNA.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MRDLNA";
+			sourceTree = "<group>";
+		};
 		1CEA739D0085CF0F0E17904C587889D6 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,46 +121,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6109B43C736B7538E939908F9800D095 /* MRDLNA */ = {
+		9018E2F2DF292AAFAA7FE4295F0C1261 /* MRC */ = {
 			isa = PBXGroup;
 			children = (
-				7C18E4FF692031EDF652E2AC48B08A05 /* CLUPnP.h */,
-				CB8FF2AF345EBFD0667E766F39BDBCF3 /* CLUPnPAction.h */,
-				860640211B257E0B10AA9FFF60125B00 /* CLUPnPAction.m */,
-				D4D960B621ED3F9596316BB9547122E0 /* CLUPnPAVPositionInfo.h */,
-				E0C42F201F48E771FDA440DFCAC36CEC /* CLUPnPAVPositionInfo.m */,
-				6ACD21EC867B63B1789B1B2C7AAA7455 /* CLUPnPDevice.h */,
-				927046FF023C7A20E5D9BB3902A2F70B /* CLUPnPDevice.m */,
-				ACB2299C0A803381BF2C54676E494CD1 /* CLUPnPRenderer.h */,
-				3CDF79EB7F18F152953720DA5B6CA5E8 /* CLUPnPRenderer.m */,
-				EC75359CC23DFB456FED1DEA77D209F3 /* CLUPnPResponseDelegate.h */,
-				972EAC230DEDCBC2AB1CD5EA2A23AE42 /* CLUPnPServer.h */,
-				2D21178181CE503F447FCAE86F3AEEC5 /* CLUPnPServer.m */,
-				DFFAE3A8ECD275A3544D09E50490E445 /* Device.xml */,
-				BEC08FED65D86C033ADA1F3E82E6B37C /* MRDLNA.h */,
-				E925B6C80DD592536E02CF78E9A59579 /* MRDLNA.m */,
-				94EC7A67CAB3949375437A242AFCB8F6 /* SetUrl.xml */,
-				4D364733DE2892258F735445EDD7CAFA /* StopAction.h */,
-				E781DD2FB24CB9F92F11DC165D4364ED /* StopAction.m */,
-				D02D11837A11731D7550281613A0616B /* MRC */,
-				77DE3A147EADC039FF064D049D61D565 /* Support Files */,
+				04912B129AC46699E5DD0A8E55991050 /* GDataXMLNode.h */,
+				F4A7554917B9E5D042FD844966F5697D /* GDataXMLNode.m */,
 			);
-			name = MRDLNA;
-			path = MRDLNA;
-			sourceTree = "<group>";
-		};
-		77DE3A147EADC039FF064D049D61D565 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				6384B705440547F65D7AB1057B469B79 /* MRDLNA.modulemap */,
-				247A0A5125781AACCAB4DB2B552A8D37 /* MRDLNA.xcconfig */,
-				943FAB76FC5D2F57C1899D8D7E5A52E8 /* MRDLNA-dummy.m */,
-				9CA360CD519CF2CBB769C8E79146D751 /* MRDLNA-Info.plist */,
-				7E74D6EF2532328040DD8EEB33A1B6B0 /* MRDLNA-prefix.pch */,
-				98B33F2D307760B18C50C04E3DA657DD /* MRDLNA-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/MRDLNA";
+			name = MRC;
 			sourceTree = "<group>";
 		};
 		B7052D285096207BAAD1C1004593908B /* Frameworks */ = {
@@ -169,18 +152,37 @@
 			children = (
 				1CEA739D0085CF0F0E17904C587889D6 /* Dependencies */,
 				B7052D285096207BAAD1C1004593908B /* Frameworks */,
-				6109B43C736B7538E939908F9800D095 /* MRDLNA */,
+				FC89C2DF128CB29DDF0C2F5404F4195C /* MRDLNA */,
 				2E99CC2BF46EFC2A2ADF3F3B544D65A2 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D02D11837A11731D7550281613A0616B /* MRC */ = {
+		FC89C2DF128CB29DDF0C2F5404F4195C /* MRDLNA */ = {
 			isa = PBXGroup;
 			children = (
-				22E02F1DBC0FF5F7CEBA8449147EF323 /* GDataXMLNode.h */,
-				454B132F33633A23794D92643D2272EE /* GDataXMLNode.m */,
+				2933E4119E3F6BE4A8A6E4535D52F07A /* CLUPnP.h */,
+				9801289E1FD59FC35522268647598B56 /* CLUPnPAction.h */,
+				A3E4EACC79A927D085C6FC7B2C97E0F9 /* CLUPnPAction.m */,
+				15B6C959FCFB5451407D45E3079C9E3E /* CLUPnPAVPositionInfo.h */,
+				404C01124D27CA800DEDC35BC90A2EAD /* CLUPnPAVPositionInfo.m */,
+				4A61236765BB6EDE520DE0CF3ACA03F1 /* CLUPnPDevice.h */,
+				76937DDD993965B18B9E1B43F5FEEFA0 /* CLUPnPDevice.m */,
+				B3924E3C5BD9A2266B18991477E83BE7 /* CLUPnPRenderer.h */,
+				2E3D92C44E1DD777E37B1F06ED732B33 /* CLUPnPRenderer.m */,
+				5E65FB3A74613B00BBD189EBDEFF0F9C /* CLUPnPResponseDelegate.h */,
+				513E55D188DB910D0F4FE0264E19717C /* CLUPnPServer.h */,
+				D12ED77FAFECE6F94623D9CD4FE40F5E /* CLUPnPServer.m */,
+				A6B052D87B6A12DC8D0436CA1DFAC561 /* Device.xml */,
+				E40E7F04E02372296CACDFD33832E717 /* MRDLNA.h */,
+				BD51EF338924CB677AB0106B010F1AFE /* MRDLNA.m */,
+				4F3218D8E8B60E6499744AF60720C8AE /* SetUrl.xml */,
+				50F91E64B6197B84A0E7E131A86E0813 /* StopAction.h */,
+				D9FB8901CF33C9F1F56FDB77A25B998A /* StopAction.m */,
+				9018E2F2DF292AAFAA7FE4295F0C1261 /* MRC */,
+				06A59280B0F7E4E1689A493B019BB196 /* Support Files */,
 			);
-			name = MRC;
+			name = MRDLNA;
+			path = MRDLNA;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,40 +300,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		4FE10E70E45CBB75CC376BA019D7F1B5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 247A0A5125781AACCAB4DB2B552A8D37 /* MRDLNA.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MRDLNA/MRDLNA-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MRDLNA/MRDLNA-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/MRDLNA/MRDLNA.modulemap";
-				PRODUCT_MODULE_NAME = MRDLNA;
-				PRODUCT_NAME = MRDLNA;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		5AAE14E2B85D2B8FC2750D3FB18ABBDD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -456,9 +424,9 @@
 			};
 			name = Debug;
 		};
-		A9FBCD0CCF280BEEE23E46076BF101B6 /* Release */ = {
+		CD484B9BD37F03FCD1A0A47CCB2B5E83 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 247A0A5125781AACCAB4DB2B552A8D37 /* MRDLNA.xcconfig */;
+			baseConfigurationReference = BCC6279A2496F93E87F79938CA65B753 /* MRDLNA.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -491,14 +459,48 @@
 			};
 			name = Release;
 		};
+		D3F19284F7238634BFFA3F03A15641A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5166EED6438B8966A074B683A72B405 /* MRDLNA.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MRDLNA/MRDLNA-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MRDLNA/MRDLNA-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/MRDLNA/MRDLNA.modulemap";
+				PRODUCT_MODULE_NAME = MRDLNA;
+				PRODUCT_NAME = MRDLNA;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		095EF9782B8A97A39C42BE12D7DCD0AF /* Build configuration list for PBXNativeTarget "MRDLNA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4FE10E70E45CBB75CC376BA019D7F1B5 /* Debug */,
-				A9FBCD0CCF280BEEE23E46076BF101B6 /* Release */,
+				D3F19284F7238634BFFA3F03A15641A6 /* Debug */,
+				CD484B9BD37F03FCD1A0A47CCB2B5E83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

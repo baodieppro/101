@@ -49,7 +49,6 @@
 }
 -(void)viewDidLoad {
     [super viewDidLoad];
-
     self.myView.backgroundColor = [UIColor colorWithHexString:@"#333333"];
     [self.playerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.myView);
@@ -114,6 +113,7 @@
     }
 }
 -(void)gs_BackClick{
+    __kAppDelegate__.allowRotation = NO;//关闭横屏仅允许竖屏
     CATransition *animation = [CATransition animation];
     animation.duration = 0.3;
     animation.type = kCATransitionPush;

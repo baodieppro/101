@@ -121,7 +121,14 @@
     playVC.playUrl = url;
     playVC.topName = name;
     playVC.playStyle = playStyleTypeHistory;
-    [[self getCurrentVC] presentViewController:playVC animated:NO completion:nil];
+    //    //设置模态视图弹出样式
+    if (iPhoneX_New == NO) {
+        //设置模态视图弹出样式
+        playVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self.tagViewController presentViewController:playVC animated:NO completion:nil];
+    }else{
+        [self.tagViewController.navigationController pushViewController:playVC animated:NO];
+    }
 }
 
 #pragma mark - 右滑删除

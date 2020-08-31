@@ -325,7 +325,7 @@ static id _instance;
         }];
         [_backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.topView);
-            make.left.mas_equalTo(self.topView.mas_left).mas_offset(20);
+            make.left.mas_equalTo(self.topView.mas_left).mas_offset(StatusBarHeight);
 //            make.size.mas_equalTo(CGSizeMake(30, 30));
         }];
     
@@ -607,7 +607,9 @@ static id _instance;
 // UIImage *img = [self firstFrameWithVideoURL:[NSURL URLWithString:playUrl] size:CGSizeMake(130, 74)];
 //    GSLog(@"%@",img);
      //定点播放
-    [self play_gestureDragProgress:currentTime];
+    if (currentTime > 0) {
+        [self play_gestureDragProgress:currentTime];
+    }
 }
 #pragma mark -  定点播放
 - (void)play_gestureDragProgress:(CGFloat)currentTime{

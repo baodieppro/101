@@ -62,11 +62,7 @@
 #pragma mark - Click
 -(void)selectedBtnClick:(UIButton *)btn
 {
-    if (btn.selected == NO) {
-        [_selectedBtn setImage:[UIImage imageNamed:@"login_Choice-mol"] forState:UIControlStateNormal];
-    }else{
-        [_selectedBtn setImage:[UIImage imageNamed:@"login_Choice-sel"] forState:UIControlStateNormal];
-    }
+    [self setIsSelected:btn.selected];
     [self myAllSelectedIs:btn.selected];
     btn.selected = !btn.selected;
 }
@@ -75,7 +71,14 @@
         [self.delegate myDeleteWithSelectAllClick];
     }
 }
-
+-(void)setIsSelected:(BOOL)isSelected{
+    _isSelected = isSelected;
+    if (isSelected == NO) {
+        [_selectedBtn setImage:[UIImage imageNamed:@"login_Choice-mol"] forState:UIControlStateNormal];
+    }else{
+        [_selectedBtn setImage:[UIImage imageNamed:@"login_Choice-sel"] forState:UIControlStateNormal];
+    }
+}
 #pragma mark - 懒加载
 -(UILabel *)titleLabel{
     if (!_titleLabel) {

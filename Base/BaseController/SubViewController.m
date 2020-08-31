@@ -23,6 +23,15 @@
 
     
 }
+#pragma mark - title
+- (void)setNaviTitle:(NSString *)naviTitle{
+    if (self.navigationController == nil) {
+//            self.navigationView.titleLabel.text = naviTitle;
+        }else{
+            self.baseNavigationBar.titleLabel.text = naviTitle;
+     }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self sub_Init];

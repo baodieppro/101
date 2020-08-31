@@ -15,6 +15,7 @@
 #import "BookmarkClickVC.h"
 #import "PlayViewController.h"
 #import "QRCodeViewController.h"
+#import "SetViewController.h"
 
 #import "GSWeb.h"
 #import "SearchView.h"
@@ -23,6 +24,8 @@
 #import "WebBottomView.h"
 #import "ToolsMenuView.h"
 #import "LSPlayerView.h"
+#import "GSTextLoading.h"
+
 @interface WebViewController ()
 <
 GSWebViewDelegate,
@@ -40,6 +43,8 @@ MyLSPlayerViewDelegate
 {
     BOOL isplay;
     BOOL isFavorite;
+    CGFloat lastContentOffset;
+    BOOL isFullScreen;
 
 }
 @property (nonatomic, strong) SearchView *searchView;
@@ -133,13 +138,22 @@ MyLSPlayerViewDelegate
     
 }
 -(void)g_loadUrl{
-    if (!kStringIsEmpty(self.url)) {
+    //保留最后打开的页面
+    if ([__isRecord__ isEqualToString:@"1"]) {
+        self.url = [DEFAULTS objectForKey:@"Record_Url"];
         [self.webView loadURLString:[GSTool urlWithIsUrl:self.url]];
+    }else{
+        if (!kStringIsEmpty(self.url)) {
+            [self.webView loadURLString:[GSTool urlWithIsUrl:self.url]];
+        }
+        if (!kStringIsEmpty(self.html)) {
+            [self.webView loadHTMLString:self.html];
+        }
     }
-    if (!kStringIsEmpty(self.html)) {
-        [self.webView loadHTMLString:self.html];
-    }
-    
+
+//    self.url = @"https://quark.sm.cn/s";
+//    [self.webView loadURLString:self.url];
+//    [IphoneType newOpenURL:[NSURL URLWithString:self.url]];
 }
 #pragma mark - UI
 -(SearchView *)searchView{
@@ -407,7 +421,8 @@ return self.isHiddenTopBar;
             isplay = [self playWithUrl:url];
         }
     }
-    
+    [[GSTextLoading loadingManager] startLoading];
+//    [GSTextLoading showGSLoadingView:webView];
 }
 -(void)gswebViewDidFinishLoad:(GSWebView *)webView url:(nonnull NSString *)url Title:(nonnull NSString *)title{
     //    __kWeakSelf__;
@@ -434,18 +449,29 @@ return self.isHiddenTopBar;
         [[ToolsMenuView menu] isFavorite:[BookMarkManager isExistAppForUrl:self.webUrl]];
     }
     if(![self.url isEqualToString:url]){
-        //历史记录
-           dispatch_async(dispatch_get_main_queue(), ^
-              {
-                  NSDictionary * dict = @{@"url":url,@"title":title,@"historyId":@"1"};
-                  [HistoryData addHistoryData:dict];
-              });
+        //无痕浏览
+        if ([__isTrace__ isEqualToString:@"0"]) {
+            //历史记录
+               dispatch_async(dispatch_get_main_queue(), ^
+                  {
+                      NSDictionary * dict = @{@"url":url,@"title":title,@"historyId":@"1"};
+                      [HistoryData addHistoryData:dict];
+                  });
+        }
+
     }
    if(isplay == YES){
        if (self.isplayView == YES) {
             [self playVideo:self.playUrl];
        }
    }
+    //保留最后一次浏览的Url
+    if([__isRecord__ isEqualToString:@"1"]){
+        [DEFAULTS setObject:self.webUrl forKey:@"Record_Url"];
+        [DEFAULTS synchronize];
+    }
+    [[GSTextLoading loadingManager] stopLoading];
+//    [GSTextLoading reomveGSLoadingView:webView];
 }
 
 -(void)gswebView:(GSWebView *)webView url:(nonnull NSString *)url Title:(nonnull NSString *)title didFailLoadWithError:(nonnull NSError *)error{
@@ -455,6 +481,8 @@ return self.isHiddenTopBar;
         self.searchView.searchTextField.text = url;
     }
     [self refreshBackImage:YES];
+    [[GSTextLoading loadingManager] stopLoading];
+//    [GSTextLoading reomveGSLoadingView:webView];
 
 }
 -(void)displayNoneAd:(NSString *)url{
@@ -493,6 +521,39 @@ return self.isHiddenTopBar;
         }
     }];
     
+}
+#pragma mark - scrollView代理
+//实现scrollView代理
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+//全局变量记录滑动前的contentOffset
+   lastContentOffset = scrollView.contentOffset.y;//判断上下滑动时
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if([__isFullScreen__ isEqualToString:@"1"]){
+         if (scrollView.contentOffset.y < lastContentOffset ){
+            //向上
+            NSLog(@"上滑");
+             if (isFullScreen == NO) {
+                 _searchView.hidden = isFullScreen;
+                 _bottomView.hidden = isFullScreen;
+                 [_webView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                     make.top.left.bottom.right.mas_equalTo(self.myView).insets(UIEdgeInsetsMake(__kNavigationBarHeight__, 0, __kTabBarHeight__, 0));
+                 }];
+                 isFullScreen = YES;
+             }
+        } else if (scrollView.contentOffset.y > lastContentOffset ){
+            //向下
+            NSLog(@"下滑");
+            if (isFullScreen == YES) {
+                _searchView.hidden = isFullScreen;
+                _bottomView.hidden = isFullScreen;
+                [_webView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.top.left.bottom.right.mas_equalTo(self.myView).insets(UIEdgeInsetsMake(0, 0, 0, 0));
+                }];
+                isFullScreen = NO;
+            }
+        }
+    }
 }
 
 #pragma mark - click
@@ -629,7 +690,7 @@ return self.isHiddenTopBar;
                 UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
                 pasteboard.string = msg;
             }else{
-                msg = self.url;
+                msg = self.webUrl;
             }
             [[GSLAlertView alertManager] createInitWithTitle:@"复制成功" message:msg sureBtn:@"知道了" cancleBtn:nil];
             [[GSLAlertView alertManager] showGSAlertView];
@@ -644,6 +705,7 @@ return self.isHiddenTopBar;
         case 999:
         {
             GSLog(@"设置");
+            [self push_SetVC];
         }
             break;
         default:
@@ -664,52 +726,7 @@ return self.isHiddenTopBar;
             GSLog(@"取消分享");
         }
     }];
-//    [GShareView newShare].screenShotsImage.image = img;
-//    [GShareView newShare].shareType = ShareScreenshotsType;
-//    [[GShareView newShare] show];
-//    [GShareView newShare].shareBlock = ^(ShareClickType shareClickType) {
-//        NSString * title;
-//        NSInteger platformType;
-//        switch (shareClickType) {
-//            case QQ_ShareType:
-//                NSLog(@"QQ好友");
-//                title = @"分享到QQ";
-//                platformType = UMSocialPlatformType_QQ;
-//                break;
-//            case error_ShareType:
-//                NSLog(@"失败");
-//                title = @"分享失败";
-//                break;
-//            case Qzone_ShareType:
-//                NSLog(@"QQ空间");
-//                title = @"分享到QQ空间";
-//                platformType = UMSocialPlatformType_Qzone;
-//
-//                break;
-//            case WechatTimeLine_ShareType:
-//                NSLog(@"微信朋友圈");
-//                title = @"分享到微信朋友圈";
-//                platformType = UMSocialPlatformType_WechatTimeLine;
-//
-//                break;
-//            case WechatSession_ShareType:
-//                NSLog(@"微信好友");
-//                title = @"分享到微信好友";
-//                platformType = UMSocialPlatformType_WechatSession;
-//
-//                break;
-//            case Sina_ShareType:
-//                NSLog(@"新浪微博");
-//                title = @"分享到新浪微博";
-//                platformType = UMSocialPlatformType_Sina;
-//
-//                break;
-//            default:
-//                break;
-//        }
-//
-//        [GSUMShare shareImageToPlatformType:platformType ShareImage:img];
-//    };
+
 }
 #pragma mark - push
 -(void)pushPlayVC_Url:(NSString *)url{
@@ -729,7 +746,15 @@ return self.isHiddenTopBar;
         }
     }else{
         playVC.playStyle = playStyleTypeHistory;
-        [self presentViewController:playVC animated:NO completion:nil];
+        if (iPhoneX_New == NO) {
+            self.definesPresentationContext = YES;
+            //设置模态视图弹出样式
+            playVC.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:playVC animated:NO completion:nil];
+        }else{
+            [self.navigationController pushViewController:playVC animated:NO];
+        }
+
     }
     
 }
@@ -744,11 +769,11 @@ return self.isHiddenTopBar;
 -(void)push_HistoryVC{
     HistoryViewController * historyVC = [[HistoryViewController alloc]init];
     historyVC.delegate = self;
-    self.definesPresentationContext = YES;
-    //设置模态视图弹出样式
-    historyVC.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:historyVC animated:NO completion:nil];
-//    [self.navigationController pushViewController:historyVC animated:YES];
+//    self.definesPresentationContext = YES;
+//    //设置模态视图弹出样式
+//    historyVC.modalPresentationStyle = UIModalPresentationFullScreen;
+//    [self presentViewController:historyVC animated:NO completion:nil];
+    [self.navigationController pushViewController:historyVC animated:YES];
 }
 -(void)push_DownloadVC{
     DownloadViewController *downLoadVC = [[DownloadViewController alloc]init];
@@ -760,6 +785,11 @@ return self.isHiddenTopBar;
     BookmarkClickVC * bookVC = [[BookmarkClickVC alloc] init];
     bookVC.delegate = self;
     [self.navigationController pushViewController:bookVC animated:YES];
+}
+-(void)push_SetVC{
+    SetViewController * pushVC = [[SetViewController alloc] init];
+//    pushVC.delegate = self;
+    [self.navigationController pushViewController:pushVC animated:YES];
 
 }
 -(void)push_QRCodeVC{
@@ -774,10 +804,13 @@ return self.isHiddenTopBar;
 }
 #pragma mark - 自定义播放器
 -(void)playVideo:(NSString *)url{
-    [PlayManager addPlayData:@{@"title":self.webTitle,@"url":self.playUrl}];
+    if ([__isTrace__ isEqualToString:@"0"]) {
+        [PlayManager addPlayData:@{@"title":self.webTitle,@"url":self.playUrl}];
+    }
     [self stopVideoHtmlJavaScript];
     self.playerView.videoURL=url;
     self.isplayView = YES;
 
 }
+
 @end

@@ -19,43 +19,45 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXFileReference section */
-		73DF7F0ED6CEC1AB2742905E84AD1002 /* LBLelinkKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LBLelinkKit.xcconfig; sourceTree = "<group>"; };
-		76B8B0BC8C48FAD5D90EE8DF2CA06D52 /* LBLelinkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LBLelinkKit.framework; sourceTree = "<group>"; };
+		0DF0D6B1298668471CB34DEE852B5275 /* LBLelinkKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LBLelinkKit.release.xcconfig; sourceTree = "<group>"; };
+		2847CCC072863887CFD57FA346D3BC28 /* LBLelinkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LBLelinkKit.framework; sourceTree = "<group>"; };
+		D1E996FC9AA07D6A4E92AEC84FD13399 /* LBLelinkKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LBLelinkKit.debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		0B844AA3BE47399B1C89DB0F8B7FAE45 /* Frameworks */ = {
+		0F01A5B71E9DBFB9B92F7E13A700F247 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				76B8B0BC8C48FAD5D90EE8DF2CA06D52 /* LBLelinkKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		60E907BF295AF67D40DF13902EE60EA3 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				73DF7F0ED6CEC1AB2742905E84AD1002 /* LBLelinkKit.xcconfig */,
+				D1E996FC9AA07D6A4E92AEC84FD13399 /* LBLelinkKit.debug.xcconfig */,
+				0DF0D6B1298668471CB34DEE852B5275 /* LBLelinkKit.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/LBLelinkKit";
 			sourceTree = "<group>";
 		};
-		98A9065426D69619D89E90AD32AF9820 /* LBLelinkKit */ = {
+		38450D27D75D07714421A113CFBA0F95 /* LBLelinkKit */ = {
 			isa = PBXGroup;
 			children = (
-				0B844AA3BE47399B1C89DB0F8B7FAE45 /* Frameworks */,
-				60E907BF295AF67D40DF13902EE60EA3 /* Support Files */,
+				74F022ACC1A0D1CAC27F061E469C0623 /* Frameworks */,
+				0F01A5B71E9DBFB9B92F7E13A700F247 /* Support Files */,
 			);
 			name = LBLelinkKit;
 			path = LBLelinkKit;
+			sourceTree = "<group>";
+		};
+		74F022ACC1A0D1CAC27F061E469C0623 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2847CCC072863887CFD57FA346D3BC28 /* LBLelinkKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A0E4F4EB92F706D00711183F77BE1E80 = {
 			isa = PBXGroup;
 			children = (
 				B39A2EA1E641FD2A794BBBA716DBF9D3 /* Frameworks */,
-				98A9065426D69619D89E90AD32AF9820 /* LBLelinkKit */,
+				38450D27D75D07714421A113CFBA0F95 /* LBLelinkKit */,
 				ACC168EF3C75CF463382979AA35F4452 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -226,9 +228,9 @@
 			};
 			name = Release;
 		};
-		D4F89E96DD869450B116302C035BF705 /* Release */ = {
+		8C73822EAC2544DD2F05E8934C263A02 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73DF7F0ED6CEC1AB2742905E84AD1002 /* LBLelinkKit.xcconfig */;
+			baseConfigurationReference = 0DF0D6B1298668471CB34DEE852B5275 /* LBLelinkKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -243,9 +245,9 @@
 			};
 			name = Release;
 		};
-		F73C46FFC793514FEDE7F59FA523A152 /* Debug */ = {
+		8E8E8B6205E7CCC1D940C376009ADE5F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73DF7F0ED6CEC1AB2742905E84AD1002 /* LBLelinkKit.xcconfig */;
+			baseConfigurationReference = D1E996FC9AA07D6A4E92AEC84FD13399 /* LBLelinkKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -265,8 +267,8 @@
 		4FB09F162C44313431B2B4EF51334C0F /* Build configuration list for PBXAggregateTarget "LBLelinkKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F73C46FFC793514FEDE7F59FA523A152 /* Debug */,
-				D4F89E96DD869450B116302C035BF705 /* Release */,
+				8E8E8B6205E7CCC1D940C376009ADE5F /* Debug */,
+				8C73822EAC2544DD2F05E8934C263A02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

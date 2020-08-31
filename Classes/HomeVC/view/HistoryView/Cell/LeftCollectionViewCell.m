@@ -90,7 +90,15 @@
             [[HistoryManager historyManager] deleteHISWithDetailedTime:itmeModel.detailedTime];
         }
         [self.delList removeAllObjects];
-        
+    for (NSInteger i = 0; i< _dayArr.count; i++) {
+       NSArray * timeArr = [[HistoryManager historyManager] timeModelArrayfromeKey:_dayArr[i]];
+        if (timeArr.count == 0) {
+            [[TimeManager timeManager] deleteModelForName:_dayArr[i]];
+        }
+    }
+    [_dayArr removeAllObjects];
+    self.dayArr = [[NSMutableArray alloc]initWithArray:[[TimeManager timeManager] allDayArray]];
+
 //        [HistoryModel addCacheName:WEB_History_Cache title:nil url:nil arr:self.selectDataArr];
         //
 
@@ -244,17 +252,17 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell * tableViewCell;
-    if (self.dataArr.count == 0) {
-        static NSString *CellTableIndentifier = @"UITableViewCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellTableIndentifier];
-        //初始化单元格
-        if(cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTableIndentifier];
-        }
-        tableViewCell = cell;
-
-    }else{
+//    if (self.dataArr.count == 0) {
+//        static NSString *CellTableIndentifier = @"UITableViewCell";
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellTableIndentifier];
+//        //初始化单元格
+//        if(cell == nil)
+//        {
+//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTableIndentifier];
+//        }
+//        tableViewCell = cell;
+//
+//    }else{
         static NSString *CellTableIndentifier = @"leftTableViewCell";
         HistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellTableIndentifier];
         //初始化单元格
@@ -262,9 +270,9 @@
         {
             cell = [[HistoryTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTableIndentifier];
         }
-//        if (_dayArr.count != 0) {
-//               _dataArr = [NSMutableArray arrayWithArray:[[HistoryManager historyManager] timeModelArrayfromeKey:_dayArr[indexPath.section]]];
-//           }
+        if (_dayArr.count != 0) {
+               _dataArr = [NSMutableArray arrayWithArray:[[HistoryManager historyManager] timeModelArrayfromeKey:_dayArr[indexPath.section]]];
+           }
         if (self.dataArr.count != 0) {
             History_FMDBDataModel * itmeModel = self.dataArr[indexPath.row];
             [cell setItmeModel:itmeModel];
@@ -272,7 +280,7 @@
         [cell setEditSelected:self.editSelected];
         [cell setIsLefOrRight:YES];
         tableViewCell = cell;
-    }
+//    }
     tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tableViewCell.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
     
@@ -355,6 +363,7 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath{
 //        _shareView.titleShare =model.title;
 //        _shareView.urlShare = model.url;
 //        [_shareView show];
+    
         [ShareTool shareWithTitle:model.title description:model.title url:model.url image:[UIImage imageNamed:@"icon_Img"] MySelf:self completionHandler:^(UIActivityType  _Nullable activityType, BOOL completed) {
             
         }];

@@ -19,6 +19,7 @@
 #import "EnumerateConfig.h"
 #import "FMDB_Name.h"
 #import "HistoryDef.h"
+#import "SetConfigModel.h"
 
 //第三方库
 #import "Masonry.h"
@@ -26,6 +27,7 @@
 #import "JSONModel.h"
 #import "AFNetworking.h"
 #import "MJExtension.h"
+#import "BasePlistModel.h"
 
 
 // 附加工具类

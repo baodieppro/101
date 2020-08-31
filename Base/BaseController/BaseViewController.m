@@ -55,6 +55,7 @@
 //    }else{
         GSLog(@"有导航栏");
         if ([NSStringFromClass([self class]) isEqualToString:@"WebViewController"]
+            ||[NSStringFromClass([self class]) isEqualToString:@"HistoryViewController"]
             ||[NSStringFromClass([self class]) isEqualToString:@"QRCodeViewController"] )
         {
             [self layoutSubviews];

@@ -15,7 +15,11 @@
 @end
 
 @implementation HistoryViewController
+-(void)viewWillAppear:(BOOL)animated{
+    __kAppDelegate__.allowRotation = NO;//关闭横屏仅允许竖屏
+    [super viewWillAppear:animated];
 
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self g_init];
@@ -27,11 +31,12 @@
 }
 - (void)g_addUI{
     [self.myView addSubview:self.historyView];
-    [self.myView bringSubviewToFront:self.backButton];
+//    [self.myView bringSubviewToFront:self.backButton];
 }
 - (void)g_layoutFrame{
     [_historyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(self.myView).insets(UIEdgeInsetsMake(StatusBarHeight, 0, 0, 0));
+        make.edges.mas_equalTo(self.myView);
+//        make.top.left.bottom.right.mas_equalTo(self.myView).insets(UIEdgeInsetsMake(StatusBarHeight, 0, 0, 0));
     }];
 }
 #pragma mark - 代理实现

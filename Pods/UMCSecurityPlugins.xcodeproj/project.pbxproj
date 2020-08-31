@@ -19,12 +19,32 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXFileReference section */
-		31E2F56248C215734BB38859EF7EF8F5 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UTDID.framework; path = thirdparties/UTDID.framework; sourceTree = "<group>"; };
-		33D726D3903AA9877FF707EF8549D9F4 /* UMCSecurityPlugins.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UMCSecurityPlugins.xcconfig; sourceTree = "<group>"; };
-		61B3AACF250BA886C848FDA14E5B2D1A /* SecurityEnvSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityEnvSDK.framework; path = thirdparties/SecurityEnvSDK.framework; sourceTree = "<group>"; };
+		151043B5D1F29F2C5B05C25FB1FB696F /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UTDID.framework; path = thirdparties/UTDID.framework; sourceTree = "<group>"; };
+		6307E4984310A0871A84B07063C8C645 /* UMCSecurityPlugins.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UMCSecurityPlugins.debug.xcconfig; sourceTree = "<group>"; };
+		763DA1394306AAC7A0CC3808A337004C /* SecurityEnvSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityEnvSDK.framework; path = thirdparties/SecurityEnvSDK.framework; sourceTree = "<group>"; };
+		FC576441860C11F9E3F41253B7016CA7 /* UMCSecurityPlugins.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UMCSecurityPlugins.release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		1B8983BD3440F7D218C1BCFCB8FA87AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				763DA1394306AAC7A0CC3808A337004C /* SecurityEnvSDK.framework */,
+				151043B5D1F29F2C5B05C25FB1FB696F /* UTDID.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B403719548E7607124F1C35BBB1F39E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6307E4984310A0871A84B07063C8C645 /* UMCSecurityPlugins.debug.xcconfig */,
+				FC576441860C11F9E3F41253B7016CA7 /* UMCSecurityPlugins.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/UMCSecurityPlugins";
+			sourceTree = "<group>";
+		};
 		3E28C8B171E3CA20BBE2664ADD6C5E86 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -39,38 +59,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		572A5354493EA3A36B601CD005E42BA3 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				33D726D3903AA9877FF707EF8549D9F4 /* UMCSecurityPlugins.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/UMCSecurityPlugins";
-			sourceTree = "<group>";
-		};
 		B7AECED25D19560232BF1DB8A830F979 = {
 			isa = PBXGroup;
 			children = (
 				4310D97BE41DC6AA1341DE6BBF17EC7A /* Frameworks */,
 				3E28C8B171E3CA20BBE2664ADD6C5E86 /* Products */,
-				CF551F7AA45D78675233D7905D5BF7DB /* UMCSecurityPlugins */,
+				EB6DCA03854ED45A0BA7BAD79E30916A /* UMCSecurityPlugins */,
 			);
 			sourceTree = "<group>";
 		};
-		BAFBA0D72AB6CD5D6DDF36A58D73A292 /* Frameworks */ = {
+		EB6DCA03854ED45A0BA7BAD79E30916A /* UMCSecurityPlugins */ = {
 			isa = PBXGroup;
 			children = (
-				61B3AACF250BA886C848FDA14E5B2D1A /* SecurityEnvSDK.framework */,
-				31E2F56248C215734BB38859EF7EF8F5 /* UTDID.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CF551F7AA45D78675233D7905D5BF7DB /* UMCSecurityPlugins */ = {
-			isa = PBXGroup;
-			children = (
-				BAFBA0D72AB6CD5D6DDF36A58D73A292 /* Frameworks */,
-				572A5354493EA3A36B601CD005E42BA3 /* Support Files */,
+				1B8983BD3440F7D218C1BCFCB8FA87AC /* Frameworks */,
+				3B403719548E7607124F1C35BBB1F39E /* Support Files */,
 			);
 			name = UMCSecurityPlugins;
 			path = UMCSecurityPlugins;
@@ -104,22 +106,6 @@
 /* End PBXProject section */
 
 /* Begin XCBuildConfiguration section */
-		1837D631CAADA742B39B9F386C2DCABA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33D726D3903AA9877FF707EF8549D9F4 /* UMCSecurityPlugins.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 		1A43399C9D2CC13589864D2CEF7FADE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -244,9 +230,25 @@
 			};
 			name = Release;
 		};
-		DE1E8005E31DEE538826A5E66493F158 /* Release */ = {
+		65AC013121556B7868F562E9AB8FB179 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33D726D3903AA9877FF707EF8549D9F4 /* UMCSecurityPlugins.xcconfig */;
+			baseConfigurationReference = 6307E4984310A0871A84B07063C8C645 /* UMCSecurityPlugins.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F70C2617F42BA7EBFA563986B612735F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC576441860C11F9E3F41253B7016CA7 /* UMCSecurityPlugins.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -276,8 +278,8 @@
 		DD879E81E7D798B50E622B502E52E91D /* Build configuration list for PBXAggregateTarget "UMCSecurityPlugins" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1837D631CAADA742B39B9F386C2DCABA /* Debug */,
-				DE1E8005E31DEE538826A5E66493F158 /* Release */,
+				65AC013121556B7868F562E9AB8FB179 /* Debug */,
+				F70C2617F42BA7EBFA563986B612735F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

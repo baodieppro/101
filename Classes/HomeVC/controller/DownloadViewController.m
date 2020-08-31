@@ -26,6 +26,7 @@
     [self g_layoutFrame];
 }
 - (void)g_init{
+    self.definesPresentationContext = YES;
     self.baseNavigationBar.backgroundColor = [UIColor colorWithHexString:@"#333333"];
     self.navigationTitle = @"下载管理";
     self.baseNavigationBar.titleLabel.textColor = [UIColor whiteColor];
@@ -50,6 +51,7 @@
 -(DownloadView *)downView{
     if (!_downView) {
         _downView = [[DownloadView alloc]init];
+        _downView.tagViewController = self;
     }
     return _downView;
 }

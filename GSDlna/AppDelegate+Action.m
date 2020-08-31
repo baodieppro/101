@@ -74,6 +74,7 @@
     [[ToolscreenShot screenShot] addScreenShotNotification];
     [NSURLProtocol registerClass:[HybridNSURLProtocol class]];
     [self createUMNotification:launchOptions];
+    [[SetConfigManager sharedManager] initManager];
 }
 #pragma mark - 根制器
 - (void)setUpRootVC
@@ -83,6 +84,7 @@
     [self.window makeKeyAndVisible];
     
 }
+
 #pragma mark - 通知
 
 -(void)newAllNotification{
@@ -379,14 +381,14 @@
                }
         }
             [GSNotificationManager cancancelLocalPushKey:cancancelKey];
-            NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
-            badge--;
-            badge = badge >= 0 ? badge : 0;
-            [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
-        
-
-    }
+            [self removeBadge];
+        }
 
 }
-    
+-(void)removeBadge{
+    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    badge--;
+    badge = badge >= 0 ? badge : 0;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
+}
 @end

@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HistoryManagerFooterView : BaseView
 @property(nonatomic, assign) id<MyHistoryManagerFooterViewDelegate>delegate;
+@property (nonatomic,assign) BOOL isSelected;//!<已选
 
 @property (nonatomic,strong) UILabel * titleLabel;//!<已选
 @property (nonatomic,strong) UILabel * numberLabel;//!<已选数量
